@@ -24,19 +24,22 @@ func _ready() -> void:
 
 func lose():
 	game_over.emit(false)
+	print('you lose')
 	pass
 
 func shoot():
+	player_shot = true
+	print('you win')
 	pass
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("draw"):
 		if current_game_state == GAME_STATE.DRAWING:
+			print('you lose')
 			lose()
 			pass
 		elif current_game_state == GAME_STATE.DRAWN:
 			shoot()
-	pass
 
 func play_round():
 	current_game_state = GAME_STATE.DRAWING
@@ -46,13 +49,16 @@ func play_round():
 	countdown.texture = load("res://games/quickdraw/assets/temp-timer2.png")
 	await get_tree().create_timer(1).timeout
 	countdown.texture = load("res://games/quickdraw/assets/temp-timer3.png")
+	await get_tree().create_timer(1).timeout
 	var extra_time = 2 + rng.randf_range(-DRAW_VARIANCE, DRAW_VARIANCE)
 	await get_tree().create_timer(extra_time).timeout
 	draw()
 
 func draw():
 	current_game_state = GAME_STATE.DRAWN
+	print('draw')
 	await get_tree().create_timer(DRAW_SPEEDS[level]).timeout
+	current_game_state = GAME_STATE.ROUND_END
 	if not player_shot:
 		lose()
 
