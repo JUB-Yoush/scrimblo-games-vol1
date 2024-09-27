@@ -1,34 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0vk25o8hs775"]
+[gd_scene load_steps=5 format=3 uid="uid://b0vk25o8hs775"]
 
 [ext_resource type="Script" path="res://games/quickdraw/src/game.gd" id="1_6uy3k"]
-[ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="1_p5qtb"]
+[ext_resource type="Texture2D" uid="uid://cuvhgmhebr120" path="res://games/quickdraw/assets/bg.png" id="2_4rnse"]
+[ext_resource type="Texture2D" uid="uid://4iwo084x55lb" path="res://games/quickdraw/assets/scrimblo-cowboy1.png" id="2_xce5s"]
+[ext_resource type="Texture2D" uid="uid://bu3a55m5w13om" path="res://games/quickdraw/assets/wizard-cowboy1.png" id="3_nr0td"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_6uy3k")
 
+[node name="BG" type="Sprite2D" parent="."]
+texture = ExtResource("2_4rnse")
+centered = false
+
 [node name="Scrimblo" type="Sprite2D" parent="."]
-position = Vector2(54, 136)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_p5qtb")
+position = Vector2(139, 161)
+texture = ExtResource("2_xce5s")
 
 [node name="Wizard" type="Sprite2D" parent="."]
-position = Vector2(377, 136)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_p5qtb")
-
-[node name="BG" type="Sprite2D" parent="."]
-modulate = Color(0.223529, 0.34902, 0.356863, 1)
-position = Vector2(207.5, 205)
-scale = Vector2(4.10156, 0.816406)
-texture = ExtResource("1_p5qtb")
+position = Vector2(285, 161)
+texture = ExtResource("3_nr0td")
 
 [node name="Countdown" type="Sprite2D" parent="."]
 position = Vector2(200, 44)
-
-[node name="Frames" type="Label" parent="."]
-offset_left = 183.0
-offset_top = 82.0
-offset_right = 223.0
-offset_bottom = 105.0
-text = "000"
-horizontal_alignment = 1

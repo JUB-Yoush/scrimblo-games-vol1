@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://43nemurnpe4c"]
+
+[ext_resource type="PackedScene" uid="uid://b0vk25o8hs775" path="res://games/quickdraw/src/game.tscn" id="1_wjvyr"]
+[ext_resource type="Texture2D" uid="uid://eb032wrne460" path="res://assets/border.png" id="2_ht23j"]
+
+[node name="Main" type="Node2D"]
+
+[node name="border" type="Sprite2D" parent="."]
+z_index = 10
+z_as_relative = false
+texture = ExtResource("2_ht23j")
+centered = false
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Minigame" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(432, 240)
+render_target_update_mode = 4
+
+[node name="Game" parent="SubViewportContainer/Minigame" instance=ExtResource("1_wjvyr")]
+
+[node name="Node" type="Node" parent="SubViewportContainer/Minigame"]
