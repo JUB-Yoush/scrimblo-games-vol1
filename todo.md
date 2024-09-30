@@ -1,0 +1,2 @@
+- [ ] copy quickdraw to set up swapping games
+- [ ] set up the in between animation, and the instruction text
