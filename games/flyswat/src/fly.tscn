@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://miqqoiqojd1p"]
+
+[ext_resource type="Script" path="res://games/flyswat/src/fly.gd" id="1_chtoy"]
+[ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="1_lypnb"]
+
+[node name="Fly" type="CharacterBody2D"]
+script = ExtResource("1_chtoy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_lypnb")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+[node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="."]
