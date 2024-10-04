@@ -25,3 +25,15 @@ curve = SubResource("Curve2D_cdtuu")
 [node name="FlySpawnLocation" type="PathFollow2D" parent="FlyPath"]
 position = Vector2(432, 2)
 rotation = 1.57491
+
+[node name="RemainingLabel" type="Label" parent="."]
+offset_left = 192.0
+offset_top = 65.0
+offset_right = 232.0
+offset_bottom = 88.0
+
+[node name="TimerLabel" type="Label" parent="."]
+offset_left = 190.0
+offset_top = 15.0
+offset_right = 230.0
+offset_bottom = 38.0
