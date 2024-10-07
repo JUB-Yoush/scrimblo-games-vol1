@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0iw5rr6s40al"]
+
+[ext_resource type="Script" path="res://games/yudumsort/src/game.gd" id="1_ols6k"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_ols6k")
+
+[node name="Button1" type="Button" parent="."]
+offset_left = 143.0
+offset_top = 89.0
+offset_right = 288.0
+offset_bottom = 136.0
+text = "Choice 1"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 143.0
+offset_top = 161.0
+offset_right = 287.0
+offset_bottom = 207.0
+text = "Choice 2
+"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 49.0
+offset_top = 40.0
+offset_right = 372.0
+offset_bottom = 63.0
+text = "Which Game was played in the GESC first?"
+autowrap_mode = 1
