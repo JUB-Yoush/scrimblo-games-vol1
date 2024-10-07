@@ -13,7 +13,7 @@ offset_bottom = 183.0
 metadata/_edit_group_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
 offset_right = 283.0
 offset_bottom = 101.0
 bbcode_enabled = true
-text = "On April 4th, 1999 I arrived home from school. I had just graduated."
