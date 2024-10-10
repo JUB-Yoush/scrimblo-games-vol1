@@ -1,6 +1,7 @@
 extends Node2D
+
 # set up game states
-enum GAME_STATE {SETUP,TURN,DANMAKU,ENDED}
+enum GAME_STATE {SETUP,MENUS,DANMAKU,ENDED}
 
 var current_game_state:GAME_STATE = GAME_STATE.SETUP
 
