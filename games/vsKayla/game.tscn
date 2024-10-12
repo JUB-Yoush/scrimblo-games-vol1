@@ -21,7 +21,7 @@ texture = ExtResource("2_ukche")
 centered = false
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
-position = Vector2(214, 66)
+position = Vector2(215, 51)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_ukche")
 
@@ -29,9 +29,13 @@ texture = ExtResource("2_ukche")
 layout_mode = 3
 anchors_preset = 0
 offset_left = 56.0
-offset_top = 56.0
+offset_top = -1.0
 offset_right = 376.0
 offset_bottom = 240.0
+
+[node name="Cursor" type="Sprite2D" parent="Control"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_ukche")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
@@ -48,7 +52,31 @@ layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
 
-[node name="LvlLabel2" type="Label" parent="Control/VBoxContainer/MarginContainer"]
+[node name="Panel" type="Panel" parent="Control/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MenuCommands" type="GridContainer" parent="Control/VBoxContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="Cmd1" type="Button" parent="Control/VBoxContainer/MarginContainer/MenuCommands"]
+layout_mode = 2
+text = "Item1"
+
+[node name="Cmd2" type="Button" parent="Control/VBoxContainer/MarginContainer/MenuCommands"]
+layout_mode = 2
+text = "Item1"
+
+[node name="Cmd3" type="Button" parent="Control/VBoxContainer/MarginContainer/MenuCommands"]
+layout_mode = 2
+text = "Item1"
+
+[node name="Cmd4" type="Button" parent="Control/VBoxContainer/MarginContainer/MenuCommands"]
+layout_mode = 2
+text = "Item1"
+
+[node name="TextLabel" type="Label" parent="Control/VBoxContainer/MarginContainer"]
 layout_mode = 2
 text = "* You feel like you've seen this before.
 
@@ -71,25 +99,27 @@ text = "HP 20/20"
 layout_mode = 2
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer/ActionMenuMargin"]
+[node name="ActionButtons" type="HBoxContainer" parent="Control/VBoxContainer/ActionMenuMargin"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="Button" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/HBoxContainer"]
+[node name="FightButton" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "FIGHT"
 
-[node name="Button2" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/HBoxContainer"]
+[node name="ActButton" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
 layout_mode = 2
 text = "ACT"
 
-[node name="Button3" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/HBoxContainer"]
+[node name="ItemButton" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
 layout_mode = 2
 text = "ITEM
 "
 
-[node name="Button4" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/HBoxContainer"]
+[node name="MercyButton" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
 layout_mode = 2
 text = "MERCY
 "
