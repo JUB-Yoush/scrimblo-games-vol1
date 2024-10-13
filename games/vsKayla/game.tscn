@@ -56,29 +56,33 @@ theme_override_constants/margin_right = 8
 layout_mode = 2
 
 [node name="MenuCommands" type="GridContainer" parent="Control/VBoxContainer/MarginContainer"]
-visible = false
 layout_mode = 2
 columns = 2
 
 [node name="Cmd1" type="Button" parent="Control/VBoxContainer/MarginContainer/MenuCommands"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Item1"
 
 [node name="Cmd2" type="Button" parent="Control/VBoxContainer/MarginContainer/MenuCommands"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Item1"
 
 [node name="Cmd3" type="Button" parent="Control/VBoxContainer/MarginContainer/MenuCommands"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Item1"
 
 [node name="Cmd4" type="Button" parent="Control/VBoxContainer/MarginContainer/MenuCommands"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Item1"
 
-[node name="TextLabel" type="Label" parent="Control/VBoxContainer/MarginContainer"]
+[node name="MenuString" type="Label" parent="Control/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "* You feel like you've seen this before.
+text = "
 
 
 "
@@ -111,15 +115,18 @@ layout_mode = 2
 text = "FIGHT"
 
 [node name="ActButton" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "ACT"
 
 [node name="ItemButton" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "ITEM
 "
 
 [node name="MercyButton" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "MERCY
 "
