@@ -9,6 +9,7 @@ var arc:float
 var dir:Vector2
 var alive:bool = true
 const SPEED_RANGE :Array[float]= [100.0,500.0]
+
 @onready var onScreen:VisibleOnScreenNotifier2D = $OnScreen
 func _ready() -> void:
 	$OnScreen.screen_exited.connect(func(): queue_free())
@@ -23,6 +24,7 @@ func _process(delta) -> void:
 		rotation += arc * delta
 		velocity = velocity.rotated(arc)
 	move_and_slide()
+
 func on_clicked(viewport,event,shape_idx):
 	if event is InputEventMouseButton:
 		if alive:
