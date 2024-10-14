@@ -53,6 +53,7 @@ func toggle_action_buttons(state):
 
 func use_item(item_str):
 	# if statements for different items 
+	print('using item '+ item_str)
 	item_over.emit()
 	pass
 
