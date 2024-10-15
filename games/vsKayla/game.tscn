@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://88vwolggeq70"]
+[gd_scene load_steps=7 format=3 uid="uid://88vwolggeq70"]
 
 [ext_resource type="Script" path="res://games/vsKayla/game.gd" id="1_hkofs"]
 [ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="2_ukche"]
+[ext_resource type="Script" path="res://games/vsKayla/heart.gd" id="3_kiag2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g310e"]
+size = Vector2(11, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ny31m"]
+size = Vector2(129, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8krc"]
+size = Vector2(78.5, 12.5)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_hkofs")
@@ -137,3 +147,64 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "MERCY
 "
+
+[node name="Danmaku" type="Node2D" parent="."]
+
+[node name="Heart" type="CharacterBody2D" parent="Danmaku"]
+position = Vector2(205, 129)
+script = ExtResource("3_kiag2")
+
+[node name="Sprite" type="Sprite2D" parent="Danmaku/Heart"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_ukche")
+
+[node name="Hurtbox" type="Area2D" parent="Danmaku/Heart"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Danmaku/Heart"]
+shape = SubResource("RectangleShape2D_g310e")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Danmaku"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Danmaku/StaticBody2D"]
+position = Vector2(208.5, 92.5)
+shape = SubResource("RectangleShape2D_ny31m")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Danmaku/StaticBody2D"]
+position = Vector2(208, 173)
+shape = SubResource("RectangleShape2D_ny31m")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Danmaku/StaticBody2D"]
+position = Vector2(277, 129.75)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_n8krc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Danmaku/StaticBody2D"]
+position = Vector2(144, 131)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_n8krc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Danmaku/StaticBody2D"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(208, 96)
+scale = Vector2(1, 0.03125)
+texture = ExtResource("2_ukche")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Danmaku/StaticBody2D"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(209, 168)
+scale = Vector2(1, 0.03125)
+texture = ExtResource("2_ukche")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Danmaku/StaticBody2D"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(270.665, 130.638)
+rotation = 1.5708
+scale = Vector2(0.60372, 0.0521069)
+texture = ExtResource("2_ukche")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Danmaku/StaticBody2D"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(149, 131)
+rotation = 1.5708
+scale = Vector2(0.60372, 0.0521069)
+texture = ExtResource("2_ukche")
