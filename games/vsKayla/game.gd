@@ -107,10 +107,41 @@ func print_to_menu(text):
     pass
 
 func enemy_turn():
-    # spawn bullets
-    pass
+    pattern1()
 
 
 func pattern1():
-    #cuphead spread from along a side of the screen
+    # drop from top of screen, at some point detonate and create spreads of 3 bullets to dodge
+    # harder version: spread of 5
+    var dropScene :PackedScene= load("res://games/vsKayla/bullet_patterns/drops.tscn")
+    # get range that isn't above the heart box
+    for i in range(5):
+        var spawn_pos_x = randi_range(70,350)
+        while spawn_pos_x > 150 and spawn_pos_x < 270:
+            spawn_pos_x = randi_range(70,350)
+        var drop = dropScene.instantiate()
+        drop.global_position = Vector2(spawn_pos_x,0)
+        add_child(drop)
+        await get_tree().create_timer(.5).timeout
+
+
+func pattern2():
+    # zebra runs across the screen and the dust it kicks up rains down
+    #harder version: more dust
+    pass
+
+func pattern3():
+    # full screen spiral
+    pass
+
+func pattern4():
+
+    pass
+
+func pattern5():
+    # full screen spiral
+    pass
+
+func pattern6():
+    # full screen spiral
     pass

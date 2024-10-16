@@ -5,12 +5,16 @@ var speed: float
 var dir:Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	add_to_group("bullets")
+	area_entered.connect(on_area_entered)
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var res = movement_function.call()
-	speed = res[0]
-	dir = res[1]
-	pass
+	var velocity = speed * dir * delta
+	position += velocity
+
+func on_area_entered(area:Area2D):
+	if area.is_in_group("bullets"):
+		return
