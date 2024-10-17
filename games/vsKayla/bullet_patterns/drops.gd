@@ -29,10 +29,24 @@ func spawn_bullets():
 	# spawn 3 in a spread
 	var player = get_parent().get_node("Danmaku/Heart")
 	var vector_to_player :Vector2 = player.global_position - global_position
+
 	var bullet = bulletScene.instantiate()
+	var bullet2 = bulletScene.instantiate()
+	var bullet3 = bulletScene.instantiate()
+
 	bullet.global_position = global_position
+	bullet2.global_position = global_position
+	bullet3.global_position = global_position
+
 	bullet.dir = vector_to_player.normalized()
+	bullet2.dir = vector_to_player.normalized().rotated(deg_to_rad(30))
+	bullet.dir = vector_to_player.normalized().rotated(deg_to_rad(-30))
+
 	bullet.speed = 100
+	bullet2.speed = 90
+	bullet3.speed = 90
 	#give it sprite and area?
 	get_parent().add_child(bullet)
+	get_parent().add_child(bullet2)
+	get_parent().add_child(bullet3)
 	queue_free()
