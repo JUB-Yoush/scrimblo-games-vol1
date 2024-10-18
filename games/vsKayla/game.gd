@@ -13,6 +13,7 @@ var awaiting_command = false
 
 var current_game_state:GAME_STATE = GAME_STATE.SETUP
 signal command_completed
+signal attack_over
 var hp = 20
 func _ready() -> void:
     clear_menu()
@@ -108,6 +109,7 @@ func print_to_menu(text):
 
 func enemy_turn():
     pattern1()
+    attack_over.emit()
 
 
 func pattern1():
@@ -123,6 +125,7 @@ func pattern1():
         drop.global_position = Vector2(spawn_pos_x,0)
         add_child(drop)
         await get_tree().create_timer(.5).timeout
+    await get_tree().create_timer(1).timeout
 
 
 func pattern2():
