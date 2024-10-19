@@ -12,18 +12,28 @@ var awaiting_command = false
 @onready var action_buttons =[%FightButton, %ActButton, %ItemButton, %MercyButton]
 
 var current_game_state:GAME_STATE = GAME_STATE.SETUP
+
 signal command_completed
 signal attack_over
 var hp = 20
 func _ready() -> void:
     clear_menu()
-    # the heart can appear on the buttons when focused
-    #%FightButton.grab_focus()
     %FightButton.pressed.connect( func(): command_selected(COMMANDS.FIGHT))
     %ActButton.pressed.connect(func(): command_selected(COMMANDS.ACT))
     %ItemButton.pressed.connect(func(): command_selected(COMMANDS.ITEM))
     %MercyButton.pressed.connect(func(): command_selected(COMMANDS.MERCY))
     end_turn()
+
+func update_game_state(new_state:GAME_STATE):
+    if new_state == GAME_STATE.DANMAKU:
+        start_danmaku()
+    current_game_state = new_state
+
+func start_danmaku():
+    #render the heart and the box
+    await attack_over
+    update_game_state(GAME_STATE.MENUS)
+    pass
 
 func start_turn():
     current_game_state = GAME_STATE.MENUS
