@@ -1,13 +1,21 @@
 # vs kayla
+
 ## menu
-- [ ] item menu reloading (not a priority rn)
-- [ ] act menu (simplfied item menu)
+
+- [x] item menu reloading (not a priority rn)
+- [x] act menu (simplfied item menu)
+
 ## danmaku
-- [ ] make heart + box
-- [ ] bullet pattern functions
+
+- [x] make heart + box
+- [x] bullet pattern functions
+- [ ] hitboxes and damage
 - [ ] starting and stopping patterns
+
 ## putting together
+
 - [ ] full combat flow
 
-## assets n polish 
+## assets n polish
+
 - [ ] unstyle buttons

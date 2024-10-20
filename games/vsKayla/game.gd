@@ -27,6 +27,8 @@ func _ready() -> void:
 func update_game_state(new_state:GAME_STATE):
     if new_state == GAME_STATE.DANMAKU:
         start_danmaku()
+    if new_state == GAME_STATE.MENUS:
+        start_turn()
     current_game_state = new_state
 
 func start_danmaku():
@@ -36,7 +38,7 @@ func start_danmaku():
     pass
 
 func start_turn():
-    current_game_state = GAME_STATE.MENUS
+    # render the menu and the action buttons
     toggle_action_buttons(2)
     clear_menu()
     %FightButton.grab_focus()

@@ -15,7 +15,7 @@ func _ready() -> void:
 	add_child(timer)
 	speed += randf_range(-speed_variance,speed_variance)
 	timer.timeout.connect(spawn_bullets)
-	timer.start(1)
+	timer.start(randf_range(.8,2))
 	pass # Replace with function body.
 
 
@@ -39,8 +39,8 @@ func spawn_bullets():
 	bullet3.global_position = global_position
 
 	bullet.dir = vector_to_player.normalized()
-	bullet2.dir = vector_to_player.normalized().rotated(deg_to_rad(30))
-	bullet.dir = vector_to_player.normalized().rotated(deg_to_rad(-30))
+	bullet2.dir = vector_to_player.normalized().rotated(deg_to_rad(20))
+	bullet3.dir = vector_to_player.normalized().rotated(deg_to_rad(-20))
 
 	bullet.speed = 100
 	bullet2.speed = 90

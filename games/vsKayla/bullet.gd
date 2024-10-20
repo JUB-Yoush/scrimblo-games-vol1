@@ -8,7 +8,6 @@ func _ready() -> void:
 	$VisibleOnScreenNotifier2D.screen_exited.connect(func(): queue_free())
 	add_to_group("bullets")
 	area_entered.connect(on_area_entered)
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
