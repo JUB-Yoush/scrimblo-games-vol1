@@ -16,6 +16,12 @@
 
 - [ ] full combat flow
 
+## xtra code stuff
+
+- [ ] make the items + acts
+- [ ] make the patterns
+
 ## assets n polish
 
+- [ ] make tha graphics
 - [ ] unstyle buttons
