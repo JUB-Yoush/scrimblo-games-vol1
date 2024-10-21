@@ -11,6 +11,9 @@ var awaiting_command = false
 @onready var cmdboxes = [%Cmd1,%Cmd2,%Cmd3,%Cmd4]
 @onready var action_buttons =[%FightButton, %ActButton, %ItemButton, %MercyButton]
 @onready var danmaku = $Danmaku
+
+var social_credit = 0
+
 var max_hp := 20
 var hp := max_hp:
     set(value):
@@ -61,6 +64,7 @@ func command_selected(command):
     if command == COMMANDS.FIGHT:
         %Cmd1.visible = true
         %Cmd1.text = "*Kayla"
+        %Cmd1.pressed.disconnect()
         %Cmd1.pressed.connect(fight)
     elif command == COMMANDS.ACT:
         populate_acts()
