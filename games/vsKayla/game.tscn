@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://88vwolggeq70"]
+[gd_scene load_steps=8 format=3 uid="uid://88vwolggeq70"]
 
 [ext_resource type="Script" path="res://games/vsKayla/game.gd" id="1_hkofs"]
 [ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="2_ukche"]
 [ext_resource type="Script" path="res://games/vsKayla/heart.gd" id="3_kiag2"]
+[ext_resource type="Script" path="res://games/vsKayla/danmaku.gd" id="3_pv4y2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g310e"]
 size = Vector2(11, 10)
@@ -19,12 +20,14 @@ metadata/_edit_vertical_guides_ = [56.0, 376.0, 376.0, 370.0]
 
 [node name="BorderL" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
+z_index = 100
 position = Vector2(-8, 98)
 scale = Vector2(1, 4.32812)
 texture = ExtResource("2_ukche")
 
 [node name="BorderR" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
+z_index = 100
 position = Vector2(376, -150)
 scale = Vector2(1, 4.14844)
 texture = ExtResource("2_ukche")
@@ -113,6 +116,7 @@ layout_mode = 2
 text = "Lv 1"
 
 [node name="HpLabel" type="Label" parent="Control/VBoxContainer/StatsHbox"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "HP 20/20"
 
@@ -149,8 +153,10 @@ text = "MERCY
 "
 
 [node name="Danmaku" type="Node2D" parent="."]
+script = ExtResource("3_pv4y2")
 
 [node name="Heart" type="CharacterBody2D" parent="Danmaku"]
+unique_name_in_owner = true
 position = Vector2(205, 129)
 script = ExtResource("3_kiag2")
 
@@ -160,49 +166,53 @@ texture = ExtResource("2_ukche")
 
 [node name="Hurtbox" type="Area2D" parent="Danmaku/Heart"]
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Danmaku/Heart/Hurtbox"]
+shape = SubResource("RectangleShape2D_g310e")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Danmaku/Heart"]
 shape = SubResource("RectangleShape2D_g310e")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Danmaku"]
+[node name="Heartbox" type="StaticBody2D" parent="Danmaku"]
+unique_name_in_owner = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Danmaku/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Danmaku/Heartbox"]
 position = Vector2(208.5, 92.5)
 shape = SubResource("RectangleShape2D_ny31m")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Danmaku/StaticBody2D"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Danmaku/Heartbox"]
 position = Vector2(208, 173)
 shape = SubResource("RectangleShape2D_ny31m")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Danmaku/StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Danmaku/Heartbox"]
 position = Vector2(277, 129.75)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_n8krc")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Danmaku/StaticBody2D"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Danmaku/Heartbox"]
 position = Vector2(144, 131)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_n8krc")
 
-[node name="Sprite2D" type="Sprite2D" parent="Danmaku/StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Danmaku/Heartbox"]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(208, 96)
 scale = Vector2(1, 0.03125)
 texture = ExtResource("2_ukche")
 
-[node name="Sprite2D4" type="Sprite2D" parent="Danmaku/StaticBody2D"]
+[node name="Sprite2D4" type="Sprite2D" parent="Danmaku/Heartbox"]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(209, 168)
 scale = Vector2(1, 0.03125)
 texture = ExtResource("2_ukche")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Danmaku/StaticBody2D"]
+[node name="Sprite2D2" type="Sprite2D" parent="Danmaku/Heartbox"]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(270.665, 130.638)
 rotation = 1.5708
 scale = Vector2(0.60372, 0.0521069)
 texture = ExtResource("2_ukche")
 
-[node name="Sprite2D3" type="Sprite2D" parent="Danmaku/StaticBody2D"]
+[node name="Sprite2D3" type="Sprite2D" parent="Danmaku/Heartbox"]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(149, 131)
 rotation = 1.5708

@@ -3,6 +3,7 @@ extends Area2D
 var movement_function:Callable
 var speed: float
 var dir:Vector2
+var damage:int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$VisibleOnScreenNotifier2D.screen_exited.connect(func(): queue_free())

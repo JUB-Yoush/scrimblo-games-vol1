@@ -10,13 +10,22 @@ var acts = ["*Check","*Appeal","*Antagonize","*HR Talk"]
 var awaiting_command = false
 @onready var cmdboxes = [%Cmd1,%Cmd2,%Cmd3,%Cmd4]
 @onready var action_buttons =[%FightButton, %ActButton, %ItemButton, %MercyButton]
+@onready var danmaku = $Danmaku
+var max_hp := 20
+var hp := max_hp:
+    set(value):
+        hp = value
+        if hp <= 0:
+            game_over()
+        %HpLabel.text = str(hp) +"/"+ str(max_hp)
+
 
 var current_game_state:GAME_STATE = GAME_STATE.SETUP
 
 signal command_completed
-signal attack_over
-var hp = 20
+
 func _ready() -> void:
+    danmaku.attack_over.connect(func(): update_game_state(GAME_STATE.MENUS))
     clear_menu()
     %FightButton.pressed.connect( func(): command_selected(COMMANDS.FIGHT))
     %ActButton.pressed.connect(func(): command_selected(COMMANDS.ACT))
@@ -25,22 +34,23 @@ func _ready() -> void:
     end_turn()
 
 func update_game_state(new_state:GAME_STATE):
+    print("update_game_state: ",current_game_state)
+    # unload prev state
+    if current_game_state == GAME_STATE.MENUS:
+        clear_menu()
+        toggle_action_buttons(0)
+
+    # load new state
     if new_state == GAME_STATE.DANMAKU:
-        start_danmaku()
+        danmaku.start()
     if new_state == GAME_STATE.MENUS:
         start_turn()
     current_game_state = new_state
 
-func start_danmaku():
-    #render the heart and the box
-    await attack_over
-    update_game_state(GAME_STATE.MENUS)
-    pass
-
 func start_turn():
     # render the menu and the action buttons
-    toggle_action_buttons(2)
     clear_menu()
+    toggle_action_buttons(2)
     %FightButton.grab_focus()
 
 func command_selected(command):
@@ -51,6 +61,7 @@ func command_selected(command):
     if command == COMMANDS.FIGHT:
         %Cmd1.visible = true
         %Cmd1.text = "*Kayla"
+        %Cmd1.pressed.connect(fight)
     elif command == COMMANDS.ACT:
         populate_acts()
     elif command == COMMANDS.MERCY:
@@ -60,15 +71,17 @@ func command_selected(command):
         populate_items(0)
 
     %Cmd1.grab_focus()
-    #while awaiting_command:
-        #if Input.is_action_just_pressed("back_menu"):
-            #start_turn()
-            #return
 
     await command_completed
     awaiting_command = false
     end_turn()
-    start_turn()
+
+func fight():
+    # do the timing minigame
+    print('this is where youd do the timing game shell dodge every time so who even cares')
+    # await or whatever
+    end_turn()
+    pass
 
 func clear_menu():
     %MenuString.text = ""
@@ -112,51 +125,16 @@ func populate_acts():
 
 
 func end_turn():
-    current_game_state = GAME_STATE.DANMAKU
-    toggle_action_buttons(0)
-    enemy_turn()
+    update_game_state(GAME_STATE.DANMAKU)
 
 func print_to_menu(text):
     pass
 
-func enemy_turn():
-    pattern1()
-    attack_over.emit()
 
-
-func pattern1():
-    # drop from top of screen, at some point detonate and create spreads of 3 bullets to dodge
-    # harder version: spread of 5
-    var dropScene :PackedScene= load("res://games/vsKayla/bullet_patterns/drops.tscn")
-    # get range that isn't above the heart box
-    for i in range(5):
-        var spawn_pos_x = randi_range(70,350)
-        while spawn_pos_x > 150 and spawn_pos_x < 270:
-            spawn_pos_x = randi_range(70,350)
-        var drop = dropScene.instantiate()
-        drop.global_position = Vector2(spawn_pos_x,0)
-        add_child(drop)
-        await get_tree().create_timer(.5).timeout
-    await get_tree().create_timer(1).timeout
-
-
-func pattern2():
-    # zebra runs across the screen and the dust it kicks up rains down
-    #harder version: more dust
+func take_damage(damage:int):
+    hp -= damage
     pass
 
-func pattern3():
-    # full screen spiral
-    pass
-
-func pattern4():
-
-    pass
-
-func pattern5():
-    # full screen spiral
-    pass
-
-func pattern6():
-    # full screen spiral
+func game_over():
+    #end the game
     pass

@@ -15,7 +15,7 @@ func _ready() -> void:
 	add_child(timer)
 	speed += randf_range(-speed_variance,speed_variance)
 	timer.timeout.connect(spawn_bullets)
-	timer.start(randf_range(.8,2))
+	timer.start(randf_range(.8,1.8))
 	pass # Replace with function body.
 
 
@@ -25,9 +25,8 @@ func _process(delta: float) -> void:
 	pass
 
 func spawn_bullets():
-	print('spawn bullets')
 	# spawn 3 in a spread
-	var player = get_parent().get_node("Danmaku/Heart")
+	var player = get_parent().get_node("Heart")
 	var vector_to_player :Vector2 = player.global_position - global_position
 
 	var bullet = bulletScene.instantiate()
@@ -42,9 +41,13 @@ func spawn_bullets():
 	bullet2.dir = vector_to_player.normalized().rotated(deg_to_rad(20))
 	bullet3.dir = vector_to_player.normalized().rotated(deg_to_rad(-20))
 
-	bullet.speed = 100
-	bullet2.speed = 90
-	bullet3.speed = 90
+	bullet.damage = 1
+	bullet2.damage = 1
+	bullet3.damage = 1
+
+	bullet.speed = 150
+	bullet2.speed = 120
+	bullet3.speed = 120
 	#give it sprite and area?
 	get_parent().add_child(bullet)
 	get_parent().add_child(bullet2)
