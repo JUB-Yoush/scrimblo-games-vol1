@@ -6,13 +6,21 @@ enum COMMANDS {FIGHT,ACT,ITEM,MERCY}
 
 var items = ["*Bingus","*M.Stew","*Scrimbookie","*scimblo"]
 var curr_items = []
-var acts = ["*Check","*Appeal","*Antagonize","*HR Talk"]
+var acts = ["*Check","*Appeal","*Oppose","*HR Talk"]
+
+var appeals = ["*You show Kayla a gif of a spinning Rei Chiquita.","*You tell Kayla you love anticipating her email replies.",""]
+var opposes = ["*You say the phrase \"Scrimblo\" 64 times","You remind Kayla that we're not a \"Gaming\"Club."]
+var hrtalks = ["*You use your strongest corportate jargon to diffuse the situation."]
+
 var awaiting_command = false
 @onready var cmdboxes = [%Cmd1,%Cmd2,%Cmd3,%Cmd4]
 @onready var action_buttons =[%FightButton, %ActButton, %ItemButton, %MercyButton]
 @onready var danmaku = $Danmaku
 
 var social_credit = 0
+var goal_credit = 100
+var turn_count
+var deadline = 20
 
 var max_hp := 20
 var hp := max_hp:
@@ -34,7 +42,7 @@ func _ready() -> void:
     %ActButton.pressed.connect(func(): command_selected(COMMANDS.ACT))
     %ItemButton.pressed.connect(func(): command_selected(COMMANDS.ITEM))
     %MercyButton.pressed.connect(func(): command_selected(COMMANDS.MERCY))
-    end_turn()
+    start_turn()
 
 func update_game_state(new_state:GAME_STATE):
     print("update_game_state: ",current_game_state)
@@ -64,8 +72,10 @@ func command_selected(command):
     if command == COMMANDS.FIGHT:
         %Cmd1.visible = true
         %Cmd1.text = "*Kayla"
-        %Cmd1.pressed.disconnect()
-        %Cmd1.pressed.connect(fight)
+
+        if !%Cmd1.pressed.is_connected(fight):
+            %Cmd1.pressed.connect(fight)
+
     elif command == COMMANDS.ACT:
         populate_acts()
     elif command == COMMANDS.MERCY:
@@ -106,9 +116,15 @@ func use_item(item_str):
     pass
 
 func use_act(act_str):
+
+    if act_str == "*Check":
+        print_to_menu("Kayla: 1HP, 1ATK, 1DEF \n She runs lassonde clubs.")
+    elif act_str == "*Appeal":
+        print_to_menu(appeals[0])
     print('using action '+ act_str)
-    %MenuString.text = "you used " + act_str
-    print_to_menu("you used " + act_str)
+    while true:
+        if Input.is_action_just_pressed("adv_menu"):
+            break
     command_completed.emit()
 
 # the offset is the 4 items rendered
@@ -131,8 +147,11 @@ func populate_acts():
 func end_turn():
     update_game_state(GAME_STATE.DANMAKU)
 
+
 func print_to_menu(text):
-    pass
+    # will b more sophisiticated later
+    clear_menu()
+    %MenuString.text = text
 
 
 func take_damage(damage:int):

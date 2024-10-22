@@ -9,11 +9,10 @@ signal attack_over
 func _ready():
     add_child(attackTimer)
     attackTimer.timeout.connect(end)
-    
+
 
 func start():
-    %Heart.visible = true
-    %Heartbox.visible = true
+    visible = true
     pattern1.call()
     # find a more natural way to do this
     attackTimer.start(attack_time)
@@ -21,8 +20,7 @@ func start():
 func end():
     for bullet in get_tree().get_nodes_in_group("bullets"):
         bullet.queue_free()
-    %Heart.visible = false
-    %Heartbox.visible = false
+    visible = false
     attack_over.emit()
 
 
