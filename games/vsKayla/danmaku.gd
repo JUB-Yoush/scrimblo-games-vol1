@@ -7,16 +7,25 @@ var attackTimer = Timer.new()
 signal attack_over
 
 func _ready():
+    attackTimer.one_shot = true
     add_child(attackTimer)
     attackTimer.timeout.connect(end)
 
 
-func start():
+func start(enemy_text):
     visible = true
+    %Heart.can_move = false
     %MenuCommands.visible = false
+    if enemy_text != "":
+        %Dialog.visible = true
+        %Dialog.text = enemy_text
+        await get_tree().create_timer(1).timeout
+        %Dialog.visible = false
+    %Heart.can_move = true
     pattern1.call()
     # find a more natural way to do this
     attackTimer.start(attack_time)
+
 
 func end():
     for bullet in get_tree().get_nodes_in_group("bullets"):
@@ -26,6 +35,11 @@ func end():
     attack_over.emit()
 
 
+func enemy_says(text):
+    %Dialog.visible = true
+    %Dialog.text = text
+    await get_tree().create_timer(1).timeout
+    %Dialog.visible = false
 
 
 var pattern1 = func():

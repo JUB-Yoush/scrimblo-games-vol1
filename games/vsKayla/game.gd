@@ -12,6 +12,9 @@ var appeals = ["*You show Kayla a gif of a spinning Rei Chiquita.","*You tell Ka
 var opposes = ["*You say the phrase \"Scrimblo\" 64 times","You remind Kayla that we're not a \"Gaming\"Club."]
 var hrtalks = ["*You use your strongest corportate jargon to diffuse the situation."]
 
+var enemy_turn_text = "this is what I have to say"
+var start_turn_text = "world is scrim blo blo blo"
+
 var awaiting_command = false
 var opposing = false
 @onready var cmdboxes = [%Cmd1,%Cmd2,%Cmd3,%Cmd4]
@@ -26,7 +29,12 @@ var social_credit = 0:
             credit_reached()
 
 var goal_credit = 100
-var turn_count
+var turn_count = 1:
+    set(value):
+        turn_count = value
+        if turn_count == deadline:
+            game_over()
+            pass
 var deadline = 20
 
 var max_hp := 20
@@ -61,15 +69,16 @@ func update_game_state(new_state:GAME_STATE):
 
     # load new state
     if new_state == GAME_STATE.DANMAKU:
-        danmaku.start()
+        danmaku.start(enemy_turn_text)
     if new_state == GAME_STATE.MENUS:
+        turn_count += 1
         start_turn()
     current_game_state = new_state
 
 func start_turn():
     # render the menu and the action buttons
     clear_menu()
-    print_to_menu("The world is scrimblo")
+    print_to_menu(start_turn_text)
     toggle_action_buttons(2)
     %FightButton.grab_focus()
 
@@ -77,7 +86,7 @@ func command_selected(command):
     awaiting_command = true
     toggle_action_buttons(0)
     clear_menu()
-
+    print(command)
     if command == COMMANDS.FIGHT:
         %Cmd1.visible = true
         %Cmd1.text = "*Kayla"
@@ -113,6 +122,11 @@ func clear_menu():
     for box in cmdboxes:
         box.visible = false
         box.text = ""
+        # reset signals
+        for sig in box.get_signal_connection_list("pressed"):
+            print(sig)
+            box.pressed.disconnect(sig["callable"])
+            pass
 
 func toggle_action_buttons(state):
     for btn in action_buttons:
@@ -130,20 +144,36 @@ func use_act(act_str):
     if act_str == "*Check":
         print_to_menu("Kayla: 1HP, 1ATK, 1DEF \n She runs lassonde clubs.")
         await txb_adv
+
     elif act_str == "*Appeal":
         print_to_menu(appeals[0])
         social_credit += 5
         await txb_adv
+
     elif act_str == "*Oppose":
         if opposing:
             print('guh')
         else:
+            opposing = true
             print_to_menu(opposes[0])
             await txb_adv
-            %Dialog.text = "I'm so mad rn like"
-            await get_tree().create_timer(1).timeout
+            start_turn_text = "kayla is feeling particularly critical of your club"
+
+    elif act_str == "*HR Talk":
+        textprompt(hrtalks[0])
+        if opposing:
+            opposing = false
+            textprompt("Situation Diffused!")
+            social_credit += 15
+            start_turn_text = "scrimblo permiates the air"
+        else:
+            textprompt("Kayla looks indifferently")
+
+
     print('using action '+ act_str)
     command_completed.emit()
+
+
 
 # the offset is the 4 items rendered
 func populate_items(offset):
@@ -165,6 +195,9 @@ func populate_acts():
 func end_turn():
     update_game_state(GAME_STATE.DANMAKU)
 
+func textprompt(text):
+    print_to_menu(text)
+    await txb_adv
 
 func print_to_menu(text):
     # will b more sophisiticated later

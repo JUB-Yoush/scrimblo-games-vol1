@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var speed = 100.0
-var can_move = true
+var can_move = false
 var dir = Vector2.ZERO
 var can_hit = true
 func _ready():
@@ -32,4 +32,4 @@ func hitflash():
 		$Sprite.visible = true
 		await get_tree().create_timer(flashspeed).timeout
 	can_hit = true
-	
+

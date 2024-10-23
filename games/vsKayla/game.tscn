@@ -57,6 +57,7 @@ offset_bottom = 240.0
 
 [node name="SocialCreditLabel" type="Label" parent="Control"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 13.0
 offset_top = 5.0
 offset_right = 168.0
@@ -67,6 +68,7 @@ autowrap_mode = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="Control"]
 visible = false
+layout_mode = 0
 offset_left = 13.0
 offset_top = 5.0
 offset_right = 17.0
