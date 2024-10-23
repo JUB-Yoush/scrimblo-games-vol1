@@ -13,6 +13,7 @@ func _ready():
 
 func start():
     visible = true
+    %MenuCommands.visible = false
     pattern1.call()
     # find a more natural way to do this
     attackTimer.start(attack_time)
@@ -21,6 +22,7 @@ func end():
     for bullet in get_tree().get_nodes_in_group("bullets"):
         bullet.queue_free()
     visible = false
+    %MenuCommands.visible = true
     attack_over.emit()
 
 

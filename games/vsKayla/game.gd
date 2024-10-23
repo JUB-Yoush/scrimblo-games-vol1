@@ -13,11 +13,18 @@ var opposes = ["*You say the phrase \"Scrimblo\" 64 times","You remind Kayla tha
 var hrtalks = ["*You use your strongest corportate jargon to diffuse the situation."]
 
 var awaiting_command = false
+var opposing = false
 @onready var cmdboxes = [%Cmd1,%Cmd2,%Cmd3,%Cmd4]
 @onready var action_buttons =[%FightButton, %ActButton, %ItemButton, %MercyButton]
 @onready var danmaku = $Danmaku
 
-var social_credit = 0
+var social_credit = 0:
+    set(value):
+        social_credit = value
+        %SocialCreditLabel.text = str(social_credit) # add leading 0s later
+        if social_credit == goal_credit:
+            credit_reached()
+
 var goal_credit = 100
 var turn_count
 var deadline = 20
@@ -34,6 +41,7 @@ var hp := max_hp:
 var current_game_state:GAME_STATE = GAME_STATE.SETUP
 
 signal command_completed
+signal txb_adv
 
 func _ready() -> void:
     danmaku.attack_over.connect(func(): update_game_state(GAME_STATE.MENUS))
@@ -61,6 +69,7 @@ func update_game_state(new_state:GAME_STATE):
 func start_turn():
     # render the menu and the action buttons
     clear_menu()
+    print_to_menu("The world is scrimblo")
     toggle_action_buttons(2)
     %FightButton.grab_focus()
 
@@ -88,16 +97,18 @@ func command_selected(command):
 
     await command_completed
     awaiting_command = false
+    clear_menu()
     end_turn()
 
 func fight():
     # do the timing minigame
     print('this is where youd do the timing game shell dodge every time so who even cares')
     # await or whatever
-    end_turn()
+    command_completed.emit()
     pass
 
 func clear_menu():
+    %Dialog.text = ""
     %MenuString.text = ""
     for box in cmdboxes:
         box.visible = false
@@ -116,15 +127,22 @@ func use_item(item_str):
     pass
 
 func use_act(act_str):
-
     if act_str == "*Check":
         print_to_menu("Kayla: 1HP, 1ATK, 1DEF \n She runs lassonde clubs.")
+        await txb_adv
     elif act_str == "*Appeal":
         print_to_menu(appeals[0])
+        social_credit += 5
+        await txb_adv
+    elif act_str == "*Oppose":
+        if opposing:
+            print('guh')
+        else:
+            print_to_menu(opposes[0])
+            await txb_adv
+            %Dialog.text = "I'm so mad rn like"
+            await get_tree().create_timer(1).timeout
     print('using action '+ act_str)
-    while true:
-        if Input.is_action_just_pressed("adv_menu"):
-            break
     command_completed.emit()
 
 # the offset is the 4 items rendered
@@ -161,3 +179,12 @@ func take_damage(damage:int):
 func game_over():
     #end the game
     pass
+
+func credit_reached():
+    # kayla is sparable
+    pass
+
+func _input(event):
+    if event.is_action_pressed("ui_accept"):
+        txb_adv.emit()
+        pass
