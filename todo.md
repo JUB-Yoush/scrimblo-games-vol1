@@ -21,7 +21,7 @@
 - [x] social credit meter
 - [x] deadline
 - [x] make the acts
-- [ ] make the items
+- [x] make the items
 - [ ] make fighting and sparing
 - [ ] make the patterns
 
