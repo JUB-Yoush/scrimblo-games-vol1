@@ -2,7 +2,10 @@ extends Node2D
 
 # set up game states
 enum GAME_STATE {SETUP,MENUS,DANMAKU,ENDED}
+enum MENU_STATES {COMMANDS, MENU, CHOSEN}
 enum COMMANDS {FIGHT,ACT,ITEM,MERCY}
+
+var menu_state = MENU_STATES.COMMANDS
 
 var items = ["*Bingus","*M.Stew","*Scrimbookie","*scimblo"]
 var curr_items = []
@@ -17,6 +20,9 @@ var start_turn_text = "world is scrim blo blo blo"
 
 var awaiting_command = false
 var opposing = false
+var scrimbookied = false
+var sparable = false
+
 @onready var cmdboxes = [%Cmd1,%Cmd2,%Cmd3,%Cmd4]
 @onready var action_buttons =[%FightButton, %ActButton, %ItemButton, %MercyButton]
 @onready var danmaku = $Danmaku
@@ -40,7 +46,7 @@ var deadline = 20
 var max_hp := 20
 var hp := max_hp:
     set(value):
-        hp = value
+        hp =  min(value, max_hp)
         if hp <= 0:
             game_over()
         %HpLabel.text = str(hp) +"/"+ str(max_hp)
@@ -50,6 +56,7 @@ var current_game_state:GAME_STATE = GAME_STATE.SETUP
 
 signal command_completed
 signal txb_adv
+signal txb_back
 
 func _ready() -> void:
     danmaku.attack_over.connect(func(): update_game_state(GAME_STATE.MENUS))
@@ -76,29 +83,34 @@ func update_game_state(new_state:GAME_STATE):
     current_game_state = new_state
 
 func start_turn():
+    menu_state = MENU_STATES.COMMANDS
     # render the menu and the action buttons
     clear_menu()
     print_to_menu(start_turn_text)
     toggle_action_buttons(2)
     %FightButton.grab_focus()
+    await txb_back
+    if menu_state != MENU_STATES.CHOSEN:
+        clear_menu()
+        start_turn()
 
 func command_selected(command):
+    menu_state = MENU_STATES.MENU
+    # going backwards in menus should happen
     awaiting_command = true
     toggle_action_buttons(0)
     clear_menu()
-    print(command)
     if command == COMMANDS.FIGHT:
         %Cmd1.visible = true
         %Cmd1.text = "*Kayla"
-
-        if !%Cmd1.pressed.is_connected(fight):
-            %Cmd1.pressed.connect(fight)
-
+        %Cmd1.pressed.connect(fight)
     elif command == COMMANDS.ACT:
         populate_acts()
     elif command == COMMANDS.MERCY:
         %Cmd1.visible = true
         %Cmd1.text = "*Kayla"
+
+        %Cmd1.pressed.connect(fight)
     elif command == COMMANDS.ITEM:
         populate_items(0)
 
@@ -110,6 +122,7 @@ func command_selected(command):
     end_turn()
 
 func fight():
+    menu_state = MENU_STATES.CHOSEN
     # do the timing minigame
     print('this is where youd do the timing game shell dodge every time so who even cares')
     # await or whatever
@@ -124,7 +137,6 @@ func clear_menu():
         box.text = ""
         # reset signals
         for sig in box.get_signal_connection_list("pressed"):
-            print(sig)
             box.pressed.disconnect(sig["callable"])
             pass
 
@@ -133,14 +145,25 @@ func toggle_action_buttons(state):
         btn.focus_mode = state
 
 func use_item(item_str):
-    # if statements for different items
-    print('using item '+ item_str)
+
+    menu_state = MENU_STATES.CHOSEN
     clear_menu()
-    %MenuString.text = "you used " + item_str
+    if item_str == "*M.Stew":
+        hp += 20
+        print_to_menu("You drank Stew sent by Maddie \n Healed 20 HP")
+        await txb_adv
+    elif item_str == "*Bingus":
+        hp += 10
+        print_to_menu("It's kinda melted. \n Healed 20 HP")
+        await txb_adv
+    elif item_str == "*Scrimbookie":
+        scrimbookied = true
+        print_to_menu("You feel especially persuasive.\n Boosted Appeal power for 3 turns")
+        await txb_adv
     command_completed.emit()
-    pass
 
 func use_act(act_str):
+    menu_state = MENU_STATES.CHOSEN
     if act_str == "*Check":
         print_to_menu("Kayla: 1HP, 1ATK, 1DEF \n She runs lassonde clubs.")
         await txb_adv
@@ -163,7 +186,8 @@ func use_act(act_str):
         textprompt(hrtalks[0])
         if opposing:
             opposing = false
-            textprompt("Situation Diffused!")
+            print_to_menu("Situation Diffused!")
+            await txb_adv
             social_credit += 15
             start_turn_text = "scrimblo permiates the air"
         else:
@@ -220,4 +244,6 @@ func credit_reached():
 func _input(event):
     if event.is_action_pressed("ui_accept"):
         txb_adv.emit()
+    elif event.is_action_pressed("ui_cancel"):
+        txb_back.emit()
         pass

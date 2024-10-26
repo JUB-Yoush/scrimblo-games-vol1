@@ -13,6 +13,7 @@ func _ready():
 
 
 func start(enemy_text):
+    %Heart.global_position = Vector2(214,128)
     visible = true
     %Heart.can_move = false
     %MenuCommands.visible = false
