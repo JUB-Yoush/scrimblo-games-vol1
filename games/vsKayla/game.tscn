@@ -1,10 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://88vwolggeq70"]
+[gd_scene load_steps=15 format=3 uid="uid://88vwolggeq70"]
 
 [ext_resource type="Script" path="res://games/vsKayla/game.gd" id="1_hkofs"]
 [ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="2_ukche"]
 [ext_resource type="Script" path="res://games/vsKayla/heart.gd" id="3_kiag2"]
 [ext_resource type="Script" path="res://games/vsKayla/danmaku.gd" id="3_pv4y2"]
 [ext_resource type="Theme" uid="uid://cbm5xucqvteak" path="res://games/vsKayla/assets/menu_theme.tres" id="3_tlcv7"]
+[ext_resource type="Texture2D" uid="uid://djpykv2xanvrr" path="res://games/vsKayla/assets/heart.png" id="3_y32a2"]
+[ext_resource type="Texture2D" uid="uid://bg323cc7jpag2" path="res://games/vsKayla/assets/hpbarempty.png" id="4_0b63n"]
+[ext_resource type="FontFile" uid="uid://cv26vul3vbixk" path="res://games/vsKayla/assets/DeterminationMonoWebRegular-Z5oq.ttf" id="4_jyr4l"]
+[ext_resource type="Texture2D" uid="uid://corabmtu10myp" path="res://games/vsKayla/assets/testbtn.png" id="4_umdsr"]
+[ext_resource type="Texture2D" uid="uid://dof2hqfx1tc6x" path="res://games/vsKayla/assets/hpbar.png" id="5_dset0"]
+[ext_resource type="FontFile" uid="uid://b5ewxl73qjltu" path="res://games/vsKayla/assets/crypt-of-tomorrow-ut-font-no-rus.ttf" id="5_nxim3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g310e"]
 size = Vector2(11, 10)
@@ -45,15 +51,17 @@ offset_left = 94.0
 offset_top = -40.0
 offset_right = 249.0
 offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("4_jyr4l")
+theme_override_font_sizes/font_size = 16
 text = "She lorem on my ipsum till i dolor sit amet"
 autowrap_mode = 2
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 56.0
+offset_left = 57.0
 offset_top = -1.0
-offset_right = 376.0
+offset_right = 375.0
 offset_bottom = 240.0
 
 [node name="SocialCreditLabel" type="Label" parent="Control"]
@@ -67,19 +75,10 @@ text = "SOCIAL CREDIT:
 "
 autowrap_mode = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="Control"]
-visible = false
-layout_mode = 0
-offset_left = 13.0
-offset_top = 5.0
-offset_right = 17.0
-offset_bottom = 32.0
-value = 10.0
-
 [node name="Cursor" type="Sprite2D" parent="Control"]
-visible = false
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_ukche")
+unique_name_in_owner = true
+z_index = 100
+texture = ExtResource("3_y32a2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
@@ -97,6 +96,7 @@ theme_override_constants/margin_right = 8
 
 [node name="Menu" type="Panel" parent="Control/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 
 [node name="MenuCommands" type="GridContainer" parent="Control/VBoxContainer/MarginContainer"]
@@ -108,26 +108,35 @@ columns = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("3_tlcv7")
-text = "Item1"
+text = "Item1asdfasdfasdfasdfa"
+alignment = 0
 
 [node name="Cmd2" type="Button" parent="Control/VBoxContainer/MarginContainer/MenuCommands"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("3_tlcv7")
 text = "Item1"
+alignment = 0
 
 [node name="Cmd3" type="Button" parent="Control/VBoxContainer/MarginContainer/MenuCommands"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("3_tlcv7")
 text = "Item1"
+alignment = 0
 
 [node name="Cmd4" type="Button" parent="Control/VBoxContainer/MarginContainer/MenuCommands"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("3_tlcv7")
 text = "Item1"
+alignment = 0
 
 [node name="MenuString" type="Label" parent="Control/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_jyr4l")
+theme_override_font_sizes/font_size = 16
 text = "
 
 
@@ -135,20 +144,42 @@ text = "
 
 [node name="StatsHbox" type="HBoxContainer" parent="Control/VBoxContainer"]
 layout_mode = 2
-alignment = 1
+
+[node name="NameLabel" type="Label" parent="Control/VBoxContainer/StatsHbox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_nxim3")
+theme_override_font_sizes/font_size = 10
+text = "MACARONI"
 
 [node name="LvlLabel" type="Label" parent="Control/VBoxContainer/StatsHbox"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("5_nxim3")
+theme_override_font_sizes/font_size = 10
 text = "Lv 1"
+horizontal_alignment = 1
+
+[node name="HPBar" type="TextureProgressBar" parent="Control/VBoxContainer/StatsHbox"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 20.0
+value = 20.0
+nine_patch_stretch = true
+stretch_margin_right = 20
+stretch_margin_bottom = 10
+texture_under = ExtResource("4_0b63n")
+texture_progress = ExtResource("5_dset0")
 
 [node name="HpLabel" type="Label" parent="Control/VBoxContainer/StatsHbox"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("5_nxim3")
+theme_override_font_sizes/font_size = 10
 text = "HP 20/20"
 
 [node name="ActionMenuMargin" type="MarginContainer" parent="Control/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
 
 [node name="ActionButtons" type="HBoxContainer" parent="Control/VBoxContainer/ActionMenuMargin"]
 unique_name_in_owner = true
@@ -156,27 +187,25 @@ layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="FightButton" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
+[node name="FightButton" type="TextureButton" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "FIGHT"
+texture_normal = ExtResource("4_umdsr")
 
-[node name="ActButton" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
+[node name="ActButton" type="TextureButton" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "ACT"
+texture_normal = ExtResource("4_umdsr")
 
-[node name="ItemButton" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
+[node name="ItemButton" type="TextureButton" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "ITEM
-"
+texture_normal = ExtResource("4_umdsr")
 
-[node name="MercyButton" type="Button" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
+[node name="MercyButton" type="TextureButton" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "MERCY
-"
+texture_normal = ExtResource("4_umdsr")
 
 [node name="Danmaku" type="Node2D" parent="."]
 visible = false
@@ -188,8 +217,7 @@ position = Vector2(205, 129)
 script = ExtResource("3_kiag2")
 
 [node name="Sprite" type="Sprite2D" parent="Danmaku/Heart"]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_ukche")
+texture = ExtResource("3_y32a2")
 
 [node name="Hurtbox" type="Area2D" parent="Danmaku/Heart"]
 

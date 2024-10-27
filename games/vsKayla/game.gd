@@ -47,6 +47,7 @@ var max_hp := 20
 var hp := max_hp:
     set(value):
         hp =  min(value, max_hp)
+        %HPBar.value = hp
         if hp <= 0:
             game_over()
         %HpLabel.text = str(hp) +"/"+ str(max_hp)
@@ -59,6 +60,7 @@ signal txb_adv
 signal txb_back
 
 func _ready() -> void:
+    get_viewport().gui_focus_changed.connect(update_cursor)
     danmaku.attack_over.connect(func(): update_game_state(GAME_STATE.MENUS))
     clear_menu()
     %FightButton.pressed.connect( func(): command_selected(COMMANDS.FIGHT))
@@ -66,6 +68,12 @@ func _ready() -> void:
     %ItemButton.pressed.connect(func(): command_selected(COMMANDS.ITEM))
     %MercyButton.pressed.connect(func(): command_selected(COMMANDS.MERCY))
     start_turn()
+
+func update_cursor(control:Control):
+    %Cursor.visible = true
+    %Cursor.global_position = control.global_position
+    %Cursor.position.x += 8
+    %Cursor.position.y += 12
 
 func update_game_state(new_state:GAME_STATE):
     print("update_game_state: ",current_game_state)
@@ -89,6 +97,7 @@ func start_turn():
     print_to_menu(start_turn_text)
     toggle_action_buttons(2)
     %FightButton.grab_focus()
+    update_cursor(%FightButton)
     await txb_back
     if menu_state != MENU_STATES.CHOSEN:
         clear_menu()
@@ -102,13 +111,13 @@ func command_selected(command):
     clear_menu()
     if command == COMMANDS.FIGHT:
         %Cmd1.visible = true
-        %Cmd1.text = "*Kayla"
+        %Cmd1.text = "    *Kayla"
         %Cmd1.pressed.connect(fight)
     elif command == COMMANDS.ACT:
         populate_acts()
     elif command == COMMANDS.MERCY:
         %Cmd1.visible = true
-        %Cmd1.text = "*Kayla"
+        %Cmd1.text = "    *Kayla"
 
         %Cmd1.pressed.connect(fight)
     elif command == COMMANDS.ITEM:
@@ -130,6 +139,7 @@ func fight():
     pass
 
 func clear_menu():
+    %Cursor.visible = false
     %Dialog.text = ""
     %MenuString.text = ""
     for box in cmdboxes:
@@ -206,13 +216,13 @@ func populate_items(offset):
         curr_items.append(items[offset + i])
         cmdboxes[i].visible = true
         cmdboxes[i].pressed.connect(func(): use_item(curr_items[i]))
-        cmdboxes[i].text = curr_items[i]
+        cmdboxes[i].text = "    " + curr_items[i]
 
 func populate_acts():
     for i in range(4):
         cmdboxes[i].visible = true
         cmdboxes[i].pressed.connect(func(): use_act(acts[i]))
-        cmdboxes[i].text = acts[i]
+        cmdboxes[i].text = "    " +acts[i]
     pass
 
 

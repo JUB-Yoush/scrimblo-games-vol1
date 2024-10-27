@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cbm5xucqvteak"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cbm5xucqvteak"]
+
+[ext_resource type="FontFile" uid="uid://cv26vul3vbixk" path="res://games/vsKayla/assets/DeterminationMonoWebRegular-Z5oq.ttf" id="1_xnh4c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qt8rr"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -9,6 +11,8 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 bg_color = Color(0.0177324, 0.0177324, 0.0177324, 1)
 
 [resource]
+Button/font_sizes/font_size = 16
+Button/fonts/font = ExtResource("1_xnh4c")
 Button/styles/focus = SubResource("StyleBoxFlat_qt8rr")
 Button/styles/hover = SubResource("StyleBoxFlat_jfm6v")
 Button/styles/normal = SubResource("StyleBoxFlat_ogcxk")
