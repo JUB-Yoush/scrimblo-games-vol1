@@ -72,7 +72,7 @@ func _ready() -> void:
 func update_cursor(control:Control):
     %Cursor.visible = true
     %Cursor.global_position = control.global_position
-    %Cursor.position.x += 8
+    %Cursor.position.x += 10
     %Cursor.position.y += 12
 
 func update_game_state(new_state:GAME_STATE):

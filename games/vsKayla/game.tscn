@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://88vwolggeq70"]
+[gd_scene load_steps=22 format=3 uid="uid://88vwolggeq70"]
 
 [ext_resource type="Script" path="res://games/vsKayla/game.gd" id="1_hkofs"]
 [ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="2_ukche"]
@@ -8,9 +8,16 @@
 [ext_resource type="Texture2D" uid="uid://djpykv2xanvrr" path="res://games/vsKayla/assets/heart.png" id="3_y32a2"]
 [ext_resource type="Texture2D" uid="uid://bg323cc7jpag2" path="res://games/vsKayla/assets/hpbarempty.png" id="4_0b63n"]
 [ext_resource type="FontFile" uid="uid://cv26vul3vbixk" path="res://games/vsKayla/assets/DeterminationMonoWebRegular-Z5oq.ttf" id="4_jyr4l"]
-[ext_resource type="Texture2D" uid="uid://corabmtu10myp" path="res://games/vsKayla/assets/testbtn.png" id="4_umdsr"]
 [ext_resource type="Texture2D" uid="uid://dof2hqfx1tc6x" path="res://games/vsKayla/assets/hpbar.png" id="5_dset0"]
 [ext_resource type="FontFile" uid="uid://b5ewxl73qjltu" path="res://games/vsKayla/assets/crypt-of-tomorrow-ut-font-no-rus.ttf" id="5_nxim3"]
+[ext_resource type="Texture2D" uid="uid://dr5hq23sfg4b8" path="res://games/vsKayla/assets/fight-btn.png" id="9_1d3tx"]
+[ext_resource type="Texture2D" uid="uid://bd06mihi57fxb" path="res://games/vsKayla/assets/fight-btn-hover.png" id="10_a2ti3"]
+[ext_resource type="Texture2D" uid="uid://dyrqlx7flgjfh" path="res://games/vsKayla/assets/act-btn.png" id="11_qq55r"]
+[ext_resource type="Texture2D" uid="uid://f7l84nsncao" path="res://games/vsKayla/assets/act-btn-hover.png" id="12_654ef"]
+[ext_resource type="Texture2D" uid="uid://swwshda683o5" path="res://games/vsKayla/assets/item-btn.png" id="13_u1qus"]
+[ext_resource type="Texture2D" uid="uid://c5jwl7ie2i8v8" path="res://games/vsKayla/assets/item-btn-hover.png" id="14_5b1j4"]
+[ext_resource type="Texture2D" uid="uid://4ag0f4iqccj4" path="res://games/vsKayla/assets/mercy-btn.png" id="15_o07cv"]
+[ext_resource type="Texture2D" uid="uid://04ko5jd6jm0g" path="res://games/vsKayla/assets/mercy-btn-hover.png" id="16_hfcem"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g310e"]
 size = Vector2(11, 10)
@@ -60,9 +67,8 @@ autowrap_mode = 2
 layout_mode = 3
 anchors_preset = 0
 offset_left = 57.0
-offset_top = -1.0
 offset_right = 375.0
-offset_bottom = 240.0
+offset_bottom = 241.0
 
 [node name="SocialCreditLabel" type="Label" parent="Control"]
 unique_name_in_owner = true
@@ -71,7 +77,9 @@ offset_left = 13.0
 offset_top = 5.0
 offset_right = 168.0
 offset_bottom = 80.0
-text = "SOCIAL CREDIT:
+theme_override_fonts/font = ExtResource("5_nxim3")
+theme_override_font_sizes/font_size = 10
+text = "SOCIAL CREDIT
 "
 autowrap_mode = 2
 
@@ -190,22 +198,34 @@ alignment = 1
 [node name="FightButton" type="TextureButton" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-texture_normal = ExtResource("4_umdsr")
+texture_normal = ExtResource("9_1d3tx")
+texture_pressed = ExtResource("10_a2ti3")
+texture_hover = ExtResource("10_a2ti3")
+texture_focused = ExtResource("10_a2ti3")
 
 [node name="ActButton" type="TextureButton" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-texture_normal = ExtResource("4_umdsr")
+texture_normal = ExtResource("11_qq55r")
+texture_pressed = ExtResource("12_654ef")
+texture_hover = ExtResource("12_654ef")
+texture_focused = ExtResource("12_654ef")
 
 [node name="ItemButton" type="TextureButton" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-texture_normal = ExtResource("4_umdsr")
+texture_normal = ExtResource("13_u1qus")
+texture_pressed = ExtResource("14_5b1j4")
+texture_hover = ExtResource("14_5b1j4")
+texture_focused = ExtResource("14_5b1j4")
 
 [node name="MercyButton" type="TextureButton" parent="Control/VBoxContainer/ActionMenuMargin/ActionButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-texture_normal = ExtResource("4_umdsr")
+texture_normal = ExtResource("15_o07cv")
+texture_pressed = ExtResource("16_hfcem")
+texture_hover = ExtResource("16_hfcem")
+texture_focused = ExtResource("16_hfcem")
 
 [node name="Danmaku" type="Node2D" parent="."]
 visible = false
