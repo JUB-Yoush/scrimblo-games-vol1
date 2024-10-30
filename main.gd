@@ -23,7 +23,6 @@ func game_over():
 	pass
 
 func boss_state():
-	print('christina vs kayla')
 	pass
 
 func pick_game():

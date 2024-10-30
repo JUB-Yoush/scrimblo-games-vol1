@@ -7,21 +7,23 @@ enum COMMANDS {FIGHT,ACT,ITEM,MERCY}
 
 var menu_state = MENU_STATES.COMMANDS
 
-var items = ["*Bingus","*M.Stew","*Scrimbookie","*scimblo"]
+var items = ["* Bingus","* M.Stew","* Scrimbookie","* Scimblo"]
 var curr_items = []
-var acts = ["*Check","*Appeal","*Oppose","*HR Talk"]
+var acts = ["* Check","* Appeal","* Oppose","* HR Talk"]
 
-var appeals = ["*You show Kayla a gif of a spinning Rei Chiquita.","*You tell Kayla you love anticipating her email replies.",""]
-var opposes = ["*You say the phrase \"Scrimblo\" 64 times","You remind Kayla that we're not a \"Gaming\"Club."]
-var hrtalks = ["*You use your strongest corportate jargon to diffuse the situation."]
+var appeals = ["* You show Kayla a gif. \n* It's spinning Rei Chiquita.","* You simply ask for social credit."]
+var opposes = ["* You say the phrase \"Scrimblo\". \n* 128 times.","* You correct Kayla. \n* \"We aren't the Gaming Club,\" \n* \"We make games, Actually\""]
+var hrtalks = ["* You use your strongest corportate jargon."]
 
 var enemy_turn_text = "this is what I have to say"
-var start_turn_text = "world is scrim blo blo blo"
+var start_turn_text = "* world is scrim blo blo blo"
 
 var awaiting_command = false
 var opposing = false
 var scrimbookied = false
 var sparable = false
+
+var fightbar_moving = false
 
 @onready var cmdboxes = [%Cmd1,%Cmd2,%Cmd3,%Cmd4]
 @onready var action_buttons =[%FightButton, %ActButton, %ItemButton, %MercyButton]
@@ -72,8 +74,12 @@ func _ready() -> void:
 func update_cursor(control:Control):
 	%Cursor.visible = true
 	%Cursor.global_position = control.global_position
-	%Cursor.position.x += 10
-	%Cursor.position.y += 12
+	if control is Button:
+		%Cursor.position.x += 8
+		%Cursor.position.y += 8
+	else:
+		%Cursor.position.x += 10
+		%Cursor.position.y += 12
 
 func update_game_state(new_state:GAME_STATE):
 	print("update_game_state: ",current_game_state)
@@ -111,13 +117,13 @@ func command_selected(command):
 	clear_menu()
 	if command == COMMANDS.FIGHT:
 		%Cmd1.visible = true
-		%Cmd1.text = "    *Kayla"
+		%Cmd1.text = "  * Kayla"
 		%Cmd1.pressed.connect(fight)
 	elif command == COMMANDS.ACT:
 		populate_acts()
 	elif command == COMMANDS.MERCY:
 		%Cmd1.visible = true
-		%Cmd1.text = "    *Kayla"
+		%Cmd1.text = "  * Kayla"
 
 		%Cmd1.pressed.connect(fight)
 	elif command == COMMANDS.ITEM:
@@ -131,11 +137,27 @@ func command_selected(command):
 	end_turn()
 
 func fight():
+	clear_menu()
 	menu_state = MENU_STATES.CHOSEN
+	%Textbox.texture = load("res://games/vsKayla/assets/attackscale.png")
+	%FightBar.visible = true
+	%FightBar.position.x = 370
+	fightbar_moving = true
 	# do the timing minigame
-	print('this is where youd do the timing game shell dodge every time so who even cares')
+	await txb_adv
+	%Knife.visible = true
+	for i in range(6):
+		%FightBar.texture = load("res://games/vsKayla/assets/fightbaralt.png")
+		%Knife.frame = i
+		await get_tree().create_timer(.1).timeout
+		%FightBar.texture = load("res://games/vsKayla/assets/fightbar.png")
+		await get_tree().create_timer(.1).timeout
+	%Knife.visible = false
+	fightbar_moving = false
+	%FightBar.visible = false
 	# await or whatever
 	command_completed.emit()
+	%Textbox.texture = load("res://games/vsKayla/assets/textbox.png")
 	pass
 
 func clear_menu():
@@ -158,50 +180,59 @@ func use_item(item_str):
 
 	menu_state = MENU_STATES.CHOSEN
 	clear_menu()
-	if item_str == "*M.Stew":
+	if item_str == "* M.Stew":
 		hp += 20
-		print_to_menu("You drank Stew sent by Maddie \n Healed 20 HP")
+		print_to_menu("* You drank Stew sent by Maddie \n* Healed 20 HP")
 		await txb_adv
-	elif item_str == "*Bingus":
+	elif item_str == "* Bingus":
 		hp += 10
-		print_to_menu("It's kinda melted. \n Healed 20 HP")
+		print_to_menu("* It's kinda melted. \n* Healed 20 HP")
 		await txb_adv
-	elif item_str == "*Scrimbookie":
+	elif item_str == "* Scrimbookie":
 		scrimbookied = true
-		print_to_menu("You feel especially persuasive.\n Boosted Appeal power for 3 turns")
+		print_to_menu("* You feel especially persuasive.\n * Extra Social Credit for 3 turns")
+		await txb_adv
+	elif item_str == "* Pigeon":
+		scrimbookied = true
+		print_to_menu("* You feel especially persuasive.\n * Extra Social Credit for 3 turns")
 		await txb_adv
 	command_completed.emit()
 
 func use_act(act_str):
 	menu_state = MENU_STATES.CHOSEN
-	if act_str == "*Check":
+	if act_str == "* Check":
 		print_to_menu("Kayla: 1HP, 1ATK, 1DEF \n She runs lassonde clubs.")
 		await txb_adv
 
-	elif act_str == "*Appeal":
+	elif act_str == "* Appeal":
 		print_to_menu(appeals[0])
 		social_credit += 5
 		await txb_adv
 
-	elif act_str == "*Oppose":
+	elif act_str == "* Oppose":
 		if opposing:
 			print('guh')
 		else:
 			opposing = true
-			print_to_menu(opposes[0])
+			print_to_menu(opposes[1])
 			await txb_adv
-			start_turn_text = "kayla is feeling particularly critical of your club"
+			start_turn_text = "* kayla is feeling particularly \n* critical of your club"
 
-	elif act_str == "*HR Talk":
+	elif act_str == "* HR Talk":
 		textprompt(hrtalks[0])
 		if opposing:
 			opposing = false
+			print_to_menu(hrtalks[0])
+			await txb_adv
 			print_to_menu("Situation Diffused!")
 			await txb_adv
 			social_credit += 15
 			start_turn_text = "scrimblo permiates the air"
 		else:
-			textprompt("Kayla looks indifferently")
+			print_to_menu(hrtalks[0])
+			await txb_adv
+			print_to_menu("Kayla looks indifferently")
+			await txb_adv
 
 
 	print('using action '+ act_str)
@@ -216,13 +247,13 @@ func populate_items(offset):
 		curr_items.append(items[offset + i])
 		cmdboxes[i].visible = true
 		cmdboxes[i].pressed.connect(func(): use_item(curr_items[i]))
-		cmdboxes[i].text = "    " + curr_items[i]
+		cmdboxes[i].text = "  " + curr_items[i]
 
 func populate_acts():
 	for i in range(4):
 		cmdboxes[i].visible = true
 		cmdboxes[i].pressed.connect(func(): use_act(acts[i]))
-		cmdboxes[i].text = "    " +acts[i]
+		cmdboxes[i].text = "  " +acts[i]
 	pass
 
 
@@ -257,3 +288,11 @@ func _input(event):
 	elif event.is_action_pressed("ui_cancel"):
 		txb_back.emit()
 		pass
+
+
+func _process(delta):
+	if fightbar_moving:
+		var barSpeed = -175
+		%FightBar.position.x += barSpeed * get_process_delta_time()
+	await txb_adv
+	fightbar_moving = false

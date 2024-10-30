@@ -24,7 +24,7 @@ func start(enemy_text):
 		await get_tree().create_timer(1).timeout
 		%Dialog.visible = false
 	%Heart.can_move = true
-	pattern1.call()
+	pattern1()
 	# find a more natural way to do this
 	attackTimer.start(attack_time)
 
@@ -45,7 +45,7 @@ func enemy_says(text):
 	%Dialog.visible = false
 
 
-var pattern1 = func():
+func pattern1():
 	# drop from top of screen, at some point detonate and create spreads of 3 bullets to dodge
 	# harder version: spread of 5
 	var dropScene :PackedScene= load("res://games/vsKayla/bullet_patterns/drops.tscn")

@@ -60,3 +60,18 @@ Scrimbookie: doubles social credit for 3 turns
 Scrimbo: summons scrimblo (scrimblo appears in the corner of the screen during danmaku)
 Pidgeon: requests food from Maddie
 M.Stew: Heals 20HP
+
+# functional
+
+- [ ] bullet patterns
+- [ ] items being disposed
+
+# polish
+
+- [ ] backing out of menu puts you back on same aciton button
+- [ ] knife animation is faster + kayla dodge
+
+# bugs
+
+- [ ] backing out of a menu makes another bullet pattern on top
+- [ ] heart starts in random spot

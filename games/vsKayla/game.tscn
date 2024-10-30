@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://88vwolggeq70"]
+[gd_scene load_steps=31 format=3 uid="uid://88vwolggeq70"]
 
 [ext_resource type="Script" path="res://games/vsKayla/game.gd" id="1_hkofs"]
 [ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="2_ukche"]
@@ -25,9 +25,11 @@
 [ext_resource type="Texture2D" uid="uid://04ko5jd6jm0g" path="res://games/vsKayla/assets/mercy-btn-hover.png" id="16_hfcem"]
 [ext_resource type="Texture2D" uid="uid://dcwtvggsginbv" path="res://games/vsKayla/assets/heartpox.png" id="19_udwge"]
 [ext_resource type="Texture2D" uid="uid://dux8p1dtjwixd" path="res://games/vsKayla/assets/battle-bg.png" id="23_qxjd5"]
+[ext_resource type="Texture2D" uid="uid://cukhv0fyi8mb5" path="res://games/vsKayla/assets/knife.png" id="25_afqnq"]
+[ext_resource type="Texture2D" uid="uid://g0xof8f0vc3b" path="res://games/vsKayla/assets/fightbar.png" id="26_0y71k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g310e"]
-size = Vector2(11, 10)
+size = Vector2(8.5, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ny31m"]
 size = Vector2(107.75, 9.5)
@@ -37,7 +39,8 @@ size = Vector2(94.125, 12.5)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_hkofs")
-metadata/_edit_vertical_guides_ = [376.0, 812.0]
+metadata/_edit_vertical_guides_ = [376.0, 812.0, 371.0]
+metadata/_edit_horizontal_guides_ = [157.0]
 
 [node name="BorderL" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -136,6 +139,7 @@ theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
 
 [node name="Textbox" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/MenuBox"]
+unique_name_in_owner = true
 z_index = 10
 layout_mode = 2
 texture = ExtResource("9_okmtv")
@@ -284,6 +288,7 @@ texture = ExtResource("3_y32a2")
 [node name="Hurtbox" type="Area2D" parent="Danmaku/Heart"]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Danmaku/Heart/Hurtbox"]
+position = Vector2(-1.25, -1)
 shape = SubResource("RectangleShape2D_g310e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Danmaku/Heart"]
@@ -321,8 +326,27 @@ position = Vector2(216, 120)
 scale = Vector2(2.88, 2.18101)
 texture = ExtResource("2_ukche")
 
+[node name="Knife" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(216, 60)
+texture = ExtResource("25_afqnq")
+hframes = 6
+frame = 5
+region_rect = Rect2(0, 0, 32, 110)
+
 [node name="battleBg" type="Sprite2D" parent="."]
 visible = false
 z_index = -10
 position = Vector2(216, 60)
 texture = ExtResource("23_qxjd5")
+
+[node name="FightBar" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 10
+position = Vector2(216, 157)
+texture = ExtResource("26_0y71k")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Knife")
