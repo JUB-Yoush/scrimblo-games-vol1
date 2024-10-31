@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dx50o8ncqh7vw"]
+
+[ext_resource type="Texture2D" uid="uid://hjq7373g116v" path="res://games/vsKayla/assets/bullets/stepper.png" id="1_1beef"]
+[ext_resource type="Script" path="res://games/vsKayla/bullet_patterns/stepper.gd" id="1_b6bsw"]
+[ext_resource type="Texture2D" uid="uid://dng6soqgs2v4a" path="res://games/vsKayla/assets/bullets/alert.png" id="2_pfn0j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lg73i"]
+size = Vector2(30, 92)
+
+[node name="Stepper" type="Node2D"]
+script = ExtResource("1_b6bsw")
+
+[node name="StepperArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="StepperArea"]
+texture = ExtResource("1_1beef")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepperArea"]
+position = Vector2(15, 46)
+shape = SubResource("RectangleShape2D_lg73i")
+
+[node name="Alert" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("2_pfn0j")
+centered = false
+hframes = 3

@@ -24,7 +24,7 @@ func start(enemy_text):
 		await get_tree().create_timer(1).timeout
 		%Dialog.visible = false
 	%Heart.can_move = true
-	pattern1()
+	pattern2()
 	# find a more natural way to do this
 	attackTimer.start(attack_time)
 
@@ -61,9 +61,23 @@ func pattern1():
 
 
 func pattern2():
-	# zebra runs across the screen and the dust it kicks up rains down
-	#harder version: more dust
-	pass
+	var stepperScene :PackedScene = load("res://games/vsKayla/bullet_patterns/stepper.tscn")
+	var stepper = stepperScene.instantiate()
+	add_child(stepper)
+	var offsets = [0,30,60]
+	var prev_offset = 0
+	for i in range(5):
+		var offset = offsets.pick_random()
+		while offset == prev_offset:
+			offset = offsets.pick_random()
+		stepper.global_position = Vector2(170,95)
+		stepper.global_position.x += offset
+		stepper.drop()
+		await stepper.dropped
+		prev_offset = offset
+		await get_tree().create_timer(.1).timeout
+	stepper.queue_free()
+
 
 func pattern3():
 	# full screen spiral
