@@ -70,8 +70,22 @@ M.Stew: Heals 20HP
 
 - [ ] backing out of menu puts you back on same aciton button
 - [ ] knife animation is faster + kayla dodge
+- [ ] per character text rendering + when you press it all appears
 
 # bugs
 
 - [ ] backing out of a menu makes another bullet pattern on top
 - [ ] heart starts in random spot
+
+# b patterns
+4 blocks from one side, they go to the other side
+There is a gap in them
+or they spawn from the top and arch down 
+gasterblasters, targeted rays that move in a spiral 
+steppy feet
+change the current one to be bursts instead of targeted
+- burst
+- blasters
+- step
+- arcs
+- block slide
