@@ -7,13 +7,14 @@ enum COMMANDS {FIGHT,ACT,ITEM,MERCY}
 
 var menu_state = MENU_STATES.COMMANDS
 
-var items = ["* Bingus","* M.Stew","* Scrimbookie","* Scimblo"]
+var items = ["* Bingus","* M.Stew","* Scrimbookie","* Pigeon"]
 var curr_items = []
 var acts = ["* Check","* Appeal","* Oppose","* HR Talk"]
 
-var appeals = ["* You show Kayla a gif. \n* It's spinning Rei Chiquita.","* You simply ask for social credit."]
-var opposes = ["* You say the phrase \"Scrimblo\". \n* 128 times.","* You correct Kayla. \n* \"We aren't the Gaming Club,\" \n* \"We make games, Actually\""]
-var hrtalks = ["* You use your strongest corportate jargon."]
+var appeals = ["* You show Kayla a gif. \n It's spinning Rei Chiquita.","* You simply ask for more social credit.","You tell Kayla you're starting a blog: \n christinasroom.com"]
+var opposes = ["* You go on an impasioned rant about \n your disdain for audio-visualizers.","* You correct Kayla. \n  \"We aren't the Gaming Club,\" \n  \"We make games, Actually\"","* You try distracting Kayla from the \n knife orbiting you."]
+var hrtalks = ["* you use the Macaroni Corpo Jargon\n technique."]
+var start_turn_texts = ["* Smells of Scrimblo resedue.","* Your heart is filled with... pasta.","* Do Scrimblos dream of \n Sheep (2000) for the PSX?"]
 
 var enemy_turn_text = "this is what I have to say"
 var start_turn_text = "* world is scrim blo blo blo"
@@ -23,6 +24,11 @@ var opposing = false
 var scrimbookied = false
 var sparable = false
 
+var scrimblo = false
+var pigeon_returned = false
+var pigeon_waiting = false
+var pigeon_turn:int
+
 var fightbar_moving = false
 
 @onready var cmdboxes = [%Cmd1,%Cmd2,%Cmd3,%Cmd4]
@@ -31,8 +37,10 @@ var fightbar_moving = false
 
 var social_credit = 0:
 	set(value):
+		if scrimbookied:
+			value += 5
 		social_credit = value
-		%SCreditBar.value = value
+		%SCreditBar.value = social_credit
 		if social_credit == goal_credit:
 			credit_reached()
 
@@ -40,17 +48,21 @@ var goal_credit = 100
 var turn_count = 1:
 	set(value):
 		turn_count = value
+		if pigeon_waiting:
+			if turn_count == pigeon_turn + 2:
+				pigeon_returned = true
 		if turn_count == deadline:
 			game_over()
 			pass
-var deadline = 20
+var deadline = 10
 
 var max_hp := 20
 var hp := max_hp:
 	set(value):
-		hp =  min(value, max_hp)
+		print(hp,value)
+		hp =  clamp(value, 0,max_hp)
 		%HPBar.value = hp
-		if hp <= 0:
+		if hp == 0:
 			game_over()
 		%HpLabel.text = str(hp) +"/"+ str(max_hp)
 
@@ -83,6 +95,8 @@ func update_cursor(control:Control):
 
 func update_game_state(new_state:GAME_STATE):
 	print("update_game_state: ",current_game_state)
+	if current_game_state == new_state:
+		return
 	# unload prev state
 	if current_game_state == GAME_STATE.MENUS:
 		clear_menu()
@@ -90,7 +104,7 @@ func update_game_state(new_state:GAME_STATE):
 
 	# load new state
 	if new_state == GAME_STATE.DANMAKU:
-		danmaku.start(enemy_turn_text)
+		danmaku.start(enemy_turn_text,opposing)
 	if new_state == GAME_STATE.MENUS:
 		turn_count += 1
 		start_turn()
@@ -99,13 +113,26 @@ func update_game_state(new_state:GAME_STATE):
 func start_turn():
 	menu_state = MENU_STATES.COMMANDS
 	# render the menu and the action buttons
+	if opposing:
+		print_to_menu("* Kayla is offended! \n Attacks are harder! \n use HR talk to diffuse!")
+	elif pigeon_returned:
+		if items.size() < 3:
+			items.append("* M.Stew")
+			print_to_menu("* The Pigeon returned from Cali! \n It hands you a bowl of stew.")
+		else:
+			print_to_menu("* The Pigeon returned from Cali! \n ...but you don't have room for\n the Pigeon and the stew.")
+		pigeon_returned = false
+		pigeon_waiting = false
+		items.append("* Pigeon")
+	else:
+		print_to_menu(start_turn_texts.pick_random())
+
 	clear_menu()
-	print_to_menu(start_turn_text)
 	toggle_action_buttons(2)
 	%FightButton.grab_focus()
 	update_cursor(%FightButton)
 	await txb_back
-	if menu_state != MENU_STATES.CHOSEN:
+	if menu_state == MENU_STATES.MENU:
 		clear_menu()
 		start_turn()
 
@@ -181,31 +208,35 @@ func use_item(item_str):
 	menu_state = MENU_STATES.CHOSEN
 	clear_menu()
 	if item_str == "* M.Stew":
-		hp += 20
-		print_to_menu("* You drank Stew sent by Maddie \n* Healed 20 HP")
+		hp += 15
+		print_to_menu("* Made by Maddie. \n* Healed 15 HP.")
 		await txb_adv
 	elif item_str == "* Bingus":
-		hp += 10
-		print_to_menu("* It's kinda melted. \n* Healed 20 HP")
+		hp += 20
+		print_to_menu("* It's mostly Ice. \n* Healed 20 HP.")
 		await txb_adv
 	elif item_str == "* Scrimbookie":
 		scrimbookied = true
-		print_to_menu("* You feel especially persuasive.\n * Extra Social Credit for 3 turns")
+		print_to_menu("* You feel especially persuasive.\n  Extra Social Credit for 3 turns.")
 		await txb_adv
 	elif item_str == "* Pigeon":
-		scrimbookied = true
-		print_to_menu("* You feel especially persuasive.\n * Extra Social Credit for 3 turns")
+		scrimblo = true
+		print_to_menu("* You tossed the Pigeon.\n It's flying to California. \n  It'll return in 2 business turns.")
+		pigeon_returned = false
+		pigeon_waiting = true
+		pigeon_turn = turn_count
 		await txb_adv
+	rm_item(item_str)
 	command_completed.emit()
 
 func use_act(act_str):
 	menu_state = MENU_STATES.CHOSEN
 	if act_str == "* Check":
-		print_to_menu("Kayla: 1HP, 1ATK, 1DEF \n She runs lassonde clubs.")
+		print_to_menu("* Kayla: 50HP, 12ATK, 5DEF \n She runs lassonde clubs.")
 		await txb_adv
 
 	elif act_str == "* Appeal":
-		print_to_menu(appeals[0])
+		print_to_menu(appeals.pick_random())
 		social_credit += 5
 		await txb_adv
 
@@ -219,19 +250,18 @@ func use_act(act_str):
 			start_turn_text = "* kayla is feeling particularly \n* critical of your club"
 
 	elif act_str == "* HR Talk":
-		textprompt(hrtalks[0])
+		textprompt(hrtalks.pick_random())
 		if opposing:
 			opposing = false
 			print_to_menu(hrtalks[0])
 			await txb_adv
-			print_to_menu("Situation Diffused!")
+			print_to_menu("* Situation Diffused!")
 			await txb_adv
 			social_credit += 15
-			start_turn_text = "scrimblo permiates the air"
 		else:
 			print_to_menu(hrtalks[0])
 			await txb_adv
-			print_to_menu("Kayla looks indifferently")
+			print_to_menu("* Kayla looks indifferently")
 			await txb_adv
 
 
@@ -242,12 +272,21 @@ func use_act(act_str):
 
 # the offset is the 4 items rendered
 func populate_items(offset):
-	offset = offset * 4
-	for i in range(4):
-		curr_items.append(items[offset + i])
+	print(items)
+	for i in range(items.size()):
+		#curr_items.append(items[offset + i])
 		cmdboxes[i].visible = true
-		cmdboxes[i].pressed.connect(func(): use_item(curr_items[i]))
-		cmdboxes[i].text = "  " + curr_items[i]
+		cmdboxes[i].pressed.connect(func(): use_item(items[i]))
+		cmdboxes[i].text = "  " + items[i]
+
+func rm_item(item_str):
+	print(items)
+	for i in range(items.size()):
+		if items[i] == item_str:
+			items.remove_at(i)
+			break
+	print(items)
+
 
 func populate_acts():
 	for i in range(4):
@@ -265,9 +304,17 @@ func textprompt(text):
 	await txb_adv
 
 func print_to_menu(text):
-	# will b more sophisiticated later
 	clear_menu()
-	%MenuString.text = text
+	# render one character at a time
+	var output = ""
+	for c in text:
+		if menu_state == MENU_STATES.MENU:
+			%MenuString.text = ''
+			output = text
+			break
+		output += c
+		%MenuString.text = output
+		await get_tree().create_timer(.01).timeout
 
 
 func take_damage(damage:int):

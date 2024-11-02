@@ -41,9 +41,9 @@ func spawn_bullets():
 	bullet2.dir = vector_to_player.normalized().rotated(deg_to_rad(20))
 	bullet3.dir = vector_to_player.normalized().rotated(deg_to_rad(-20))
 
-	bullet.damage = 1
-	bullet2.damage = 1
-	bullet3.damage = 1
+	bullet.damage = 2
+	bullet2.damage = 2
+	bullet3.damage = 2
 
 	bullet.speed = 150
 	bullet2.speed = 120

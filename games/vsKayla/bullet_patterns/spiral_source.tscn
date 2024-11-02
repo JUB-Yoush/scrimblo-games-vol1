@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bbv6kl4xan8hx"]
+
+[node name="SpiralSource" type="Node2D"]

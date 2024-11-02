@@ -40,7 +40,7 @@ size = Vector2(94.125, 12.5)
 [node name="Game" type="Node"]
 script = ExtResource("1_hkofs")
 metadata/_edit_vertical_guides_ = [376.0, 812.0, 371.0, 170.0]
-metadata/_edit_horizontal_guides_ = [157.0, 95.0]
+metadata/_edit_horizontal_guides_ = [157.0, 95.0, 95.0, 137.0]
 
 [node name="BorderL" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)

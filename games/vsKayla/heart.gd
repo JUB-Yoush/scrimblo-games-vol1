@@ -18,10 +18,18 @@ func _process(delta: float) -> void:
 
 
 func on_area_entered(area:Area2D):
+	print(area)
+	if area.is_in_group("onehit"):
+		print(area.hit)
+		if area.hit == true:
+			return
+		else:
+			print('setting to true')
+			area.hit = true
 	if area.is_in_group("bullets") and can_hit:
+		print(area.damage)
 		get_parent().get_parent().take_damage(area.damage)
 		hitflash()
-		area.queue_free()
 
 func hitflash():
 	can_hit = false
@@ -32,4 +40,3 @@ func hitflash():
 		$Sprite.visible = true
 		await get_tree().create_timer(flashspeed).timeout
 	can_hit = true
-

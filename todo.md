@@ -65,12 +65,12 @@ M.Stew: Heals 20HP
 
 - [ ] bullet patterns
 - [ ] items being disposed
+- [ ] extra damage in oppose mode
 
 # polish
 
 - [ ] backing out of menu puts you back on same aciton button
 - [ ] knife animation is faster + kayla dodge
-- [ ] per character text rendering + when you press it all appears
 
 # bugs
 
@@ -78,12 +78,14 @@ M.Stew: Heals 20HP
 - [ ] heart starts in random spot
 
 # b patterns
+
 4 blocks from one side, they go to the other side
 There is a gap in them
-or they spawn from the top and arch down 
-gasterblasters, targeted rays that move in a spiral 
+or they spawn from the top and arch down
+gasterblasters, targeted rays that move in a spiral
 steppy feet
 change the current one to be bursts instead of targeted
+
 - burst
 - blasters
 - step
