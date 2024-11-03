@@ -72,6 +72,10 @@ M.Stew: Heals 20HP
 - [ ] backing out of menu puts you back on same aciton button
 - [ ] knife animation is faster + kayla dodge
 
+# improvements
+
+- [ ] make stepper also horiz
+
 # bugs
 
 - [ ] backing out of a menu makes another bullet pattern on top

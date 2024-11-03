@@ -102,7 +102,7 @@ var pattern2 := func():
 	print('pattern over')
 
 
-func pattern3():
+var pattern3 = func():
 	var spiralSource = load("res://games/vsKayla/bullet_patterns/spiral_source.tscn").instantiate()
 	var spinBulletScene :PackedScene = load("res://games/vsKayla/bullet_spin.tscn")
 	add_child(spiralSource)
