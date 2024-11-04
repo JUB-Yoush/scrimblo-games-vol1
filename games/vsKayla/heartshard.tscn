@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://5qfqw053v04d"]
+
+[ext_resource type="Texture2D" uid="uid://driqw8eb32fch" path="res://games/vsKayla/assets/heart-shard.png" id="1_cojye"]
+
+[node name="Node2D" type="RigidBody2D"]
+position = Vector2(216, 106)
+gravity_scale = 0.5
+linear_velocity = Vector2(0, -200)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cojye")

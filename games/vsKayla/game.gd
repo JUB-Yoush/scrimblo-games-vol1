@@ -11,7 +11,7 @@ var items = ["* Bingus","* M.Stew","* Scrimbookie","* Pigeon"]
 var curr_items = []
 var acts = ["* Check","* Appeal","* Oppose","* HR Talk"]
 
-var appeals = ["* You show Kayla a gif. \n It's spinning Rei Chiquita.","* You simply ask for more social credit.","You tell Kayla you're starting a blog: \n christinasroom.com"]
+var appeals = ["* You show Kayla a gif. \n It's spinning Rei Chiquita.","* You simply ask Kayla \n  for more social credit.","You annouce your new blog: \n christinasroom.com"]
 var opposes = ["* You go on an impasioned rant about \n your disdain for audio-visualizers.","* You correct Kayla. \n  \"We aren't the Gaming Club,\" \n  \"We make games, Actually\"","* You try distracting Kayla from the \n knife orbiting you."]
 var hrtalks = ["* you use the Macaroni Corpo Jargon\n technique."]
 var start_turn_texts = ["* Smells of Scrimblo resedue.","* Your heart is filled with... pasta.","* Do Scrimblos dream of \n Sheep (2000) for the PSX?"]
@@ -42,6 +42,7 @@ var social_credit = 0:
 		social_credit = value
 		%SCreditBar.value = social_credit
 		if social_credit == goal_credit:
+			sparable = true
 			credit_reached()
 
 var goal_credit = 100
@@ -52,7 +53,7 @@ var turn_count = 1:
 			if turn_count == pigeon_turn + 2:
 				pigeon_returned = true
 		if turn_count == deadline:
-			game_over()
+			out_of_time()
 			pass
 var deadline = 10
 
@@ -63,12 +64,13 @@ var hp := max_hp:
 		hp =  clamp(value, 0,max_hp)
 		%HPBar.value = hp
 		if hp == 0:
-			game_over()
+			die()
 		%HpLabel.text = str(hp) +"/"+ str(max_hp)
 
 
 var current_game_state:GAME_STATE = GAME_STATE.SETUP
 
+signal game_over(state)
 signal command_completed
 signal txb_adv
 signal txb_back
@@ -152,7 +154,7 @@ func command_selected(command):
 		%Cmd1.visible = true
 		%Cmd1.text = "  * Kayla"
 
-		%Cmd1.pressed.connect(fight)
+		%Cmd1.pressed.connect(spare)
 	elif command == COMMANDS.ITEM:
 		populate_items(0)
 
@@ -186,6 +188,18 @@ func fight():
 	command_completed.emit()
 	%Textbox.texture = load("res://games/vsKayla/assets/textbox.png")
 	pass
+
+func spare():
+	menu_state = MENU_STATES.CHOSEN
+	if sparable:
+		#turn her grey or whatever and sto animation
+		print_to_menu("* YOU WON!.\n You earned 0 XP and 0 gold.")
+		await txb_adv
+		game_over.emit(true)
+	else:
+		print_to_menu("* Not enough Social Credit!")
+		await txb_adv
+
 
 func clear_menu():
 	%Cursor.visible = false
@@ -321,12 +335,19 @@ func take_damage(damage:int):
 	hp -= damage
 	pass
 
-func game_over():
-	#end the game
+func out_of_time():
+	print_to_menu("Deadline Reached! \n Insufficient social credit!")
+	await txb_adv
+	# make heart visible ig
+	die()
+
+func die():
+	danmaku.heart_explode()
 	pass
 
+
 func credit_reached():
-	# kayla is sparable
+
 	pass
 
 func _input(event):

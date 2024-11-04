@@ -63,14 +63,17 @@ M.Stew: Heals 20HP
 
 # functional
 
-- [ ] bullet patterns
-- [ ] items being disposed
-- [ ] extra damage in oppose mode
+- [x] sparing at max social credit
+- [x] time limit
+- [ ] bullet pattern 4
+- [ ] bullet pattern 5
 
 # polish
 
 - [ ] backing out of menu puts you back on same aciton button
 - [ ] knife animation is faster + kayla dodge
+- [ ] make the heart hitflash an animation so I can stop it
+- [ ] toast on the number of social credit that gone up
 
 # improvements
 

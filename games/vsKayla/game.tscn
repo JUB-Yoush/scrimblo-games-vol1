@@ -1,8 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://88vwolggeq70"]
+[gd_scene load_steps=30 format=3 uid="uid://88vwolggeq70"]
 
 [ext_resource type="Script" path="res://games/vsKayla/game.gd" id="1_hkofs"]
 [ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="2_ukche"]
-[ext_resource type="Script" path="res://games/vsKayla/heart.gd" id="3_kiag2"]
 [ext_resource type="Script" path="res://games/vsKayla/danmaku.gd" id="3_pv4y2"]
 [ext_resource type="Theme" uid="uid://cbm5xucqvteak" path="res://games/vsKayla/assets/menu_theme.tres" id="3_tlcv7"]
 [ext_resource type="Texture2D" uid="uid://djpykv2xanvrr" path="res://games/vsKayla/assets/heart.png" id="3_y32a2"]
@@ -24,12 +23,10 @@
 [ext_resource type="Texture2D" uid="uid://4ag0f4iqccj4" path="res://games/vsKayla/assets/mercy-btn.png" id="15_o07cv"]
 [ext_resource type="Texture2D" uid="uid://04ko5jd6jm0g" path="res://games/vsKayla/assets/mercy-btn-hover.png" id="16_hfcem"]
 [ext_resource type="Texture2D" uid="uid://dcwtvggsginbv" path="res://games/vsKayla/assets/heartpox.png" id="19_udwge"]
+[ext_resource type="PackedScene" uid="uid://d2uyf1p23lwlc" path="res://games/vsKayla/heart.tscn" id="23_qpt78"]
 [ext_resource type="Texture2D" uid="uid://dux8p1dtjwixd" path="res://games/vsKayla/assets/battle-bg.png" id="23_qxjd5"]
 [ext_resource type="Texture2D" uid="uid://cukhv0fyi8mb5" path="res://games/vsKayla/assets/knife.png" id="25_afqnq"]
 [ext_resource type="Texture2D" uid="uid://g0xof8f0vc3b" path="res://games/vsKayla/assets/fightbar.png" id="26_0y71k"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g310e"]
-size = Vector2(8.5, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ny31m"]
 size = Vector2(107.75, 9.5)
@@ -277,22 +274,8 @@ texture_focused = ExtResource("16_hfcem")
 visible = false
 script = ExtResource("3_pv4y2")
 
-[node name="Heart" type="CharacterBody2D" parent="Danmaku"]
+[node name="Heart" parent="Danmaku" instance=ExtResource("23_qpt78")]
 unique_name_in_owner = true
-position = Vector2(205, 129)
-script = ExtResource("3_kiag2")
-
-[node name="Sprite" type="Sprite2D" parent="Danmaku/Heart"]
-texture = ExtResource("3_y32a2")
-
-[node name="Hurtbox" type="Area2D" parent="Danmaku/Heart"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Danmaku/Heart/Hurtbox"]
-position = Vector2(-1.25, -1)
-shape = SubResource("RectangleShape2D_g310e")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Danmaku/Heart"]
-shape = SubResource("RectangleShape2D_g310e")
 
 [node name="Heartbox" type="StaticBody2D" parent="Danmaku"]
 unique_name_in_owner = true

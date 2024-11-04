@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2uyf1p23lwlc"]
+
+[ext_resource type="Script" path="res://games/vsKayla/heart.gd" id="1_6qf7a"]
+[ext_resource type="Texture2D" uid="uid://djpykv2xanvrr" path="res://games/vsKayla/assets/heart.png" id="2_4x4qp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2kg0a"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g310e"]
+size = Vector2(11.625, 10.5)
+
+[sub_resource type="Animation" id="Animation_rueey"]
+resource_name = "explode"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5n3ns"]
+_data = {
+"explode": SubResource("Animation_rueey")
+}
+
+[node name="Heart" type="CharacterBody2D"]
+position = Vector2(205, 129)
+script = ExtResource("1_6qf7a")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_4x4qp")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_2kg0a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.8125, -0.25)
+shape = SubResource("RectangleShape2D_g310e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5n3ns")
+}

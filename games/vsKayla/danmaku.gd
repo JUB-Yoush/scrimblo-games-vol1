@@ -5,6 +5,7 @@ var attack_time = 60
 var attackTimer = Timer.new()
 signal attack_over
 signal pattern_over
+var died = false
 
 var opposing
 func _ready():
@@ -28,6 +29,7 @@ func start(enemy_text,_opposing):
 		%Dialog.visible = false
 	%Heart.can_move = true
 	patterns.pick_random().call()
+	#pattern3.call()
 	# find a more natural way to do this
 	await pattern_over
 	end()
@@ -35,6 +37,8 @@ func start(enemy_text,_opposing):
 
 
 func end():
+	if died:
+		return
 	%MenuBox.visible = true
 	for bullet in get_tree().get_nodes_in_group("bullets"):
 		bullet.queue_free()
@@ -48,6 +52,30 @@ func enemy_says(text):
 	%Dialog.text = text
 	await get_tree().create_timer(1).timeout
 	%Dialog.visible = false
+
+
+func heart_explode():
+	if died:
+		return
+	died = true
+	%Heart.can_hit = false
+	%Heart.z_index = 1001
+	%Heart.can_move = false
+	get_parent().get_node('bg').z_index = 1000
+	await get_tree().create_timer(1).timeout
+	%Heart.hide()
+	for i in range(randi_range(4,7)):
+		var rigid := RigidBody2D.new()
+		rigid.gravity_scale = .5
+		rigid.global_position = %Heart.position
+		var sprite = Sprite2D.new()
+		sprite.z_index = 1001
+		sprite.texture = load("res://games/vsKayla/assets/heart-shard.png")
+		rigid.linear_velocity.x = randf_range(100,200) * [-1,1].pick_random()
+		rigid.linear_velocity.y = randf_range(100,300)* [-1,1].pick_random()
+		rigid.add_child(sprite)
+		add_child(rigid)
+
 
 
 var pattern1 := func():
@@ -123,14 +151,19 @@ var pattern3 = func():
 			var b = spinBulletScene.instantiate()
 			add_child(b)
 			b.speed = b_speed * mod
-			b.damage = 2
+			b.damage = 1
 			b.global_position = spiralSource.global_position
 			b.rotation = spiralSource.rotation
-		await get_tree().create_timer(.4).timeout
+		await get_tree().create_timer(.3).timeout
 	await get_tree().create_timer(1).timeout
 	pattern_over.emit()
 
 func pattern4():
+	# make two balls that bounce around sure why not
+	# they appear at the top so you have time to dodge them
+	var ball_count = 2
+	#for i in range(ball_count):
+
 
 	pass
 
