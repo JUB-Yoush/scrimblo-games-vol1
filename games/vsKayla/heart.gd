@@ -18,9 +18,8 @@ func _process(delta: float) -> void:
 
 
 func on_area_entered(area:Area2D):
-	print(area)
+	print(area.is_in_group("bullets"),can_hit)
 	if area.is_in_group("onehit"):
-		print(area.hit)
 		if area.hit == true:
 			return
 		else:

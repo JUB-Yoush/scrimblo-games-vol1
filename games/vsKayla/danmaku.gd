@@ -29,7 +29,7 @@ func start(enemy_text,_opposing):
 		%Dialog.visible = false
 	%Heart.can_move = true
 	patterns.pick_random().call()
-	#pattern3.call()
+	#pattern4.call()
 	# find a more natural way to do this
 	await pattern_over
 	end()
@@ -158,21 +158,21 @@ var pattern3 = func():
 	await get_tree().create_timer(1).timeout
 	pattern_over.emit()
 
-func pattern4():
-	# make two balls that bounce around sure why not
-	# they appear at the top so you have time to dodge them
-	var ball_count = 2
-	#for i in range(ball_count):
-
-
-	pass
+var pattern4 = func():
+	# stop them from bunching up at the beginning
+	var ball_count = 3
+	var start_pos = 190
+	for i in range(ball_count):
+		var ball = load("res://games/vsKayla/bullet_patterns/bullet_ball.tscn").instantiate()
+		add_child(ball)
+		ball.dir = Vector2((.5 + randf_range(.1,.9))*[-1,1].pick_random(),1).normalized()
+		ball.position = Vector2(start_pos + (30 * i),104)
+	await get_tree().create_timer(6).timeout
+	pattern_over.emit()
 
 func pattern5():
 	# full screen spiral
 	pass
 
-func pattern6():
-	# full screen spiral
-	pass
 
-var patterns = [pattern1,pattern2,pattern3]
+var patterns = [pattern1,pattern2,pattern3,pattern4]

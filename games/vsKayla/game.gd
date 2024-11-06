@@ -7,11 +7,11 @@ enum COMMANDS {FIGHT,ACT,ITEM,MERCY}
 
 var menu_state = MENU_STATES.COMMANDS
 
-var items = ["* Bingus","* M.Stew","* Scrimbookie","* Pigeon"]
+var items = ["* Bingus","* M.Soup","* Scrimbookie","* Pigeon"]
 var curr_items = []
 var acts = ["* Check","* Appeal","* Oppose","* HR Talk"]
 
-var appeals = ["* You show Kayla a gif. \n It's spinning Rei Chiquita.","* You simply ask Kayla \n  for more social credit.","You annouce your new blog: \n christinasroom.com"]
+var appeals = ["* You show Kayla a gif. \n It's spinning Rei Chiquita.","* You simply ask Kayla \n  for more social credit.","You turn to the audience \n (there is no audience)"]
 var opposes = ["* You go on an impasioned rant about \n your disdain for audio-visualizers.","* You correct Kayla. \n  \"We aren't the Gaming Club,\" \n  \"We make games, Actually\"","* You try distracting Kayla from the \n knife orbiting you."]
 var hrtalks = ["* you use the Macaroni Corpo Jargon\n technique."]
 var start_turn_texts = ["* Smells of Scrimblo resedue.","* Your heart is filled with... pasta.","* Do Scrimblos dream of \n Sheep (2000) for the PSX?"]
@@ -35,11 +35,11 @@ var fightbar_moving = false
 @onready var action_buttons =[%FightButton, %ActButton, %ItemButton, %MercyButton]
 @onready var danmaku = $Danmaku
 
-var social_credit = 0:
+var social_credit = 100:
 	set(value):
 		if scrimbookied:
-			value += 5
-		social_credit = value
+			value += 7
+		social_credit = min(value,goal_credit)
 		%SCreditBar.value = social_credit
 		if social_credit == goal_credit:
 			sparable = true
@@ -119,10 +119,10 @@ func start_turn():
 		print_to_menu("* Kayla is offended! \n Attacks are harder! \n use HR talk to diffuse!")
 	elif pigeon_returned:
 		if items.size() < 3:
-			items.append("* M.Stew")
-			print_to_menu("* The Pigeon returned from Cali! \n It hands you a bowl of stew.")
+			items.append("* M.Soup")
+			print_to_menu("* The Pigeon returned from Cali! \n It hands you a bowl of Soup.")
 		else:
-			print_to_menu("* The Pigeon returned from Cali! \n ...but you don't have room for\n the Pigeon and the stew.")
+			print_to_menu("* The Pigeon returned from Cali! \n ...but you don't have room for\n the Pigeon and the Soup.")
 		pigeon_returned = false
 		pigeon_waiting = false
 		items.append("* Pigeon")
@@ -221,7 +221,7 @@ func use_item(item_str):
 
 	menu_state = MENU_STATES.CHOSEN
 	clear_menu()
-	if item_str == "* M.Stew":
+	if item_str == "* M.Soup":
 		hp += 15
 		print_to_menu("* Made by Maddie. \n* Healed 15 HP.")
 		await txb_adv
@@ -234,7 +234,6 @@ func use_item(item_str):
 		print_to_menu("* You feel especially persuasive.\n  Extra Social Credit for 3 turns.")
 		await txb_adv
 	elif item_str == "* Pigeon":
-		scrimblo = true
 		print_to_menu("* You tossed the Pigeon.\n It's flying to California. \n  It'll return in 2 business turns.")
 		pigeon_returned = false
 		pigeon_waiting = true
@@ -271,7 +270,7 @@ func use_act(act_str):
 			await txb_adv
 			print_to_menu("* Situation Diffused!")
 			await txb_adv
-			social_credit += 15
+			social_credit += 20
 		else:
 			print_to_menu(hrtalks[0])
 			await txb_adv

@@ -65,7 +65,7 @@ M.Stew: Heals 20HP
 
 - [x] sparing at max social credit
 - [x] time limit
-- [ ] bullet pattern 4
+- [x] bullet pattern 4
 - [ ] bullet pattern 5
 
 # polish

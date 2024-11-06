@@ -19,12 +19,15 @@ _data = {
 
 [node name="Heart" type="CharacterBody2D"]
 position = Vector2(205, 129)
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_6qf7a")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_4x4qp")
 
 [node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(-1, -1)
