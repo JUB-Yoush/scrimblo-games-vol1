@@ -5,7 +5,7 @@ extends Node2D
 signal game_over(result)
 
 
-var remaining := 25:
+var remaining := 20:
 	set(value):
 		remaining = value
 		if remaining == 0:
@@ -28,7 +28,7 @@ func _ready() -> void:
 	gameTimer.timeout.connect(func(): game_over.emit(0))
 	timer.one_shot = true
 	timer.start(fly_spawn_time)
-	gameTimer.start(60)
+	gameTimer.start(25)
 	pass # Replace with function body.
 
 func spawn_fly():

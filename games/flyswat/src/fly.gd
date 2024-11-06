@@ -8,7 +8,7 @@ var speed:int
 var arc:float
 var dir:Vector2
 var alive:bool = true
-const SPEED_RANGE :Array[float]= [100.0,500.0]
+const SPEED_RANGE :Array[float]= [100.0,300.0]
 
 @onready var onScreen:VisibleOnScreenNotifier2D = $OnScreen
 func _ready() -> void:

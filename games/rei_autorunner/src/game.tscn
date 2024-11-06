@@ -1,3 +1,45 @@
-[gd_scene format=3 uid="uid://bmcobtds2gqxp"]
+[gd_scene load_steps=6 format=3 uid="uid://bmcobtds2gqxp"]
+
+[ext_resource type="Script" path="res://games/rei_autorunner/src/rei.gd" id="1_s8pnr"]
+[ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="2_p0yu5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8bw2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xkbrn"]
+size = Vector2(24, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tae1v"]
+size = Vector2(437, 131)
 
 [node name="Game" type="Node2D"]
+
+[node name="Rei" type="CharacterBody2D" parent="."]
+position = Vector2(48, 148)
+script = ExtResource("1_s8pnr")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Rei"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_p0yu5")
+
+[node name="Area2D" type="Area2D" parent="Rei"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Rei/Area2D"]
+shape = SubResource("RectangleShape2D_u8bw2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rei"]
+shape = SubResource("RectangleShape2D_xkbrn")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(63, 267)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(152.5, 0)
+scale = Vector2(5.55469, 1)
+texture = ExtResource("2_p0yu5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(153.5, -1.5)
+shape = SubResource("RectangleShape2D_tae1v")
