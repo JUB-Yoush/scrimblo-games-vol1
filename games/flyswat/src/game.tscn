@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://crihqai1bloct"]
+[gd_scene load_steps=5 format=3 uid="uid://crihqai1bloct"]
 
 [ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="1_6lr7e"]
 [ext_resource type="Script" path="res://games/flyswat/src/game.gd" id="1_r6bcs"]
+[ext_resource type="Texture2D" uid="uid://dbrnx5s2xpf0a" path="res://games/flyswat/assets/bg.png" id="2_fwl2q"]
 
 [sub_resource type="Curve2D" id="Curve2D_cdtuu"]
 _data = {
@@ -11,6 +12,12 @@ point_count = 6
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_r6bcs")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 432.0
+offset_bottom = 240.0
+texture = ExtResource("2_fwl2q")
+stretch_mode = 1
 
 [node name="Mouse" type="Area2D" parent="."]
 visible = false

@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmcobtds2gqxp"]
+[gd_scene load_steps=7 format=3 uid="uid://bmcobtds2gqxp"]
 
+[ext_resource type="Script" path="res://games/rei_autorunner/src/game.gd" id="1_di7do"]
 [ext_resource type="Script" path="res://games/rei_autorunner/src/rei.gd" id="1_s8pnr"]
 [ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="2_p0yu5"]
 
@@ -12,6 +13,9 @@ size = Vector2(24, 24)
 size = Vector2(437, 131)
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_di7do")
+metadata/_edit_horizontal_guides_ = [180.0]
+metadata/_edit_vertical_guides_ = [428.0]
 
 [node name="Rei" type="CharacterBody2D" parent="."]
 position = Vector2(48, 148)
@@ -35,7 +39,7 @@ position = Vector2(63, 267)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Floor"]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0.180005, 0.180005, 0.180005, 1)
 position = Vector2(152.5, 0)
 scale = Vector2(5.55469, 1)
 texture = ExtResource("2_p0yu5")

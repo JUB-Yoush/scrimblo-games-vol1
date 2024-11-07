@@ -14,8 +14,10 @@ const SPEED_RANGE :Array[float]= [100.0,300.0]
 func _ready() -> void:
 	$OnScreen.screen_exited.connect(func(): queue_free())
 	$Area2D.input_event.connect(on_clicked)
+	$AnimationPlayer.play("flap")
 
 func _process(delta) -> void:
+	$Sprite2D.global_rotation = 0
 	if alive:
 		rotation += arc * delta
 		velocity = velocity.rotated(arc)
@@ -30,6 +32,7 @@ func on_clicked(viewport,event,shape_idx):
 		if alive:
 			alive = false
 			died.emit()
+			$Sprite2D.texture = load("res://games/flyswat/assets/fly-ded.png")
 			print('died')
 		# change sprites or something
 

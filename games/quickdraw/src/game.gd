@@ -12,9 +12,9 @@ var current_game_state = GAME_STATE.SETUP
 var countdown_sprite := ""
 var level = 0
 var player_shot:bool
-const DRAW_SPEEDS:Array[float] = [1,0.5,0.25]
+const DRAW_SPEEDS:Array[float] = [.3,0.5,0.25]
 
-const DRAW_VARIANCE:float = 5.0
+const DRAW_VARIANCE:float = 1.5
 var rng = RandomNumberGenerator.new()
 @onready var countdown:Sprite2D = $Countdown
 @onready var scrimblo:Sprite2D = $Scrimblo
@@ -24,6 +24,9 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func lose():
+	$Hitflash.visible = true
+	await get_tree().create_timer(.1).timeout
+	$Hitflash.visible = false
 	var rigid := RigidBody2D.new()
 	rigid.linear_velocity.x = -200
 	add_child(rigid)
@@ -43,7 +46,9 @@ func lose():
 
 func shoot():
 	player_shot = true
-
+	$Hitflash.visible = true
+	await get_tree().create_timer(.1).timeout
+	$Hitflash.visible = false
 	var rigid := RigidBody2D.new()
 	rigid.linear_velocity.x = 200
 	add_child(rigid)

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3s48drf03dwt"]
+
+[ext_resource type="Script" path="res://games/rei_autorunner/src/obstacle.gd" id="1_fewyg"]
+[ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="1_sg1dc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prihi"]
+size = Vector2(14, 30)
+
+[node name="Obstacle" type="Area2D"]
+script = ExtResource("1_fewyg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 4.15)
+scale = Vector2(0.103906, 0.252344)
+texture = ExtResource("1_sg1dc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_prihi")
