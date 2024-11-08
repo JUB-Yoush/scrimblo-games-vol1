@@ -1,22 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0iw5rr6s40al"]
+[gd_scene load_steps=6 format=3 uid="uid://d0iw5rr6s40al"]
 
 [ext_resource type="Script" path="res://games/yudumsort/src/game.gd" id="1_ols6k"]
+[ext_resource type="FontFile" uid="uid://c0fl6pty7w5ci" path="res://games/flyswat/assets/Awe Mono Gold.ttf" id="2_v4isn"]
+[ext_resource type="Texture2D" uid="uid://2n2e2256i3tf" path="res://games/yudumsort/assets/o1.png" id="3_fvsvr"]
+[ext_resource type="Texture2D" uid="uid://druhkvw7kei4n" path="res://games/yudumsort/assets/o2.png" id="4_lomft"]
+[ext_resource type="Texture2D" uid="uid://bcq7xjcpn1d13" path="res://games/yudumsort/assets/plus.png" id="5_1oxqb"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ols6k")
 
-[node name="Button1" type="Button" parent="."]
-offset_left = 143.0
-offset_top = 89.0
-offset_right = 288.0
-offset_bottom = 136.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 435.0
+offset_bottom = 242.0
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button1" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_v4isn")
 text = "Choice 1"
 
-[node name="Button2" type="Button" parent="."]
-offset_left = 143.0
-offset_top = 161.0
-offset_right = 287.0
-offset_bottom = 207.0
+[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_v4isn")
 text = "Choice 2
 "
 
@@ -25,5 +38,25 @@ offset_left = 49.0
 offset_top = 40.0
 offset_right = 372.0
 offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("2_v4isn")
 text = "Which Game was played in the GESC first?"
 autowrap_mode = 1
+
+[node name="Score" type="Node2D" parent="."]
+position = Vector2(3, 2)
+
+[node name="R1Sprite" type="Sprite2D" parent="Score"]
+position = Vector2(34, 19)
+texture = ExtResource("3_fvsvr")
+
+[node name="R2Sprite" type="Sprite2D" parent="Score"]
+position = Vector2(73, 19)
+texture = ExtResource("4_lomft")
+
+[node name="R3Sprite" type="Sprite2D" parent="Score"]
+position = Vector2(108, 20)
+texture = ExtResource("5_1oxqb")
+
+[node name="R4Sprite" type="Sprite2D" parent="Score"]
+
+[node name="R5Sprite" type="Sprite2D" parent="Score"]
