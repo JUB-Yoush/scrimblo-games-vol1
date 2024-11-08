@@ -1,14 +1,52 @@
-[gd_scene load_steps=5 format=3 uid="uid://crihqai1bloct"]
+[gd_scene load_steps=9 format=3 uid="uid://crihqai1bloct"]
 
-[ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="1_6lr7e"]
 [ext_resource type="Script" path="res://games/flyswat/src/game.gd" id="1_r6bcs"]
 [ext_resource type="Texture2D" uid="uid://dbrnx5s2xpf0a" path="res://games/flyswat/assets/bg.png" id="2_fwl2q"]
+[ext_resource type="FontFile" uid="uid://c0fl6pty7w5ci" path="res://games/flyswat/assets/Awe Mono Gold.ttf" id="4_jvc5c"]
+[ext_resource type="Texture2D" uid="uid://4rtj4mapb3ox" path="res://games/flyswat/assets/swatter.png" id="4_kglss"]
 
 [sub_resource type="Curve2D" id="Curve2D_cdtuu"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 432, 2, 0, 0, 0, 0, 431, 245, 0, 0, 0, 0, -1, 245, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 432, 2)
 }
 point_count = 6
+
+[sub_resource type="Animation" id="Animation_mbe60"]
+resource_name = "swat"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mouse:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 0]
+}
+
+[sub_resource type="Animation" id="Animation_m8e4s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mouse:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jcd7u"]
+_data = {
+"RESET": SubResource("Animation_m8e4s"),
+"swat": SubResource("Animation_mbe60")
+}
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_r6bcs")
@@ -19,13 +57,6 @@ offset_bottom = 240.0
 texture = ExtResource("2_fwl2q")
 stretch_mode = 1
 
-[node name="Mouse" type="Area2D" parent="."]
-visible = false
-
-[node name="Sprite2D" type="Sprite2D" parent="Mouse"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_6lr7e")
-
 [node name="FlyPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_cdtuu")
 
@@ -34,13 +65,34 @@ position = Vector2(432, 2)
 rotation = 1.57491
 
 [node name="RemainingLabel" type="Label" parent="."]
-offset_left = 192.0
-offset_top = 65.0
-offset_right = 232.0
-offset_bottom = 88.0
+offset_left = 193.0
+offset_top = 16.0
+offset_right = 248.0
+offset_bottom = 50.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_jvc5c")
+theme_override_font_sizes/font_size = 32
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TimerLabel" type="Label" parent="."]
-offset_left = 190.0
-offset_top = 15.0
-offset_right = 230.0
-offset_bottom = 38.0
+visible = false
+offset_left = 192.0
+offset_top = 19.0
+offset_right = 232.0
+offset_bottom = 42.0
+
+[node name="Mouse" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(143, 102)
+texture = ExtResource("4_kglss")
+hframes = 3
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jcd7u")
+}

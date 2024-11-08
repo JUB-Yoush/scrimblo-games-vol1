@@ -33,7 +33,7 @@ func _ready() -> void:
 
 func spawn_fly():
 	var fly = FlyScene.instantiate()
-	fly.died.connect(func(): remaining -= 1)
+	fly.died.connect(fly_died)
 	flySpawnLocation.progress_ratio = randf()
 	var dir = flySpawnLocation.rotation + PI / 2
 	fly.position = flySpawnLocation.position
@@ -45,8 +45,16 @@ func spawn_fly():
 	add_child(fly)
 	timer.start(fly_spawn_time + randf_range(0,fly_spawn_variance))
 
+func fly_died():
+	remaining -= 1
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	$TimerLabel.text = str(gameTimer.time_left)
 	$RemainingLabel.text = str(remaining)
+	$Mouse.position = get_local_mouse_position()
 	pass
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		$AnimationPlayer.play("swat")
