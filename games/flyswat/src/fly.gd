@@ -8,7 +8,7 @@ var speed:int
 var arc:float
 var dir:Vector2
 var alive:bool = true
-const SPEED_RANGE :Array[float]= [100.0,300.0]
+const SPEED_RANGE :Array[float]= [100.0,200.0]
 
 @onready var onScreen:VisibleOnScreenNotifier2D = $OnScreen
 func _ready() -> void:
@@ -17,6 +17,7 @@ func _ready() -> void:
 	$AnimationPlayer.play("flap")
 
 func _process(delta) -> void:
+	$Area2D/CollisionShape2D.global_rotation = 0
 	$Sprite2D.global_rotation = 0
 	if alive:
 		rotation += arc * delta
@@ -33,6 +34,7 @@ func on_clicked(viewport,event,shape_idx):
 			alive = false
 			died.emit()
 			$Sprite2D.texture = load("res://games/flyswat/assets/fly-ded.png")
+			$AnimationPlayer.stop()
 			print('died')
 		# change sprites or something
 
