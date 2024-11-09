@@ -4,9 +4,9 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 
 
-@export var blue := Color("#4682b4")
+@export var blue := Color("#38495e")
 @export var green := Color("#639765")
-@export var red := Color("#a65455")
+@export var red := Color("#4682b4")
 
 var current_char_index:int = 1
 var sentence:String
@@ -23,9 +23,14 @@ var prompt_index = 0
 @onready var richTextLabel:RichTextLabel = $Panel/RichTextLabel
 signal game_over(result)
 func _ready() -> void:
+	richTextLabel.visible = false
+	$AnimationPlayer.play('slide_in')
+	await $AnimationPlayer.animation_finished
+	richTextLabel.visible = true
 	richTextLabel.text = PROMPTS[0]
 	sentence = richTextLabel.text
 	current_char_index = 0
+	set_next_char(0)
 	pass # Replace with function body.
 
 func _unhandled_input(event: InputEvent) -> void:

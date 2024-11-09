@@ -15,6 +15,7 @@ func _ready() -> void:
 	$OnScreen.screen_exited.connect(func(): queue_free())
 	$Area2D.input_event.connect(on_clicked)
 	$AnimationPlayer.play("flap")
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _process(delta) -> void:
 	$Area2D/CollisionShape2D.global_rotation = 0

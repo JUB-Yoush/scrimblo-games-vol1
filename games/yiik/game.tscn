@@ -1,19 +1,98 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmc8o2plq472b"]
+[gd_scene load_steps=7 format=3 uid="uid://dmc8o2plq472b"]
 
 [ext_resource type="Script" path="res://games/yiik/game.gd" id="1_3sa2k"]
+[ext_resource type="Texture2D" uid="uid://comjrkv8x7gky" path="res://games/yiik/assets/talkbox.png" id="2_oce5u"]
+[ext_resource type="Texture2D" uid="uid://dji2dysnmfygn" path="res://games/yiik/assets/alex2.png" id="2_v0j2h"]
+
+[sub_resource type="Animation" id="Animation_as6od"]
+resource_name = "slide_in"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(218, 339), Vector2(218, 120)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(14, 350), Vector2(14, 141)]
+}
+
+[sub_resource type="Animation" id="Animation_66ll6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(218, 120)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(14, 350)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8e0fm"]
+_data = {
+"RESET": SubResource("Animation_66ll6"),
+"slide_in": SubResource("Animation_as6od")
+}
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_3sa2k")
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = 61.0
-offset_top = 81.0
-offset_right = 343.0
-offset_bottom = 183.0
-metadata/_edit_group_ = true
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 432.0
+offset_bottom = 245.0
+color = Color(0.140447, 0.140447, 0.140447, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(218, 120)
+texture = ExtResource("2_v0j2h")
+
+[node name="Panel" type="TextureRect" parent="."]
+offset_left = 14.0
+offset_top = 350.0
+offset_right = 414.0
+offset_bottom = 439.0
+texture = ExtResource("2_oce5u")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
 layout_mode = 0
-offset_right = 283.0
-offset_bottom = 101.0
+offset_left = 10.0
+offset_top = 23.0
+offset_right = 394.0
+offset_bottom = 84.0
 bbcode_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8e0fm")
+}

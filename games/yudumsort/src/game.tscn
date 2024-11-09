@@ -1,13 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0iw5rr6s40al"]
+[gd_scene load_steps=7 format=3 uid="uid://d0iw5rr6s40al"]
 
 [ext_resource type="Script" path="res://games/yudumsort/src/game.gd" id="1_ols6k"]
+[ext_resource type="Shader" path="res://games/yudumsort/src/game.gdshader" id="2_1b1ce"]
+[ext_resource type="Texture2D" uid="uid://bmf3a4cg82oy4" path="res://games/yudumsort/assets/bg.png" id="2_37qve"]
 [ext_resource type="FontFile" uid="uid://c0fl6pty7w5ci" path="res://games/flyswat/assets/Awe Mono Gold.ttf" id="2_v4isn"]
-[ext_resource type="Texture2D" uid="uid://2n2e2256i3tf" path="res://games/yudumsort/assets/o1.png" id="3_fvsvr"]
-[ext_resource type="Texture2D" uid="uid://druhkvw7kei4n" path="res://games/yudumsort/assets/o2.png" id="4_lomft"]
 [ext_resource type="Texture2D" uid="uid://bcq7xjcpn1d13" path="res://games/yudumsort/assets/plus.png" id="5_1oxqb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7g8ye"]
+shader = ExtResource("2_1b1ce")
+shader_parameter/screen_height = 240.0
+shader_parameter/amplitude = 0.075
+shader_parameter/frequency = 10.0
+shader_parameter/speed = 2.0
+shader_parameter/amplitude_vertical = 0.0
+shader_parameter/frequency_vertical = 0.0
+shader_parameter/speed_vertical = 0.0
+shader_parameter/scroll_direction = Vector2(0, 0)
+shader_parameter/scrolling_speed = 0.08
+shader_parameter/enable_palette_cycling = false
+shader_parameter/palette_speed = 0.1
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ols6k")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 432.0
+offset_bottom = 243.0
+color = Color(0.0705882, 0.00784314, 0.152941, 1)
+
+[node name="BG" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_7g8ye")
+offset_right = 432.0
+offset_bottom = 240.0
+texture = ExtResource("2_37qve")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_right = 435.0
@@ -33,30 +58,48 @@ theme_override_fonts/font = ExtResource("2_v4isn")
 text = "Choice 2
 "
 
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 62.0
+offset_top = 49.0
+offset_right = 386.0
+offset_bottom = 76.0
+color = Color(0.0705882, 0.00784314, 0.152941, 1)
+
 [node name="Label" type="Label" parent="."]
-offset_left = 49.0
-offset_top = 40.0
-offset_right = 372.0
-offset_bottom = 63.0
+offset_left = 66.0
+offset_top = 53.0
+offset_right = 389.0
+offset_bottom = 76.0
 theme_override_fonts/font = ExtResource("2_v4isn")
 text = "Which Game was played in the GESC first?"
 autowrap_mode = 1
 
-[node name="Score" type="Node2D" parent="."]
-position = Vector2(3, 2)
+[node name="Score" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+offset_right = 56.0
+offset_bottom = 40.0
 
-[node name="R1Sprite" type="Sprite2D" parent="Score"]
-position = Vector2(34, 19)
-texture = ExtResource("3_fvsvr")
-
-[node name="R2Sprite" type="Sprite2D" parent="Score"]
-position = Vector2(73, 19)
-texture = ExtResource("4_lomft")
-
-[node name="R3Sprite" type="Sprite2D" parent="Score"]
-position = Vector2(108, 20)
+[node name="TextureRect" type="TextureRect" parent="Score"]
+layout_mode = 2
 texture = ExtResource("5_1oxqb")
+stretch_mode = 2
 
-[node name="R4Sprite" type="Sprite2D" parent="Score"]
+[node name="TextureRect2" type="TextureRect" parent="Score"]
+layout_mode = 2
+texture = ExtResource("5_1oxqb")
+stretch_mode = 2
 
-[node name="R5Sprite" type="Sprite2D" parent="Score"]
+[node name="TextureRect3" type="TextureRect" parent="Score"]
+layout_mode = 2
+texture = ExtResource("5_1oxqb")
+stretch_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="Score"]
+layout_mode = 2
+texture = ExtResource("5_1oxqb")
+stretch_mode = 2
+
+[node name="TextureRect5" type="TextureRect" parent="Score"]
+layout_mode = 2
+texture = ExtResource("5_1oxqb")
+stretch_mode = 2

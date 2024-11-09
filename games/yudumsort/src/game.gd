@@ -1,5 +1,7 @@
 extends Node2D
 
+# put one of these on there https://godotshaders.com/shader/earthbound-like-battle-background-shader-w-scroll-effect-and-palette-cycling/
+
 const GAMES = [
 	"Cave Story",
 	"DOOM",
@@ -21,6 +23,7 @@ const GAMES = [
     "Silent Hill 2",
 ]
 var pool = range(GAMES.size())
+var round = 0
 var correct_btn_index :int
 var right = 0
 var wrong = 0
@@ -52,14 +55,18 @@ func picked(choice:int) -> void:
 		print('right choice')
 		#win things
 		right += 1
+		%Score.get_child(round).texture = load("res://games/yudumsort/assets/o1.png")
+		round += 1
 		if right == 5:
 			game_over.emit(1)
 		pass
 	else:
 		print('wrong choice')
+		%Score.get_child(round).texture = load("res://games/yudumsort/assets/o2.png")
 		wrong += 1
-		if wrong == 3:
-			game_over.emit(0)
+		round += 1
+		#if wrong == 3:
+		game_over.emit(0)
 		#lose things
 		pass
 	pick_games()
