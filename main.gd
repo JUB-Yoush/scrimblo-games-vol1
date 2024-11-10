@@ -1,7 +1,8 @@
 extends Node2D
 
 
-var microgames:Array[String] = ["res://games/quickdraw/src/game.tscn"]
+#var microgames:Array[String] = ["res://games/quickdraw/src/game.tscn"]
+var microgames:Array[String] = ["quickdraw","yiik","flyswat","mushroom","yudumsort",]
 var playedGames:Array[String] = []
 var result:bool
 var lives:int:
@@ -33,6 +34,7 @@ func pick_game():
 	while playedGames.has(gameString):
 		gameString = microgames.pick_random()
 
+	gameString = "res://games/%s/src/game.tscn" % gameString
 	var currGame:PackedScene = load(gameString)
 	var gameInstance = currGame.instantiate()
 
