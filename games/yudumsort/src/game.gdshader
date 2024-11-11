@@ -36,4 +36,3 @@ void fragment()
 	else COLOR = tex;
 	COLOR = mix(vec4(0.0), COLOR, float(int(UV.y * screen_height) % 2));
 }
-
