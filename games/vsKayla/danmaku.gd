@@ -28,8 +28,8 @@ func start(enemy_text,_opposing):
 		await get_tree().create_timer(1).timeout
 		%Dialog.visible = false
 	%Heart.can_move = true
-	#patterns.pick_random().call()
-	pattern2.call()
+	patterns.pick_random().call()
+	#pattern2.call()
 	# find a more natural way to do this
 	await pattern_over
 	end()
