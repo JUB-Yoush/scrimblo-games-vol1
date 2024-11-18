@@ -98,3 +98,9 @@ change the current one to be bursts instead of targeted
 - step
 - arcs
 - block slide
+
+# other games
+
+## mushroom
+
+- [ ] goomblo

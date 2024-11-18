@@ -1,7 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://88vwolggeq70"]
+[gd_scene load_steps=31 format=3 uid="uid://88vwolggeq70"]
 
 [ext_resource type="Script" path="res://games/vsKayla/game.gd" id="1_hkofs"]
 [ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="2_ukche"]
+[ext_resource type="Texture2D" uid="uid://ccodmol41dimj" path="res://games/vsKayla/assets/kayla.png" id="3_eihpo"]
 [ext_resource type="Script" path="res://games/vsKayla/danmaku.gd" id="3_pv4y2"]
 [ext_resource type="Theme" uid="uid://cbm5xucqvteak" path="res://games/vsKayla/assets/menu_theme.tres" id="3_tlcv7"]
 [ext_resource type="Texture2D" uid="uid://djpykv2xanvrr" path="res://games/vsKayla/assets/heart.png" id="3_y32a2"]
@@ -36,8 +37,7 @@ size = Vector2(94.125, 12.5)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_hkofs")
-metadata/_edit_vertical_guides_ = [812.0, 240.0]
-metadata/_edit_horizontal_guides_ = [103.0]
+metadata/_edit_vertical_guides_ = [812.0, 181.0, 247.0]
 
 [node name="BorderL" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -55,16 +55,15 @@ texture = ExtResource("2_ukche")
 centered = false
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
-position = Vector2(216, 49)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_ukche")
+position = Vector2(216, 62)
+texture = ExtResource("3_eihpo")
 
 [node name="Dialog" type="Label" parent="EnemySprite"]
 unique_name_in_owner = true
-offset_left = 80.0
-offset_top = -48.0
-offset_right = 223.0
-offset_bottom = -21.0
+offset_left = 37.0
+offset_top = -36.0
+offset_right = 180.0
+offset_bottom = -9.0
 theme_override_fonts/font = ExtResource("5_nxim3")
 theme_override_font_sizes/font_size = 10
 text = "I am kayla"
@@ -308,7 +307,7 @@ texture = ExtResource("19_udwge")
 [node name="bg" type="Sprite2D" parent="."]
 self_modulate = Color(0, 0, 0, 1)
 z_index = -100
-position = Vector2(216, 120)
+position = Vector2(216, 127)
 scale = Vector2(2.88, 2.18101)
 texture = ExtResource("2_ukche")
 

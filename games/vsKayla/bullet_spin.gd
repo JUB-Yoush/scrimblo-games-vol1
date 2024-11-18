@@ -4,6 +4,8 @@ var movement_function:Callable
 var speed: float
 var dir:Vector2
 var damage:int
+var rot:float = 300
+@onready var sprite = $Sprite
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$VisibleOnScreenNotifier2D.screen_exited.connect(func(): queue_free())
@@ -16,6 +18,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position += dir.rotated(rotation) * speed * delta
+	sprite.rotate(deg_to_rad(rot * delta))
 
 func on_area_entered(area:Area2D):
 	if area.is_in_group("Heart"):

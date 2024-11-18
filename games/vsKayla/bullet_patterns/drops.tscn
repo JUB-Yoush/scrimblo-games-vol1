@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://clnv2r1g7utqb"]
 
-[ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="1_ajx8y"]
 [ext_resource type="Script" path="res://games/vsKayla/bullet_patterns/drops.gd" id="1_mtglw"]
+[ext_resource type="Texture2D" uid="uid://2227blmsu88w" path="res://games/vsKayla/assets/bullets/drops.png" id="2_5xc5j"]
 
 [node name="Drops" type="Area2D"]
 script = ExtResource("1_mtglw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("1_ajx8y")
+texture = ExtResource("2_5xc5j")

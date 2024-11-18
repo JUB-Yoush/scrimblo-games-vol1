@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cqkdubb6plc08"
-path="res://.godot/imported/pellet.png-42391aac693b6c5b69f39a760b23584c.ctex"
+path="res://.godot/imported/pellet.png-947186d9f909f420430d63e2edc46d7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://games/vsKayla/bullet_patterns/pellet.png"
-dest_files=["res://.godot/imported/pellet.png-42391aac693b6c5b69f39a760b23584c.ctex"]
+source_file="res://games/vsKayla/assets/pellet.png"
+dest_files=["res://.godot/imported/pellet.png-947186d9f909f420430d63e2edc46d7c.ctex"]
 
 [params]
 

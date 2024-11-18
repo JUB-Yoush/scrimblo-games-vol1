@@ -29,7 +29,7 @@ func start(enemy_text,_opposing):
 		%Dialog.visible = false
 	%Heart.can_move = true
 	patterns.pick_random().call()
-	#pattern2.call()
+	#pattern1.call()
 	# find a more natural way to do this
 	await pattern_over
 	end()
@@ -165,7 +165,7 @@ var pattern4 = func():
 	for i in range(ball_count):
 		var ball = load("res://games/vsKayla/bullet_patterns/bullet_ball.tscn").instantiate()
 		add_child(ball)
-		ball.dir = Vector2((.5 + randf_range(.1,.9))*[-1,1].pick_random(),1).normalized()
+		ball.dir = Vector2((.5 + randf_range(0,2))*[-1,1].pick_random(),1).normalized()
 		ball.position = Vector2(start_pos + (30 * i),104)
 	await get_tree().create_timer(6).timeout
 	pattern_over.emit()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://5rpmw0qyr66s"]
 
 [ext_resource type="Script" path="res://games/vsKayla/bullet_spin.gd" id="1_jr2vy"]
-[ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="2_avum0"]
+[ext_resource type="Texture2D" uid="uid://cqkdubb6plc08" path="res://games/vsKayla/assets/pellet.png" id="2_7to5m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7v8to"]
 size = Vector2(12, 12)
@@ -11,8 +11,7 @@ collision_mask = 3
 script = ExtResource("1_jr2vy")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_avum0")
+texture = ExtResource("2_7to5m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7v8to")

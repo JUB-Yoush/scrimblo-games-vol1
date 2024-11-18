@@ -1,11 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://vw1cvy6kgiqg"]
+[gd_scene load_steps=19 format=3 uid="uid://vw1cvy6kgiqg"]
 
 [ext_resource type="Script" path="res://games/mushroom/src/game.gd" id="1_wfl7i"]
+[ext_resource type="Shader" path="res://games/mushroom/src/game.gdshader" id="2_76qab"]
 [ext_resource type="Texture2D" uid="uid://dq28msgfn4uyo" path="res://games/mushroom/assets/floor-bg.png" id="2_rqoj1"]
 [ext_resource type="Texture2D" uid="uid://c10m4g356qc0m" path="res://games/mushroom/assets/kaisaan-Sheet.png" id="3_0r1yp"]
 [ext_resource type="Texture2D" uid="uid://c8a430iqbu60t" path="res://games/mushroom/assets/macaroni-sheet.png" id="3_fpoct"]
 [ext_resource type="Texture2D" uid="uid://bnp7jq1gro7y" path="res://games/mushroom/assets/curtain-bg.png" id="3_qsg8g"]
+[ext_resource type="Texture2D" uid="uid://bwlmseaf4ck1h" path="res://games/mushroom/assets/bg.png" id="3_s14sn"]
 [ext_resource type="Texture2D" uid="uid://cwvyh40bweiin" path="res://games/mushroom/assets/mushroom-item.png" id="4_b70cy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_om2m6"]
+shader = ExtResource("2_76qab")
+shader_parameter/speed = 0.2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oat13"]
 size = Vector2(23, 33)
@@ -146,6 +152,13 @@ _data = {
 script = ExtResource("1_wfl7i")
 metadata/_edit_vertical_guides_ = [78.0]
 
+[node name="bg" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_om2m6")
+offset_right = 439.0
+offset_bottom = 213.0
+texture = ExtResource("3_s14sn")
+stretch_mode = 1
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_rqoj1")
 centered = false
@@ -158,17 +171,18 @@ centered = false
 [node name="Macaroni" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 z_index = 4
-position = Vector2(27, 187)
+position = Vector2(52, 184)
 texture = ExtResource("3_fpoct")
 hframes = 2
 
 [node name="Item" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(27, 147)
+z_index = 2
+position = Vector2(53, 147)
 texture = ExtResource("4_b70cy")
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(107, 163)
+position = Vector2(140, 164)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
@@ -188,7 +202,7 @@ shape = SubResource("RectangleShape2D_yye88")
 [node name="walls" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
-position = Vector2(59, 94)
+position = Vector2(78, 95)
 shape = SubResource("RectangleShape2D_s13i0")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
