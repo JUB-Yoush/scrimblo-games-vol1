@@ -78,6 +78,7 @@ M.Stew: Heals 20HP
 # improvements
 
 - [ ] make stepper also horiz
+- [ ] cant get same bullet pattern twice
 
 # bugs
 

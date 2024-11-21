@@ -20,7 +20,7 @@ const GAMES = [
 	"Sleeping Dogs: Definitive Edition",
 	"Disco Elysium",
 	"Super Mario 64",
-    "Silent Hill 2",
+	"Silent Hill 2",
 ]
 var pool = range(GAMES.size())
 var round = 0

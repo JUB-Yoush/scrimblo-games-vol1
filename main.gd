@@ -1,7 +1,5 @@
 extends Node2D
 
-
-#var microgames:Array[String] = ["res://games/quickdraw/src/game.tscn"]
 var microgames:Array[String] = ["quickdraw","yiik","flyswat","mushroom","yudumsort",]
 var playedGames:Array[String] = []
 var result:bool
@@ -10,8 +8,10 @@ var lives:int:
 		lives = value
 		if lives == 0:
 			game_over()
+
 var score:int
 @onready var minigameWindow = $SubViewportContainer/Minigame
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	lives = 5

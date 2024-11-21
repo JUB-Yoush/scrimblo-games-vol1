@@ -61,6 +61,7 @@ func shoot():
 	scrimblo.texture = load("res://games/quickdraw/assets/scrimblo-cowboy2.png")
 	countdown.texture = null
 	print('you win')
+	#await get_tree().create_timer(2).timeout
 	game_over.emit(1)
 	pass
 

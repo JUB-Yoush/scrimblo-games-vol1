@@ -16,7 +16,7 @@ var opposes = ["* You go on an impasioned rant about \n your disdain for audio-v
 var hrtalks = ["* you use the Macaroni Corpo Jargon\n technique."]
 var start_turn_texts = ["* Smells of Scrimblo resedue.","* Your heart is filled with... pasta.","* Do Scrimblos dream of \n Sheep (2000) for the PSX?"]
 
-var enemy_turn_text = "this is what I have to say"
+var enemy_turn_text = "Well Christina, I made it. \ndispite your \ndirections."
 var start_turn_text = "* world is scrim blo blo blo"
 
 var awaiting_command = false
