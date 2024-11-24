@@ -61,31 +61,31 @@ Scrimbo: summons scrimblo (scrimblo appears in the corner of the screen during d
 Pidgeon: requests food from Maddie
 M.Stew: Heals 20HP
 
-# functional
+## functional
 
 - [x] sparing at max social credit
 - [x] time limit
 - [x] bullet pattern 4
 - [ ] bullet pattern 5
 
-# polish
+## polish
 
 - [ ] backing out of menu puts you back on same aciton button
 - [ ] knife animation is faster + kayla dodge
 - [ ] make the heart hitflash an animation so I can stop it
 - [ ] toast on the number of social credit that gone up
 
-# improvements
+## improvements
 
 - [ ] make stepper also horiz
 - [ ] cant get same bullet pattern twice
 
-# bugs
+## bugs
 
 - [ ] backing out of a menu makes another bullet pattern on top
 - [ ] heart starts in random spot
 
-# b patterns
+## b patterns
 
 4 blocks from one side, they go to the other side
 There is a gap in them
@@ -100,8 +100,25 @@ change the current one to be bursts instead of targeted
 - arcs
 - block slide
 
-# other games
-
-## mushroom
+# mushroom
 
 - [ ] goomblo
+
+# yudumsort
+
+- [ ] mouse not reaching viewport (does it need to be in a viewport?)
+
+# main
+
+- [ ] do games need to be in a subviewport? cant they just be children?
+- [ ] transiton animations between games
+  - [ ] scrimblo moving towards the skull
+  - [ ] prompts appearing
+- [ ] main menu
+  - [ ] logo
+  - [ ] animate it a lil
+- [ ] settings menu
+  - [ ] volume
+  - [ ] window type
+  - [ ] resolution scale x1 x2 x3
+  - [ ] vsync

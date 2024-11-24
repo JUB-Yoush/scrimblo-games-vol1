@@ -1,22 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://43nemurnpe4c"]
+[gd_scene load_steps=5 format=3 uid="uid://43nemurnpe4c"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_58lve"]
 [ext_resource type="Texture2D" uid="uid://eb032wrne460" path="res://assets/border.png" id="2_ht23j"]
-[ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="3_rc4l5"]
+[ext_resource type="Texture2D" uid="uid://41j33ouc6f5x" path="res://assets/prompt.png" id="3_6hep3"]
+[ext_resource type="Texture2D" uid="uid://b03mauinv1gfs" path="res://assets/scirmblo-progress-token.png" id="4_xgi41"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_58lve")
 
-[node name="border" type="Sprite2D" parent="."]
+[node name="border" type="TextureRect" parent="."]
 z_index = 10
 z_as_relative = false
 texture = ExtResource("2_ht23j")
-centered = false
-
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 429.0
-offset_bottom = 238.0
-texture = ExtResource("3_rc4l5")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
@@ -26,3 +21,17 @@ offset_bottom = 40.0
 handle_input_locally = false
 size = Vector2i(432, 240)
 render_target_update_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_top = 4.0
+offset_right = 432.0
+offset_bottom = 237.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_6hep3")
+stretch_mode = 2
+
+[node name="ScrimbloIcon" type="Sprite2D" parent="."]
+position = Vector2(-23, 21)
+texture = ExtResource("4_xgi41")

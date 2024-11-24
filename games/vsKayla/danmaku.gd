@@ -6,6 +6,7 @@ var attackTimer = Timer.new()
 signal attack_over
 signal pattern_over
 var died = false
+var last_pattern:Callable
 
 var opposing
 func _ready():
@@ -28,9 +29,12 @@ func start(enemy_text,_opposing):
 		await get_tree().create_timer(1).timeout
 		%Dialog.visible = false
 	%Heart.can_move = true
-	patterns.pick_random().call()
-	#pattern1.call()
-	# find a more natural way to do this
+
+	var pattern = patterns.pick_random()
+	while pattern == last_pattern:
+		pattern = patterns.pick_random()
+	pattern.call()
+	last_pattern == pattern
 	await pattern_over
 	end()
 

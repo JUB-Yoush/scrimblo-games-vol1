@@ -52,9 +52,3 @@ func pick_game():
 		lives -= 1
 	if lives > 0:
 		pick_game()
-
-
-
-
-
-
