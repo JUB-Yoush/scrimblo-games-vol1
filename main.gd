@@ -1,6 +1,6 @@
 extends Node2D
 
-var microgames:Array[String] = ["quickdraw","yiik","flyswat","mushroom","yudumsort",]
+var microgames:Array[String] = ["quickdraw","yiik","flyswat","yudumsort",]
 var playedGames:Array[String] = []
 var result:bool
 var lives:int:
@@ -11,12 +11,15 @@ var lives:int:
 
 var score:int
 @onready var minigameWindow = $SubViewportContainer/Minigame
+@onready var gameParent = $GameParent
+@onready var animPlayer = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	lives = 5
 	score = 0
-	pick_game()
+	move_scrimblo()
+	between_games()
 	pass # Replace with function body.
 
 func game_over():
@@ -38,7 +41,8 @@ func pick_game():
 	var currGame:PackedScene = load(gameString)
 	var gameInstance = currGame.instantiate()
 
-	minigameWindow.add_child(gameInstance)
+	#minigameWindow.add_child(gameInstance)
+	gameParent.add_child(gameInstance)
 	gameInstance.game_over.connect(func(res): result = res )
 	await gameInstance.game_over
 
@@ -46,9 +50,27 @@ func pick_game():
 	if result == true:
 		playedGames.append(gameString)
 		score += 2
+		gameInstance.get_child(0).queue_free()
 	else:
 		playedGames.append(gameString)
 		score -= 1
 		lives -= 1
 	if lives > 0:
-		pick_game()
+		between_games()
+
+func move_scrimblo():
+	var scrimblo_move_offset = 64
+	var tween = create_tween()
+	tween.tween_property(%ScrimbloIcon,"position",Vector2(%ScrimbloIcon.position.x + 64,%ScrimbloIcon.position.y),.5)
+
+func between_games():
+	animPlayer.play("close")
+	%ProgressUi.visible = true
+	move_scrimblo()
+	await get_tree().create_timer(.5).timeout
+	%Prompt.visible = true
+	await get_tree().create_timer(1).timeout
+	%ProgressUi.visible = false
+	animPlayer.play("open")
+	%Prompt.visible = false
+	pick_game()

@@ -1,9 +1,144 @@
-[gd_scene load_steps=5 format=3 uid="uid://43nemurnpe4c"]
+[gd_scene load_steps=16 format=3 uid="uid://43nemurnpe4c"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_58lve"]
 [ext_resource type="Texture2D" uid="uid://eb032wrne460" path="res://assets/border.png" id="2_ht23j"]
 [ext_resource type="Texture2D" uid="uid://41j33ouc6f5x" path="res://assets/prompt.png" id="3_6hep3"]
 [ext_resource type="Texture2D" uid="uid://b03mauinv1gfs" path="res://assets/scirmblo-progress-token.png" id="4_xgi41"]
+[ext_resource type="Texture2D" uid="uid://dh0yskkgsf5t" path="res://assets/transiton-l.png" id="5_csi2c"]
+[ext_resource type="Texture2D" uid="uid://mwj2a3davy07" path="res://assets/transiton-r.png" id="6_mno75"]
+[ext_resource type="FontFile" uid="uid://c0fl6pty7w5ci" path="res://games/flyswat/assets/Awe Mono Gold.ttf" id="7_rwdij"]
+[ext_resource type="Texture2D" uid="uid://dqs4tqjsd6il8" path="res://assets/lives.png" id="8_vurq1"]
+
+[sub_resource type="Animation" id="Animation_cwgph"]
+resource_name = "open"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transitions/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-216, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transitions/Sprite2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(216, 0), Vector2(432, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kdxa6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transitions/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transitions/Sprite2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(216, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_660ot"]
+resource_name = "close"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transitions/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-216, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transitions/Sprite2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(432, 0), Vector2(216, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gg6qs"]
+_data = {
+"RESET": SubResource("Animation_kdxa6"),
+"close": SubResource("Animation_660ot"),
+"open": SubResource("Animation_cwgph")
+}
+
+[sub_resource type="Animation" id="Animation_lcmx3"]
+resource_name = "shake"
+length = 0.2
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Prompt:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.261799, 0.261799]
+}
+
+[sub_resource type="Animation" id="Animation_ybvfx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Prompt:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xal1y"]
+_data = {
+"RESET": SubResource("Animation_ybvfx"),
+"shake": SubResource("Animation_lcmx3")
+}
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_58lve")
@@ -13,25 +148,79 @@ z_index = 10
 z_as_relative = false
 texture = ExtResource("2_ht23j")
 
+[node name="ProgressUi" type="VBoxContainer" parent="border"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_top = 4.0
+offset_right = 432.0
+offset_bottom = 237.0
+
+[node name="LevelBar" type="TextureRect" parent="border/ProgressUi"]
+layout_mode = 2
+texture = ExtResource("3_6hep3")
+stretch_mode = 2
+
+[node name="ScrimbloIcon" type="Sprite2D" parent="border/ProgressUi"]
+unique_name_in_owner = true
+position = Vector2(53, 15)
+texture = ExtResource("4_xgi41")
+
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+visible = false
+z_index = 8
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Minigame" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(432, 240)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_top = 4.0
-offset_right = 432.0
-offset_bottom = 237.0
+[node name="GameParent" type="Node2D" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+[node name="Transitions" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Transitions"]
+texture = ExtResource("5_csi2c")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="Transitions"]
+position = Vector2(216, 0)
+texture = ExtResource("6_mno75")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gg6qs")
+}
+
+[node name="Prompt" type="MarginContainer" parent="AnimationPlayer"]
+unique_name_in_owner = true
+visible = false
+offset_left = 212.0
+offset_top = 91.0
+offset_right = 260.0
+offset_bottom = 131.0
+theme_override_constants/margin_left = -32
+
+[node name="Label" type="Label" parent="AnimationPlayer/Prompt"]
 layout_mode = 2
-texture = ExtResource("3_6hep3")
-stretch_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_rwdij")
+theme_override_font_sizes/font_size = 32
+text = "OBAMA"
+metadata/_edit_use_anchors_ = true
 
-[node name="ScrimbloIcon" type="Sprite2D" parent="."]
-position = Vector2(-23, 21)
-texture = ExtResource("4_xgi41")
+[node name="textAnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xal1y")
+}
+autoplay = "shake"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Lives" type="Sprite2D" parent="."]
+position = Vector2(144, 155)
+texture = ExtResource("8_vurq1")
