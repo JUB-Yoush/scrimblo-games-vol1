@@ -3,7 +3,7 @@ extends Node2D
 @onready var FlyScene:PackedScene = load("res://games/flyswat/src/fly.tscn")
 @onready var flySpawnLocation = $FlyPath/FlySpawnLocation
 signal game_over(result)
-
+const PROMPT = "SWAT"
 
 var remaining := 20:
 	set(value):

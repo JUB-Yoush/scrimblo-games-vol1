@@ -106,14 +106,8 @@ change the current one to be bursts instead of targeted
 
 # yudumsort
 
-- [ ] mouse not reaching viewport (does it need to be in a viewport?)
-
 # main
 
-- [ ] do games need to be in a subviewport? cant they just be children?
-- [ ] transiton animations between games
-  - [ ] scrimblo moving towards the skull
-  - [ ] prompts appearing
 - [ ] main menu
   - [ ] logo
   - [ ] animate it a lil

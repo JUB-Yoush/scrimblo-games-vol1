@@ -3,8 +3,20 @@ extends Node2D
 var microgames:Array[String] = ["quickdraw","yiik","flyswat","yudumsort",]
 var playedGames:Array[String] = []
 var result:bool
-var lives:int:
+var lives:int = 3:
 	set(value):
+		%Lifebar.visible = true
+		var lifeSprite = get_node("Lifebar/Lives%d" % lives)
+		await get_tree().create_timer(.5).timeout
+		lifeSprite.texture = load("res://assets/explosion/gamemaker_explosion.png")
+		lifeSprite.hframes = 17
+		lifeSprite.frame = 0
+		while lifeSprite.frame < 16:
+			await get_tree().create_timer(.04).timeout
+			lifeSprite.frame +=1
+		lifeSprite.visible = false
+		await get_tree().create_timer(.3).timeout
+		%Lifebar.visible = false
 		lives = value
 		if lives == 0:
 			game_over()
@@ -16,8 +28,8 @@ var score:int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	lives = 5
 	score = 0
+	lives -= 1
 	move_scrimblo()
 	between_games()
 	pass # Replace with function body.
@@ -29,7 +41,7 @@ func game_over():
 func boss_state():
 	pass
 
-func pick_game():
+func select_game():
 	if playedGames.size() == microgames.size():
 		boss_state()
 	var gameString:String = microgames.pick_random()
@@ -38,10 +50,10 @@ func pick_game():
 		gameString = microgames.pick_random()
 
 	gameString = "res://games/%s/src/game.tscn" % gameString
-	var currGame:PackedScene = load(gameString)
-	var gameInstance = currGame.instantiate()
+	return gameString
 
-	#minigameWindow.add_child(gameInstance)
+
+func play_game(gameInstance):
 	gameParent.add_child(gameInstance)
 	gameInstance.game_over.connect(func(res): result = res )
 	await gameInstance.game_over
@@ -68,9 +80,11 @@ func between_games():
 	%ProgressUi.visible = true
 	move_scrimblo()
 	await get_tree().create_timer(.5).timeout
+	var nextGame:PackedScene = load(select_game()).instatiate()
+	%PromptText.text = nextGame.PROMPT
 	%Prompt.visible = true
 	await get_tree().create_timer(1).timeout
 	%ProgressUi.visible = false
 	animPlayer.play("open")
 	%Prompt.visible = false
-	pick_game()
+	play_game(nextGame)

@@ -8,6 +8,8 @@ signal game_over(result)
 
 enum GAME_STATE {SETUP,DRAWING,DRAWN,ROUND_END,DONE}
 
+const PROMPT = "QUICKDRAW"
+
 var current_game_state = GAME_STATE.SETUP
 var countdown_sprite := ""
 var level = 0

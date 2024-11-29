@@ -4,6 +4,8 @@ extends Node2D
 @onready var playerSprite :=$Player/Sprite2D
 @onready var playerHbox := $Player/Hitbox
 
+const PROMPT = "MUSHROOM"
+
 var mushroomScene:PackedScene = load("res://games/mushroom/src/mushroom.tscn")
 var collected_count = 0
 var required = 10

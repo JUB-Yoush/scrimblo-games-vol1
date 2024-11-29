@@ -1,6 +1,6 @@
 extends Node2D
 
-# put one of these on there https://godotshaders.com/shader/earthbound-like-battle-background-shader-w-scroll-effect-and-palette-cycling/
+const PROMPT = "SORT"
 
 const GAMES = [
 	"Cave Story",

@@ -8,6 +8,7 @@ extends Node2D
 @export var green := Color("#639765")
 @export var red := Color("#4682b4")
 
+const PROMPT = "TYPE"
 var current_char_index:int = 1
 var sentence:String
 
