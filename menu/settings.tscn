@@ -35,13 +35,19 @@ theme_override_constants/margin_right = 250
 [node name="VolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="CheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer"]
+[node name="VsyncBox" type="CheckBox" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Vsync"
 
+[node name="FramerateBox" type="CheckBox" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "60 FPS Lock"
+
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Window Behaviour:"
+text = "Window Mode:"
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -68,10 +74,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -18.0
-offset_top = -44.0
-offset_right = 19.0
-offset_bottom = -13.0
+offset_left = 91.0
+offset_top = -223.0
+offset_right = 186.0
+offset_bottom = -192.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Exit"

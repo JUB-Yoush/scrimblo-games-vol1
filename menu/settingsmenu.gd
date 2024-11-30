@@ -1,25 +1,65 @@
 extends Control
 
-
+#https://youtu.be/YsdkcPV0BAo?si=iHuca-ZZmBHAL_V1
 # Called when the node enters the scene tree for the first time.
-const WINDOW_MODE_ARRAY =[[432,240],[864,480]]
-func _ready() -> void:
-	%GameResToggle.item_selected.connect(resolution_toggled)
-	%GameResToggle.add_item("x1 240")
-	%GameResToggle.add_item("x2 480")
-	%GameResToggle.add_item("x3 720")
-	%GameResToggle.add_item("x4 960")
-	%GameResToggle.add_item("x5 1200")
-	%GameResToggle.add_item("x6 1440")
 
-	%WindowStyleToggle.add_item("Fullscreen")
-	%WindowStyleToggle.add_item("Borderless")
-	%WindowStyleToggle.add_item("Window")
+#const WINDOW_MODE_ARRAY =[[432,240],[864,480]]
+const BASE_RESOLUTION = Vector2i(432,240)
+const WINDOW_MODE_ARRAY : Array[String] = [
+	"Full-Screen",
+	"Window Mode",
+	"Borderless Window",
+	"Borderless Full-Screen"
+]
+
+const RESOLUTIONS = {
+	"x1 240": BASE_RESOLUTION*1,
+	"x2 480": BASE_RESOLUTION*2,
+	"x3 720": BASE_RESOLUTION*3,
+	"x4 960": BASE_RESOLUTION*4,
+	"x5 1200": BASE_RESOLUTION*5,
+	"x6 1440": BASE_RESOLUTION*6,
+}
+
+func _ready() -> void:
+	%VsyncBox.toggled.connect(
+	func(state):
+		if state == true:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+		if state == false:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+		)
+	%FramerateBox.toggled.connect(
+	func(state):
+		if state == true:
+			Engine.max_fps = 60
+		if state == false:
+			Engine.max_fps = 0
+		)
+	%GameResToggle.item_selected.connect(resolution_toggled)
+	for resolution in RESOLUTIONS:
+		%GameResToggle.add_item(resolution)
+
+	%WindowStyleToggle.item_selected.connect(on_window_mode_selected)
+	for mode in WINDOW_MODE_ARRAY:
+		%WindowStyleToggle.add_item(mode)
+
+func on_window_mode_selected(index: int):
+	match index:
+		0: #fullscreen
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS,false)
+		1:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS,false)
+		2:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS,true)
+		3:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS,true)
 
 func resolution_toggled(index):
-	DisplayServer.window_set_size(Vector2i(WINDOW_MODE_ARRAY[index][0],WINDOW_MODE_ARRAY[index][1]))
+	DisplayServer.window_set_size(RESOLUTIONS.values()[index])
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
