@@ -1,8 +1,10 @@
 extends Node2D
 
-var microgames:Array[String] = ["quickdraw","yiik","flyswat","yudumsort",]
+#var microgames:Array[String] = ["quickdraw","yiik","flyswat","yudumsort",]
+var microgames:Array[String] = ["mushroom"]
 var playedGames:Array[String] = []
 var result:bool
+
 var lives:int = 3:
 	set(value):
 		%Lifebar.visible = true
@@ -53,16 +55,15 @@ func select_game():
 	return gameString
 
 
-func play_game(gameInstance):
+func play_game(gameInstance,gameString):
 	gameParent.add_child(gameInstance)
 	gameInstance.game_over.connect(func(res): result = res )
 	await gameInstance.game_over
-
+	gameInstance.queue_free()
 	print('game is over now bye')
 	if result == true:
 		playedGames.append(gameString)
 		score += 2
-		gameInstance.get_child(0).queue_free()
 	else:
 		playedGames.append(gameString)
 		score -= 1
@@ -80,11 +81,12 @@ func between_games():
 	%ProgressUi.visible = true
 	move_scrimblo()
 	await get_tree().create_timer(.5).timeout
-	var nextGame:PackedScene = load(select_game()).instatiate()
+	var game_string = select_game()
+	var nextGame = load(game_string).instantiate()
 	%PromptText.text = nextGame.PROMPT
 	%Prompt.visible = true
 	await get_tree().create_timer(1).timeout
 	%ProgressUi.visible = false
 	animPlayer.play("open")
 	%Prompt.visible = false
-	play_game(nextGame)
+	play_game(nextGame,game_string)

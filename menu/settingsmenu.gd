@@ -1,7 +1,8 @@
 extends Control
 
-#https://youtu.be/YsdkcPV0BAo?si=iHuca-ZZmBHAL_V1
-# Called when the node enters the scene tree for the first time.
+var audio_bus_name := "Master"
+
+@onready var _bus := AudioServer.get_bus_index(audio_bus_name)
 
 #const WINDOW_MODE_ARRAY =[[432,240],[864,480]]
 const BASE_RESOLUTION = Vector2i(432,240)
@@ -22,6 +23,9 @@ const RESOLUTIONS = {
 }
 
 func _ready() -> void:
+	%VolumeSlider.value_changed.connect(func(value):AudioServer.set_bus_volume_db(_bus,linear_to_db(value)))
+
+
 	%VsyncBox.toggled.connect(
 	func(state):
 		if state == true:

@@ -33,6 +33,7 @@ layout_mode = 2
 theme_override_constants/margin_right = 250
 
 [node name="VolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="VsyncBox" type="CheckBox" parent="MarginContainer/VBoxContainer"]

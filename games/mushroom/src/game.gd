@@ -6,11 +6,19 @@ extends Node2D
 
 const PROMPT = "MUSHROOM"
 
+signal game_over(result)
+
 var mushroomScene:PackedScene = load("res://games/mushroom/src/mushroom.tscn")
-var collected_count = 0
+var collected_count = 0:
+	set(value):
+		if collected_count == required:
+			%AnimationPlayer.play('win')
+			await %AnimationPlayer.animation_finished
+			game_over.emit(1)
+
 var required = 10
 var player_speed := 125.0
-var spawn_range = 250
+var spawn_range = 300
 var eating = false
 enum GAME_STATE {SETUP,PLAYING,DONE}
 
@@ -25,7 +33,7 @@ func _ready() -> void:
 	shroomTimer.timeout.connect(
 		func():
 		var newShroom = mushroomScene.instantiate()
-		newShroom.position.x = randf_range(65,spawn_range)
+		newShroom.position.x = randf_range(80,spawn_range)
 		newShroom.position.y = 0
 		newShroom.collected.connect(func(): collected_count+=1)
 		add_child(newShroom)
@@ -55,4 +63,9 @@ func on_area_entered(area):
 	eating = true
 	%AnimationPlayer.play("eat")
 	await %AnimationPlayer.animation_finished
+	collected_count += 1
 	eating = false
+
+func lose():
+	game_over.emit(0)
+

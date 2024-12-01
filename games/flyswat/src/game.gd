@@ -5,7 +5,7 @@ extends Node2D
 signal game_over(result)
 const PROMPT = "SWAT"
 
-var remaining := 20:
+var remaining := 10:
 	set(value):
 		remaining = value
 		if remaining == 0:

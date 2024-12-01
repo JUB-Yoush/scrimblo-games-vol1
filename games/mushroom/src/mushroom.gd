@@ -14,6 +14,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position.y += speed * delta
+	if position.y > 230:
+		get_parent().lose()
+
 
 func _on_body_entered(body:PhysicsBody2D):
 	print('area entered')
