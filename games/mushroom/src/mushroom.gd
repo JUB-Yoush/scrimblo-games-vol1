@@ -14,7 +14,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position.y += speed * delta
-	if position.y > 230:
+	if position.y > 230 and get_parent().current_game_state == get_parent().GAME_STATE.PLAYING:
+		$Sprite2D.texture = load("res://games/mushroom/assets/mushroom-lose.png")
+		speed = 0
+		await get_tree().create_timer(.5).timeout
 		get_parent().lose()
 
 
