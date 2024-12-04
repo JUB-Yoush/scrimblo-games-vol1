@@ -12,6 +12,9 @@ const PROMPT = "TYPE"
 var current_char_index:int = 1
 var sentence:String
 
+# calculate
+var wpm 
+
 var PROMPTS = [
 	"I had known her for less than two hours when she vanished from my sight.",
 	"Sammy was gone for good, swept away as if she'd never been there at all.",
@@ -47,7 +50,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			set_next_char(current_char_index)
 			if current_char_index == sentence.length():
 				change_prompt()
-				game_over.emit(1)
 		else:
 			print("wrong char of instead of" ,  key_typed, next_char)
 		next_char = sentence.substr(current_char_index,1)
@@ -70,6 +72,8 @@ func get_bbcode_end_color_tag() -> String:
 
 func change_prompt():
 	prompt_index += 1
+	if prompt_index == PROMPTS.size():
+		game_over.emit(1)
 	richTextLabel.text = PROMPTS[prompt_index]
 	sentence = richTextLabel.text
 	current_char_index = 0

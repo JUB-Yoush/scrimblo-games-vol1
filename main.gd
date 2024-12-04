@@ -1,7 +1,7 @@
 extends Node2D
 
 #var microgames:Array[String] = ["quickdraw","yiik","flyswat","yudumsort",]
-var microgames:Array[String] = ["mushroom"]
+var microgames:Array[String] = ["yiik"]
 var playedGames:Array[String] = []
 var result:bool
 

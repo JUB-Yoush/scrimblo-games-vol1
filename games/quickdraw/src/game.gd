@@ -43,6 +43,7 @@ func lose():
 	scrimblo.texture = load("res://games/quickdraw/assets/scrimblo-cowboy3.png")
 	wizard.texture = load("res://games/quickdraw/assets/wizard-cowboy2.png")
 	print('you lose')
+	await get_tree().create_timer(1).timeout
 	game_over.emit(0)
 	pass
 
@@ -63,7 +64,7 @@ func shoot():
 	scrimblo.texture = load("res://games/quickdraw/assets/scrimblo-cowboy2.png")
 	countdown.texture = null
 	print('you win')
-	#await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(1).timeout
 	game_over.emit(1)
 	pass
 
