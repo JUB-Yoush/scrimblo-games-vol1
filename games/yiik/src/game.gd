@@ -1,6 +1,5 @@
 extends Node2D
 
-#https://youtu.be/qRPI_c9qI1o?si=GQsg6SjXqMKiYQpa
 # Called when the node enters the scene tree for the first time.
 
 
@@ -8,26 +7,48 @@ extends Node2D
 @export var green := Color("#639765")
 @export var red := Color("#4682b4")
 
+var deathTimer = Timer.new()
+
 const PROMPT = "TYPE"
 var current_char_index:int = 1
 var sentence:String
 
 # calculate
-var wpm 
+var wpm = 50.0
+var seconds = 0.0
+var typed_chars = 10.0
+var typing_started = false
 
 var PROMPTS = [
 	"I had known her for less than two hours when she vanished from my sight.",
 	"Sammy was gone for good, swept away as if she'd never been there at all.",
 	"A door into nothing, into a different reality, opened up and swalloed Sammy whole.",
 	"At that moment I couldn't think, I couldn't breathe.",
-	"All I could do was replay the scene of her being pulled into obscurity by nothing",
-	"There one second and gone the next",
+	"All I could do was replay the scene of her being pulled into obscurity by nothing.",
+	"There one second and gone the next.",
 ]
 var prompt_index = 0
 @onready var richTextLabel:RichTextLabel = $Panel/RichTextLabel
 signal game_over(result)
 func _ready() -> void:
+
+	%MarginContainer.rotation = 0
+	var clock = Timer.new()
+	clock.timeout.connect(
+	func():
+		seconds+=.1
+		update_wpm()
+	)
+	clock.one_shot = false
+	add_child(clock)
+	clock.start(.1)
+	deathTimer.paused = true
+	add_child(deathTimer)
+	deathTimer.timeout.connect( func():
+		game_over.emit(0)
+	)
 	richTextLabel.visible = false
+
 	$AnimationPlayer.play('slide_in')
 	await $AnimationPlayer.animation_finished
 	richTextLabel.visible = true
@@ -46,6 +67,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		print("next char is "+next_char)
 		if key_typed == next_char:
 			print("typed "+ key_typed)
+			typed_chars += 1
+			update_wpm()
 			current_char_index+=1
 			set_next_char(current_char_index)
 			if current_char_index == sentence.length():
@@ -74,7 +97,30 @@ func change_prompt():
 	prompt_index += 1
 	if prompt_index == PROMPTS.size():
 		game_over.emit(1)
+		return
 	richTextLabel.text = PROMPTS[prompt_index]
 	sentence = richTextLabel.text
 	current_char_index = 0
 	set_next_char(current_char_index)
+
+func update_wpm():
+	wpm = (typed_chars/5) / (seconds/60)
+	%WPMLabel.text = "WPM: " + str(wpm)
+	%WPMBar.value = wpm
+	if !typing_started:
+		return
+	if wpm < 60:
+		%WPMBar.texture_progress = load("res://games/yiik/assets/bar-inner-bad.png")
+		%WPMLabel.modulate = Color.RED
+		if deathTimer.paused:
+			deathTimer.paused = false
+			%AnimationPlayer.play('shake')
+			deathTimer.start(3)
+	if wpm >= 60:
+		%WPMBar.texture_progress = load("res://games/yiik/assets/bar-inner.png")
+		%WPMLabel.modulate = Color.WHITE
+		deathTimer.paused = true
+		%AnimationPlayer.pause()
+		%MarginContainer.rotation = 0
+func start_typing():
+	typing_started = true
