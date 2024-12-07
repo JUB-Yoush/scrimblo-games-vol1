@@ -28,6 +28,7 @@ var correct_btn_index :int
 var right = 0
 var wrong = 0
 var choice_made = false
+var over = false
 signal game_over(result)
 func _ready() -> void:
 	pick_games()
@@ -49,7 +50,7 @@ func pick_games():
 	%Button2.text = game2
 
 func picked(choice:int) -> void:
-	if choice_made:
+	if over:
 		return
 	if choice == correct_btn_index:
 		print('right choice')
@@ -57,7 +58,8 @@ func picked(choice:int) -> void:
 		right += 1
 		%Score.get_child(round).texture = load("res://games/yudumsort/assets/o1.png")
 		round += 1
-		if right == 5:
+		if right == 1:
+			over = true
 			game_over.emit(1)
 		pass
 	else:
@@ -65,8 +67,10 @@ func picked(choice:int) -> void:
 		%Score.get_child(round).texture = load("res://games/yudumsort/assets/o2.png")
 		wrong += 1
 		round += 1
-		#if wrong == 3:
-		game_over.emit(0)
+		if wrong == 1:
+			over = true
+			game_over.emit(0)
 		#lose things
 		pass
-	pick_games()
+	if right < 1 and over == false:
+		pick_games()

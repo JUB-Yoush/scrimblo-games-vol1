@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cptb2we4n2tso"]
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+position = Vector2(193, 93)
+emitting = false
+direction = Vector2(0, -1)
+initial_velocity_min = 136.09
+initial_velocity_max = 153.85

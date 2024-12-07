@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cub324t10wlbx"]
+[gd_scene load_steps=7 format=3 uid="uid://2lddftf36uqf"]
 
 [ext_resource type="Script" path="res://games/yiik/src/game.gd" id="1_45gnx"]
 [ext_resource type="Texture2D" uid="uid://comjrkv8x7gky" path="res://games/yiik/assets/talkbox.png" id="2_oce5u"]
