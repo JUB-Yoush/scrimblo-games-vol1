@@ -1,6 +1,7 @@
 extends Node2D
 
 const PROMPT = "SORT"
+const CONTROLS = "mouse"
 
 const GAMES = [
 	"Cave Story",

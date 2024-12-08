@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://43nemurnpe4c"]
+[gd_scene load_steps=19 format=3 uid="uid://43nemurnpe4c"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_58lve"]
 [ext_resource type="Texture2D" uid="uid://eb032wrne460" path="res://assets/border.png" id="2_ht23j"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dh0yskkgsf5t" path="res://assets/transiton-l.png" id="5_csi2c"]
 [ext_resource type="Texture2D" uid="uid://mwj2a3davy07" path="res://assets/transiton-r.png" id="6_mno75"]
 [ext_resource type="FontFile" uid="uid://c0fl6pty7w5ci" path="res://games/flyswat/assets/Awe Mono Gold.ttf" id="7_rwdij"]
+[ext_resource type="Texture2D" uid="uid://v2gfeqxe3txx" path="res://assets/keeb.png" id="8_ve5y5"]
 [ext_resource type="Texture2D" uid="uid://dqs4tqjsd6il8" path="res://assets/lives.png" id="8_vurq1"]
 [ext_resource type="Texture2D" uid="uid://bprpmwke2a4hc" path="res://assets/yeah.png" id="9_kvk3l"]
 
@@ -273,9 +274,33 @@ libraries = {
 "": SubResource("AnimationLibrary_gg6qs")
 }
 
-[node name="Prompt" type="MarginContainer" parent="AnimationPlayer"]
+[node name="Controls" type="Panel" parent="AnimationPlayer"]
 unique_name_in_owner = true
 visible = false
+offset_left = 178.0
+offset_top = 135.0
+offset_right = 258.0
+offset_bottom = 175.0
+
+[node name="ControlImg" type="TextureRect" parent="AnimationPlayer/Controls"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.5
+offset_top = -20.0
+offset_right = 30.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_ve5y5")
+stretch_mode = 2
+
+[node name="Prompt" type="MarginContainer" parent="AnimationPlayer"]
+unique_name_in_owner = true
 offset_left = 212.0
 offset_top = 91.0
 offset_right = 260.0

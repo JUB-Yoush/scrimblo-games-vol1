@@ -10,6 +10,7 @@ extends Node2D
 var deathTimer = Timer.new()
 
 const PROMPT = "TYPE"
+const CONTROLS = "keeb"
 var current_char_index:int = 1
 var sentence:String
 

@@ -6,6 +6,8 @@ extends Node2D
 
 const PROMPT = "MUSHROOM"
 
+const CONTROLS = "wasd"
+
 signal game_over(result)
 
 var mushroomScene:PackedScene = load("res://games/mushroom/src/mushroom.tscn")
