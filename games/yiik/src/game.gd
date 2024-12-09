@@ -106,7 +106,7 @@ func change_prompt():
 
 func update_wpm():
 	wpm = (typed_chars/5) / (seconds/60)
-	%WPMLabel.text = "WPM: " + str(wpm)
+	%WPMLabel.text = "WPM: " + str(roundf(wpm))
 	%WPMBar.value = wpm
 	if !typing_started:
 		return

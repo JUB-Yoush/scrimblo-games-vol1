@@ -100,19 +100,75 @@ change the current one to be bursts instead of targeted
 - arcs
 - block slide
 
-# mushroom
-
-- [ ] goomblo
-
-# yudumsort
-
 # main
 
 - [ ] main menu
   - [ ] logo
   - [ ] animate it a lil
-- [ ] settings menu
-  - [ ] volume
-  - [ ] window type
-  - [ ] resolution scale x1 x2 x3
-  - [ ] vsync
+  - [ ] styled
+- [x] settings menu
+  - [x] Style it
+  - [x] volume
+  - [x] window type
+  - [x] resolution scale x1 x2 x3
+  - [x] vsync
+
+# okay, WHAT'S LEFT
+
+- [ ] final win screen
+- [ ] lose screen
+
+## boss stage
+
+- [ ] opening animation
+- [ ] kayla go grey
+
+# Sound
+
+## music
+
+- [ ] Main Menu theme
+- [ ] In between game jingle
+- [ ] win jingle
+- [ ] lose jingle
+- [ ] win entire game jingle
+- [ ] game over jingle
+
+- [ ] quickdraw jingle
+- [ ] yudum sort theme
+- [ ] flyswat theme
+- [ ] yiik ambiance
+- [ ] vs kayla theme
+
+## sfx
+
+### general
+
+- [ ] game win
+- [ ] explosion
+- [ ] game over
+
+### quickdraw
+
+- [ ] gunshot
+
+### flyswat
+
+- [ ] fly buzzing
+- [ ] swatting sound effect
+
+### mushroom
+
+- [ ] item use sound effect
+- [ ] eat sound effect
+
+### sort
+
+- [ ] correct pick
+- [ ] wrong pick
+
+### yiik
+
+- [ ] typing noise
+- [ ] heartbeat
+- [ ] alex yiik voice lines

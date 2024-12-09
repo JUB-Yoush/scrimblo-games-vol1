@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cg0glil55gaq4"]
+[gd_scene load_steps=13 format=3 uid="uid://cg0glil55gaq4"]
 
 [ext_resource type="Script" path="res://games/yiik/src/game.gd" id="1_6lwmk"]
 [ext_resource type="Texture2D" uid="uid://comjrkv8x7gky" path="res://games/yiik/assets/talkbox.png" id="2_oce5u"]
 [ext_resource type="Texture2D" uid="uid://dji2dysnmfygn" path="res://games/yiik/assets/alex2.png" id="2_v0j2h"]
+[ext_resource type="FontFile" uid="uid://c0fl6pty7w5ci" path="res://games/flyswat/assets/Awe Mono Gold.ttf" id="4_h7yoi"]
 [ext_resource type="Texture2D" uid="uid://vtywrhqquthc" path="res://games/yiik/assets/bar-outer.png" id="4_vrhqq"]
 [ext_resource type="Texture2D" uid="uid://bl1xxiqscrx7" path="res://games/yiik/assets/bar-inner.png" id="5_v0mdc"]
 [ext_resource type="Shader" path="res://games/yiik/src/game.gdshader" id="6_eesxk"]
@@ -155,9 +156,11 @@ libraries = {
 [node name="WPMLabel" type="Label" parent="."]
 unique_name_in_owner = true
 offset_left = 182.0
-offset_top = 5.0
+offset_top = 9.0
 offset_right = 227.0
-offset_bottom = 28.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("4_h7yoi")
+theme_override_font_sizes/font_size = 16
 text = "WPM: "
 horizontal_alignment = 1
 

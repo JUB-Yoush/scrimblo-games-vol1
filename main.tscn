@@ -185,14 +185,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationPlayer/Prompt:rotation")
+tracks/0/path = NodePath("AnimationPlayer/PromptText:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [-0.0523599]
 }
 
 [sub_resource type="Animation" id="Animation_lcmx3"]
@@ -203,14 +203,14 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationPlayer/Prompt:rotation")
+tracks/0/path = NodePath("AnimationPlayer/PromptText:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [-0.261799, 0.261799]
+"values": [-0.0872665, 0.0, 0.0523599]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xal1y"]
@@ -229,7 +229,6 @@ texture = ExtResource("2_ht23j")
 
 [node name="ProgressUi" type="VBoxContainer" parent="border"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 0
 offset_top = 4.0
 offset_right = 432.0
@@ -242,7 +241,7 @@ stretch_mode = 2
 
 [node name="ScrimbloIcon" type="Sprite2D" parent="border/ProgressUi"]
 unique_name_in_owner = true
-position = Vector2(53, 15)
+position = Vector2(-11, 15)
 texture = ExtResource("4_xgi41")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -299,22 +298,18 @@ grow_vertical = 2
 texture = ExtResource("8_ve5y5")
 stretch_mode = 2
 
-[node name="Prompt" type="MarginContainer" parent="AnimationPlayer"]
+[node name="PromptText" type="Label" parent="AnimationPlayer"]
 unique_name_in_owner = true
-offset_left = 212.0
-offset_top = 91.0
-offset_right = 260.0
-offset_bottom = 131.0
-theme_override_constants/margin_left = -32
-
-[node name="PromptText" type="Label" parent="AnimationPlayer/Prompt"]
-unique_name_in_owner = true
-layout_mode = 2
+offset_left = 181.0
+offset_top = 95.0
+offset_right = 245.0
+offset_bottom = 127.0
+rotation = -0.0523599
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_rwdij")
 theme_override_font_sizes/font_size = 32
-text = "OBAMA"
+text = "TEXT"
 metadata/_edit_use_anchors_ = true
 
 [node name="textAnimPlayer" type="AnimationPlayer" parent="."]

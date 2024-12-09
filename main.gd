@@ -1,7 +1,7 @@
 extends Node2D
 
 #var microgames:Array[String] = ["quickdraw","yiik","flyswat","yudumsort",]
-var microgames:Array[String] = ["quickdraw"]
+var microgames:Array[String] = ["yiik"]
 var playedGames:Array[String] = []
 var result:bool
 
@@ -103,12 +103,14 @@ func between_games(result,prevGame,prevGameString):
 		move_scrimblo()
 
 	%PromptText.text = nextGame.PROMPT
+	%PromptText.pivot_offset = %PromptText.size/2
+	%PromptText.position.x = (432/2) - %PromptText.size.x/2
 	%ControlImg.texture = load("res://assets/%s.png" % nextGame.CONTROLS)
-	%Prompt.visible = true
+	%PromptText.visible = true
 	%Controls.visible = true
 	await get_tree().create_timer(1.5).timeout
 	%ProgressUi.visible = false
 	%Controls.visible = false
 	animPlayer.play("open")
-	%Prompt.visible = false
+	%PromptText.visible = false
 	play_game(nextGame,game_string)
