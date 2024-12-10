@@ -5,7 +5,7 @@ var microgames:Array[String] = ["yiik"]
 var playedGames:Array[String] = []
 var result:bool
 
-var lives:int = 3:
+var lives:int = 1:
 	set(value):
 		%Lifebar.visible = true
 		var lifeSprite = get_node("Lifebar/Lives%d" % lives)
@@ -37,8 +37,12 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func game_over():
-	print('the WHOLE THING is over you SUCK')
-	pass
+	get_tree().paused = true
+	await get_tree().create_timer(1).timeout
+	%LosePanel.visible = true
+	%RetryButton.pressed.connect(func():
+		get_tree().paused = false
+		get_tree().change_scene_to_file('res://main.tscn'))
 
 func boss_state():
 	pass

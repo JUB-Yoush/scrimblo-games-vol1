@@ -14,12 +14,12 @@ const WINDOW_MODE_ARRAY : Array[String] = [
 ]
 
 const RESOLUTIONS = {
-	"x1 240": BASE_RESOLUTION*1,
-	"x2 480": BASE_RESOLUTION*2,
-	"x3 720": BASE_RESOLUTION*3,
-	"x4 960": BASE_RESOLUTION*4,
-	"x5 1200": BASE_RESOLUTION*5,
-	"x6 1440": BASE_RESOLUTION*6,
+	"x1 240p": BASE_RESOLUTION*1,
+	"x2 480p": BASE_RESOLUTION*2,
+	"x3 720p": BASE_RESOLUTION*3,
+	"x4 960p": BASE_RESOLUTION*4,
+	"x5 1200p": BASE_RESOLUTION*5,
+	"x6 1440p": BASE_RESOLUTION*6,
 }
 
 func _ready() -> void:
@@ -50,7 +50,11 @@ func _ready() -> void:
 
 func on_window_mode_selected(index: int):
 	match index:
-		0: #fullscreen
+	#"Full-Screen",
+	#"Window Mode",
+	#"Borderless Window",
+	#"Borderless Full-Screen"
+		0:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS,false)
 		1:

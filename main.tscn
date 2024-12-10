@@ -309,7 +309,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_rwdij")
 theme_override_font_sizes/font_size = 32
-text = "TEXT"
+text = "LOSE"
 metadata/_edit_use_anchors_ = true
 
 [node name="textAnimPlayer" type="AnimationPlayer" parent="."]
@@ -361,3 +361,32 @@ hue_variation_max = 0.77
 unique_name_in_owner = true
 position = Vector2(216, 120)
 texture = ExtResource("9_kvk3l")
+
+[node name="LosePanel" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_right = 434.0
+offset_bottom = 242.0
+
+[node name="RetryButton" type="Button" parent="LosePanel"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 0
+offset_left = 187.0
+offset_top = 136.0
+offset_right = 237.0
+offset_bottom = 167.0
+text = "Retry"
+
+[node name="PromptText2" type="Label" parent="LosePanel"]
+unique_name_in_owner = true
+offset_left = 181.0
+offset_top = 95.0
+offset_right = 245.0
+offset_bottom = 127.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_rwdij")
+theme_override_font_sizes/font_size = 32
+text = "LOSE"
+metadata/_edit_use_anchors_ = true
