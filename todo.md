@@ -120,8 +120,9 @@ change the current one to be bursts instead of targeted
 
 ## boss stage
 
-- [ ] opening animation
+- [x] opening animation
 - [ ] kayla go grey
+- [ ] put the miss on the knife anim
 
 # Sound
 

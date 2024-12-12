@@ -1,5 +1,8 @@
 extends Node
 
+var PROMPT = "BOSS"
+var CONTROLS = "keeb"
+
 # set up game states
 enum GAME_STATE {SETUP,MENUS,DANMAKU,ENDED}
 enum MENU_STATES {COMMANDS, MENU, CHOSEN}
@@ -58,7 +61,7 @@ var turn_count = 1:
 var deadline = 10
 
 var max_hp := 20
-var hp := max_hp:
+var hp := 1:
 	set(value):
 		print(hp,value)
 		hp =  clamp(value, 0,max_hp)
@@ -76,6 +79,11 @@ signal txb_adv
 signal txb_back
 
 func _ready() -> void:
+	%AnimationPlayer.play("start")
+	await %AnimationPlayer.animation_finished
+	%AnimationPlayer.play("RESET")
+	await %AnimationPlayer.animation_finished
+	%Cursor.position = Vector2(14,228)
 	get_viewport().gui_focus_changed.connect(update_cursor)
 	danmaku.attack_over.connect(func(): update_game_state(GAME_STATE.MENUS))
 	clear_menu()
@@ -341,8 +349,9 @@ func out_of_time():
 	die()
 
 func die():
-	danmaku.heart_explode()
-	pass
+	%AnimationPlayer.play("die")
+	await %AnimationPlayer.animation_finished
+	game_over.emit(0)
 
 
 func credit_reached():

@@ -30,7 +30,7 @@ func _ready() -> void:
 	gameTimer.timeout.connect(func(): game_over.emit(0))
 	timer.one_shot = true
 	timer.start(fly_spawn_time)
-	gameTimer.start(25)
+	gameTimer.start(12.5)
 	pass # Replace with function body.
 
 func spawn_fly():
@@ -53,6 +53,7 @@ func fly_died():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	$TimerLabel.text = str(gameTimer.time_left)
+	%TimerBar.value = gameTimer.time_left * 8
 	$RemainingLabel.text = str(remaining)
 	$Mouse.position = get_local_mouse_position()
 	pass

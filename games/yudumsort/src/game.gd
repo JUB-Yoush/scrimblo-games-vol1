@@ -59,7 +59,7 @@ func picked(choice:int) -> void:
 		right += 1
 		%Score.get_child(round).texture = load("res://games/yudumsort/assets/o1.png")
 		round += 1
-		if right == 1:
+		if right == 5:
 			over = true
 			game_over.emit(1)
 		pass

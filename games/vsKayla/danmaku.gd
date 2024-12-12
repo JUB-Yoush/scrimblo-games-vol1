@@ -5,6 +5,7 @@ var attack_time = 60
 var attackTimer = Timer.new()
 signal attack_over
 signal pattern_over
+signal game_over(state)
 var died = false
 var last_pattern:Callable
 
@@ -63,9 +64,9 @@ func heart_explode():
 		return
 	died = true
 	%Heart.can_hit = false
-	%Heart.z_index = 1001
+	%Heart.z_index = 32
 	%Heart.can_move = false
-	get_parent().get_node('bg').z_index = 1000
+	get_parent().get_node('bg').z_index = 16
 	await get_tree().create_timer(1).timeout
 	%Heart.hide()
 	for i in range(randi_range(4,7)):
@@ -79,7 +80,7 @@ func heart_explode():
 		rigid.linear_velocity.y = randf_range(100,300)* [-1,1].pick_random()
 		rigid.add_child(sprite)
 		add_child(rigid)
-
+	get_parent().get_node('bg').z_index = 0
 
 
 var pattern1 := func():

@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://crihqai1bloct"]
+[gd_scene load_steps=10 format=3 uid="uid://crihqai1bloct"]
 
 [ext_resource type="Script" path="res://games/flyswat/src/game.gd" id="1_r6bcs"]
 [ext_resource type="Texture2D" uid="uid://dbrnx5s2xpf0a" path="res://games/flyswat/assets/bg.png" id="2_fwl2q"]
 [ext_resource type="FontFile" uid="uid://c0fl6pty7w5ci" path="res://games/flyswat/assets/Awe Mono Gold.ttf" id="4_jvc5c"]
 [ext_resource type="Texture2D" uid="uid://4rtj4mapb3ox" path="res://games/flyswat/assets/swatter.png" id="4_kglss"]
+[ext_resource type="Texture2D" uid="uid://bl1xxiqscrx7" path="res://games/yiik/assets/bar-inner.png" id="5_j31oi"]
 
 [sub_resource type="Curve2D" id="Curve2D_cdtuu"]
 _data = {
@@ -96,3 +97,14 @@ frame = 1
 libraries = {
 "": SubResource("AnimationLibrary_jcd7u")
 }
+
+[node name="TimerBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.758311, 5.24625e-06, 0.49269, 1)
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 160.0
+offset_bottom = 46.0
+scale = Vector2(2.72, 0.519999)
+value = 50.0
+texture_progress = ExtResource("5_j31oi")

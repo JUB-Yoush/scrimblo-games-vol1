@@ -1,11 +1,17 @@
 extends Node2D
 
-#var microgames:Array[String] = ["quickdraw","yiik","flyswat","yudumsort",]
-var microgames:Array[String] = ["yiik"]
+var microgames:Array[String] = ["res://games/quickdraw/src/game.tscn",
+"res://games/yiik/src/game.tscn",
+"res://games/flyswat/src/game.tscn",
+"res://games/yudumsort/src/game.tscn",
+"res://games/mushroom/src/game.tscn",]
+#var microgames:Array[String] = ["res://games/flyswat/src/game.tscn"]
 var playedGames:Array[String] = []
 var result:bool
+var currentGame
+var at_boss = false
 
-var lives:int = 1:
+var lives:int = 3:
 	set(value):
 		%Lifebar.visible = true
 		var lifeSprite = get_node("Lifebar/Lives%d" % lives)
@@ -24,7 +30,6 @@ var lives:int = 1:
 			game_over()
 
 var score:int
-@onready var minigameWindow = $SubViewportContainer/Minigame
 @onready var gameParent = $GameParent
 @onready var animPlayer = $AnimationPlayer
 
@@ -34,32 +39,48 @@ func _ready() -> void:
 	move_scrimblo()
 	between_games(true,null,null)
 	%WinSprite.visible = false
+	%RetryButton.pressed.connect(restart)
 	pass # Replace with function body.
 
 func game_over():
 	get_tree().paused = true
+	%LoseAnimPlayer.play("wipe")
 	await get_tree().create_timer(1).timeout
 	%LosePanel.visible = true
-	%RetryButton.pressed.connect(func():
-		get_tree().paused = false
-		get_tree().change_scene_to_file('res://main.tscn'))
+
+
+func restart():
+	print("pressing")
+	print("before pause: ",get_tree())
+	get_tree().paused = false
+	print("after pause: ",get_tree())
+	%LosePanel.visible = false
+	#await get_tree().create_timer(1).timeout
+	#get_tree().change_scene_to_file('res://main.tscn')
+	get_tree().reload_current_scene()
 
 func boss_state():
-	pass
+	%PromptText.text = "BOSS STAGE"
+	var gameInstance = load("res://games/vsKayla/game.tscn").instantiate()
+	play_game(gameInstance,"res://games/vsKayla/game.tscn")
 
 func select_game():
-	if playedGames.size() == microgames.size():
-		boss_state()
+
+
 	var gameString:String = microgames.pick_random()
 
+	if playedGames.size() == microgames.size():
+		gameString = "res://games/vsKayla/game.tscn"
+		return gameString
+	print(playedGames)
 	while playedGames.has(gameString):
 		gameString = microgames.pick_random()
 
-	gameString = "res://games/%s/src/game.tscn" % gameString
 	return gameString
 
 
 func play_game(gameInstance,gameString):
+	currentGame = gameInstance
 	gameParent.add_child(gameInstance)
 	gameInstance.game_over.connect(func(res): result = res )
 	await gameInstance.game_over
@@ -88,6 +109,9 @@ func between_games(result,prevGame,prevGameString):
 		if prevGame != null:
 			animPlayer.play("win")
 			await animPlayer.animation_finished
+
+		if prevGameString == "res://games/vsKayla/game.tscn":
+			get_tree().change_scene_to_file("res://win.tscn")
 		game_string = select_game()
 		nextGame = load(game_string).instantiate()
 	else:
@@ -107,14 +131,25 @@ func between_games(result,prevGame,prevGameString):
 		move_scrimblo()
 
 	%PromptText.text = nextGame.PROMPT
+	if %PromptText.text == "BOSS":
+		%Border.texture = null
+	else:
+		%Border.texture = load("res://assets/border.png")
 	%PromptText.pivot_offset = %PromptText.size/2
 	%PromptText.position.x = (432/2) - %PromptText.size.x/2
 	%ControlImg.texture = load("res://assets/%s.png" % nextGame.CONTROLS)
 	%PromptText.visible = true
 	%Controls.visible = true
+
 	await get_tree().create_timer(1.5).timeout
 	%ProgressUi.visible = false
 	%Controls.visible = false
 	animPlayer.play("open")
 	%PromptText.visible = false
 	play_game(nextGame,game_string)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("DEBUG_LOSE"):
+		currentGame.game_over.emit(0)
+	elif event.is_action_pressed("DEBUG_WIN"):
+		currentGame.game_over.emit(1)
