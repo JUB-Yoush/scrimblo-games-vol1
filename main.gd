@@ -1,11 +1,11 @@
 extends Node2D
 
-var microgames:Array[String] = ["res://games/quickdraw/src/game.tscn",
-"res://games/yiik/src/game.tscn",
-"res://games/flyswat/src/game.tscn",
-"res://games/yudumsort/src/game.tscn",
-"res://games/mushroom/src/game.tscn",]
-#var microgames:Array[String] = ["res://games/flyswat/src/game.tscn"]
+#var microgames:Array[String] = ["res://games/quickdraw/src/game.tscn",
+#"res://games/yiik/src/game.tscn",
+#"res://games/flyswat/src/game.tscn",
+#"res://games/yudumsort/src/game.tscn",
+#"res://games/mushroom/src/game.tscn",]
+var microgames:Array[String] = ["res://games/flyswat/src/game.tscn"]
 var playedGames:Array[String] = []
 var result:bool
 var currentGame

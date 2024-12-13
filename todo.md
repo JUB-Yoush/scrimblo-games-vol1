@@ -121,8 +121,9 @@ change the current one to be bursts instead of targeted
 ## boss stage
 
 - [x] opening animation
-- [ ] kayla go grey
+- [ ] kayla go grey when sparing (tell her we got a room in the 2sc)
 - [ ] put the miss on the knife anim
+- [ ] dialog (just all of steamed hams idk burh)
 
 # Sound
 

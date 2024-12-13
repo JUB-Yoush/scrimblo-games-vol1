@@ -11,6 +11,7 @@ var remaining := 10:
 	set(value):
 		remaining = value
 		if remaining == 0:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			game_over.emit(1)
 
 
@@ -24,10 +25,13 @@ var fly_spawn_variance := 0.2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	add_child(timer)
 	add_child(gameTimer)
 	timer.timeout.connect(spawn_fly)
-	gameTimer.timeout.connect(func(): game_over.emit(0))
+	gameTimer.timeout.connect(func():
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		game_over.emit(0))
 	timer.one_shot = true
 	timer.start(fly_spawn_time)
 	gameTimer.start(12.5)

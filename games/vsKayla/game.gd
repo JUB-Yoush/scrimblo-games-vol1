@@ -19,7 +19,8 @@ var opposes = ["* You go on an impasioned rant about \n your disdain for audio-v
 var hrtalks = ["* you use the Macaroni Corpo Jargon\n technique."]
 var start_turn_texts = ["* Smells of Scrimblo resedue.","* Your heart is filled with... pasta.","* Do Scrimblos dream of \n Sheep (2000) for the PSX?"]
 
-var enemy_turn_text = "Well Christina, I made it. \ndispite your \ndirections."
+var enemy_turn_text = ["Well Christina, I made it. \ndispite your \ndirections.","quite fond of this \nscrimblo character"]
+var opposing_turn_text = ["You've been ordering \na lot of Gino's Pizza."]
 var start_turn_text = "* world is scrim blo blo blo"
 
 var awaiting_command = false
@@ -61,7 +62,7 @@ var turn_count = 1:
 var deadline = 10
 
 var max_hp := 20
-var hp := 1:
+var hp := 20:
 	set(value):
 		print(hp,value)
 		hp =  clamp(value, 0,max_hp)
@@ -114,7 +115,10 @@ func update_game_state(new_state:GAME_STATE):
 
 	# load new state
 	if new_state == GAME_STATE.DANMAKU:
-		danmaku.start(enemy_turn_text,opposing)
+		var kayla_text = enemy_turn_text.pick_random()
+		if opposing:
+			kayla_text = opposing_turn_text.pick_random()
+		danmaku.start(kayla_text,opposing)
 	if new_state == GAME_STATE.MENUS:
 		turn_count += 1
 		start_turn()
@@ -201,6 +205,7 @@ func spare():
 	menu_state = MENU_STATES.CHOSEN
 	if sparable:
 		#turn her grey or whatever and sto animation
+		%EnemySprite.modulate = "#717171"
 		print_to_menu("* YOU WON!.\n You earned 0 XP and 0 gold.")
 		await txb_adv
 		game_over.emit(true)

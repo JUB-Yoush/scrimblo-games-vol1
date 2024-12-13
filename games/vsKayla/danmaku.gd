@@ -16,7 +16,7 @@ func _ready():
 	attackTimer.timeout.connect(end)
 
 
-func start(enemy_text,_opposing):
+func start(text,_opposing):
 	opposing = _opposing
 	print('started')
 	%MenuBox.visible = false
@@ -24,11 +24,16 @@ func start(enemy_text,_opposing):
 	visible = true
 	%Heart.can_move = false
 	%MenuCommands.visible = false
-	if enemy_text != "":
+	if text != "":
+		# get start text to render out character by character
 		%Dialog.visible = true
-		%Dialog.text = enemy_text
+		var output = ""
+		for c in text:
+			output += c
+			%Dialog.text = output
+			await get_tree().create_timer(.02).timeout
 		await get_tree().create_timer(1).timeout
-		%Dialog.visible = false
+	%Dialog.visible = false
 	%Heart.can_move = true
 
 	var pattern = patterns.pick_random()
