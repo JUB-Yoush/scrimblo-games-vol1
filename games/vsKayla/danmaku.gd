@@ -27,6 +27,7 @@ func start(text,_opposing):
 	if text != "":
 		# get start text to render out character by character
 		%Dialog.visible = true
+		%Bubble.visible = true
 		var output = ""
 		for c in text:
 			output += c
@@ -34,6 +35,7 @@ func start(text,_opposing):
 			await get_tree().create_timer(.02).timeout
 		await get_tree().create_timer(1).timeout
 	%Dialog.visible = false
+	%Bubble.visible = false
 	%Heart.can_move = true
 
 	var pattern = patterns.pick_random()

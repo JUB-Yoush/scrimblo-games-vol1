@@ -19,7 +19,7 @@ var opposes = ["* You go on an impasioned rant about \n your disdain for audio-v
 var hrtalks = ["* you use the Macaroni Corpo Jargon\n technique."]
 var start_turn_texts = ["* Smells of Scrimblo resedue.","* Your heart is filled with... pasta.","* Do Scrimblos dream of \n Sheep (2000) for the PSX?"]
 
-var enemy_turn_text = ["Well Christina, I made it. \ndispite your \ndirections.","quite fond of this \nscrimblo character"]
+var enemy_turn_text = ["Well Christina, I made it. dispite your directions.","quite fond of this scrimblo character"]
 var opposing_turn_text = ["You've been ordering \na lot of Gino's Pizza."]
 var start_turn_text = "* world is scrim blo blo blo"
 
@@ -80,11 +80,14 @@ signal txb_adv
 signal txb_back
 
 func _ready() -> void:
+
 	%AnimationPlayer.play("start")
 	await %AnimationPlayer.animation_finished
 	%AnimationPlayer.play("RESET")
+	%MissPlayer.play("preset")
 	await %AnimationPlayer.animation_finished
 	%Cursor.position = Vector2(14,228)
+	%AnimationPlayer.play("bob")
 	get_viewport().gui_focus_changed.connect(update_cursor)
 	danmaku.attack_over.connect(func(): update_game_state(GAME_STATE.MENUS))
 	clear_menu()
@@ -186,13 +189,10 @@ func fight():
 	fightbar_moving = true
 	# do the timing minigame
 	await txb_adv
-	%Knife.visible = true
-	for i in range(6):
-		%FightBar.texture = load("res://games/vsKayla/assets/fightbaralt.png")
-		%Knife.frame = i
-		await get_tree().create_timer(.1).timeout
-		%FightBar.texture = load("res://games/vsKayla/assets/fightbar.png")
-		await get_tree().create_timer(.1).timeout
+	%MissPlayer.play("knife")
+	await  %MissPlayer.animation_finished
+	%MissPlayer.play("miss")
+	await  %MissPlayer.animation_finished
 	%Knife.visible = false
 	fightbar_moving = false
 	%FightBar.visible = false
@@ -206,12 +206,14 @@ func spare():
 	if sparable:
 		#turn her grey or whatever and sto animation
 		%EnemySprite.modulate = "#717171"
+		%AnimationPlayer.stop()
 		print_to_menu("* YOU WON!.\n You earned 0 XP and 0 gold.")
 		await txb_adv
 		game_over.emit(true)
 	else:
 		print_to_menu("* Not enough Social Credit!")
 		await txb_adv
+		command_completed.emit()
 
 
 func clear_menu():

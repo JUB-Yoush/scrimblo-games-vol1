@@ -82,9 +82,6 @@ M.Stew: Heals 20HP
 
 ## bugs
 
-- [ ] backing out of a menu makes another bullet pattern on top
-- [ ] heart starts in random spot
-
 ## b patterns
 
 4 blocks from one side, they go to the other side
@@ -116,13 +113,15 @@ change the current one to be bursts instead of targeted
 # okay, WHAT'S LEFT
 
 - [ ] final win screen
-- [ ] lose screen
+- [ ] style settings menu
+- [x] lose screen
+- [ ] use the scrolling bg shader I stole
 
 ## boss stage
 
 - [x] opening animation
-- [ ] kayla go grey when sparing (tell her we got a room in the 2sc)
-- [ ] put the miss on the knife anim
+- [x] kayla go grey when sparing (tell her we got a room in the 2sc)
+- [x] put the miss on the knife anim
 - [ ] dialog (just all of steamed hams idk burh)
 
 # Sound

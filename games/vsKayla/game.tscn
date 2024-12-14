@@ -1,18 +1,20 @@
-[gd_scene load_steps=35 format=3 uid="uid://88vwolggeq70"]
+[gd_scene load_steps=43 format=3 uid="uid://88vwolggeq70"]
 
 [ext_resource type="Script" path="res://games/vsKayla/game.gd" id="1_hkofs"]
 [ext_resource type="Texture2D" uid="uid://q5vh3ph1acbg" path="res://icon.svg" id="2_ukche"]
-[ext_resource type="Texture2D" uid="uid://ccodmol41dimj" path="res://games/vsKayla/assets/kayla.png" id="3_eihpo"]
+[ext_resource type="Texture2D" uid="uid://hp42pn2t1l2v" path="res://games/vsKayla/assets/bubble2.png" id="3_h02n0"]
 [ext_resource type="Script" path="res://games/vsKayla/danmaku.gd" id="3_pv4y2"]
 [ext_resource type="Theme" uid="uid://cbm5xucqvteak" path="res://games/vsKayla/assets/menu_theme.tres" id="3_tlcv7"]
 [ext_resource type="Texture2D" uid="uid://djpykv2xanvrr" path="res://games/vsKayla/assets/heart.png" id="3_y32a2"]
 [ext_resource type="Texture2D" uid="uid://bg323cc7jpag2" path="res://games/vsKayla/assets/hpbarempty.png" id="4_0b63n"]
 [ext_resource type="FontFile" uid="uid://cv26vul3vbixk" path="res://games/vsKayla/assets/DeterminationMonoWebRegular-Z5oq.ttf" id="4_jyr4l"]
 [ext_resource type="Texture2D" uid="uid://dmddw3tsun2q8" path="res://games/vsKayla/assets/credit-under.png" id="4_lvxuj"]
+[ext_resource type="Texture2D" uid="uid://bgodhnla4mly0" path="res://games/vsKayla/assets/kaylahead.png" id="5_8nhik"]
 [ext_resource type="Texture2D" uid="uid://dof2hqfx1tc6x" path="res://games/vsKayla/assets/hpbar.png" id="5_dset0"]
 [ext_resource type="FontFile" uid="uid://b5ewxl73qjltu" path="res://games/vsKayla/assets/crypt-of-tomorrow-ut-font-no-rus.ttf" id="5_nxim3"]
 [ext_resource type="Texture2D" uid="uid://gxrxwla0n6fm" path="res://games/vsKayla/assets/credit-over.png" id="5_v12a1"]
 [ext_resource type="Texture2D" uid="uid://dnrvhegbcvf1g" path="res://games/vsKayla/assets/credit-progress.png" id="6_6eue4"]
+[ext_resource type="Texture2D" uid="uid://crihw8oge26nt" path="res://games/vsKayla/assets/kaylabody.png" id="6_kjqcj"]
 [ext_resource type="Texture2D" uid="uid://dr5hq23sfg4b8" path="res://games/vsKayla/assets/fight-btn.png" id="9_1d3tx"]
 [ext_resource type="Texture2D" uid="uid://o8qu2u7suw0" path="res://games/vsKayla/assets/textbox.png" id="9_okmtv"]
 [ext_resource type="Texture2D" uid="uid://bd06mihi57fxb" path="res://games/vsKayla/assets/fight-btn-hover.png" id="10_a2ti3"]
@@ -23,11 +25,13 @@
 [ext_resource type="Texture2D" uid="uid://c5jwl7ie2i8v8" path="res://games/vsKayla/assets/item-btn-hover.png" id="14_5b1j4"]
 [ext_resource type="Texture2D" uid="uid://4ag0f4iqccj4" path="res://games/vsKayla/assets/mercy-btn.png" id="15_o07cv"]
 [ext_resource type="Texture2D" uid="uid://04ko5jd6jm0g" path="res://games/vsKayla/assets/mercy-btn-hover.png" id="16_hfcem"]
+[ext_resource type="Texture2D" uid="uid://brwsl31kdsnkt" path="res://games/vsKayla/assets/miss.png" id="17_qbuyq"]
 [ext_resource type="Texture2D" uid="uid://dcwtvggsginbv" path="res://games/vsKayla/assets/heartpox.png" id="19_udwge"]
 [ext_resource type="PackedScene" uid="uid://d2uyf1p23lwlc" path="res://games/vsKayla/heart.tscn" id="23_qpt78"]
 [ext_resource type="Texture2D" uid="uid://dux8p1dtjwixd" path="res://games/vsKayla/assets/battle-bg.png" id="23_qxjd5"]
 [ext_resource type="Texture2D" uid="uid://cukhv0fyi8mb5" path="res://games/vsKayla/assets/knife.png" id="25_afqnq"]
 [ext_resource type="Texture2D" uid="uid://g0xof8f0vc3b" path="res://games/vsKayla/assets/fightbar.png" id="26_0y71k"]
+[ext_resource type="Texture2D" uid="uid://cx3wq04dw1qwf" path="res://games/vsKayla/assets/fightbaralt.png" id="32_uopsb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ny31m"]
 size = Vector2(107.75, 9.5)
@@ -84,6 +88,90 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(159, 108)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%EnemySprite/Head:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Knife/../MissSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Knife/../MissSprite:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(216, 19)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("%FightBar:texture")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("26_0y71k")]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("%MissSprite:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_hvsen"]
@@ -156,10 +244,127 @@ tracks/3/keys = {
 "values": [Vector2(159, 108), Vector2(14, 228)]
 }
 
+[sub_resource type="Animation" id="Animation_goqap"]
+resource_name = "bob"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%EnemySprite/Head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4cq8l"]
+resource_name = "miss"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Knife/../MissSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Knife/../MissSprite:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(216, 19), Vector2(216, 6), Vector2(216, 10)]
+}
+
+[sub_resource type="Animation" id="Animation_fsfal"]
+resource_name = "knife"
+length = 1.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%FightBar:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("32_uopsb"), ExtResource("26_0y71k"), ExtResource("32_uopsb"), ExtResource("26_0y71k"), ExtResource("32_uopsb"), ExtResource("26_0y71k"), ExtResource("32_uopsb"), ExtResource("26_0y71k")]
+}
+
+[sub_resource type="Animation" id="Animation_2qv0d"]
+resource_name = "preset"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%MissSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qnsa2"]
 _data = {
 "RESET": SubResource("Animation_hvi54"),
+"bob": SubResource("Animation_goqap"),
 "die": SubResource("Animation_hvsen"),
+"knife": SubResource("Animation_fsfal"),
+"miss": SubResource("Animation_4cq8l"),
+"preset": SubResource("Animation_2qv0d"),
 "start": SubResource("Animation_03o8r")
 }
 
@@ -182,22 +387,43 @@ scale = Vector2(1, 4.14844)
 texture = ExtResource("2_ukche")
 centered = false
 
+[node name="Bubble" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(301, 42)
+texture = ExtResource("3_h02n0")
+
 [node name="Dialog" type="Label" parent="."]
 unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
 z_index = 256
-offset_left = 246.0
-offset_top = 20.0
-offset_right = 389.0
-offset_bottom = 47.0
+offset_left = 268.0
+offset_top = 24.0
+offset_right = 351.0
+offset_bottom = 56.0
 theme_override_fonts/font = ExtResource("5_nxim3")
 theme_override_font_sizes/font_size = 5
-text = "I am kayla"
+text = "I am kayla
+line 2
+l
+"
 autowrap_mode = 2
 
-[node name="EnemySprite" type="Sprite2D" parent="."]
+[node name="MissSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(216, 19)
+scale = Vector2(2, 2)
+texture = ExtResource("17_qbuyq")
+
+[node name="EnemySprite" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(216, 55)
-texture = ExtResource("3_eihpo")
+
+[node name="Body" type="Sprite2D" parent="EnemySprite"]
+texture = ExtResource("6_kjqcj")
+
+[node name="Head" type="Sprite2D" parent="EnemySprite"]
+texture = ExtResource("5_8nhik")
 
 [node name="SocialCreditLabel" type="Label" parent="."]
 unique_name_in_owner = true
@@ -222,6 +448,7 @@ offset_left = 56.0
 offset_right = -56.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="SCreditBar" type="TextureProgressBar" parent="Control"]
 unique_name_in_owner = true
@@ -352,8 +579,7 @@ texture_progress = ExtResource("5_dset0")
 [node name="HpLabel" type="Label" parent="Control/MarginContainer/VBoxContainer/StatsMargin/StatsHbox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_nxim3")
-theme_override_font_sizes/font_size = 10
+theme_override_fonts/font = ExtResource("11_t2h2h")
 text = "HP 20/20"
 
 [node name="ActionMenuMargin" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer"]
@@ -440,14 +666,13 @@ z_index = -100
 position = Vector2(216, 127)
 scale = Vector2(2.88, 2.18101)
 texture = ExtResource("2_ukche")
+metadata/_edit_lock_ = true
 
 [node name="Knife" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-visible = false
 position = Vector2(216, 60)
 texture = ExtResource("25_afqnq")
 hframes = 6
-frame = 5
 region_rect = Rect2(0, 0, 32, 110)
 
 [node name="battleBg" type="Sprite2D" parent="."]
@@ -464,6 +689,13 @@ position = Vector2(216, 157)
 texture = ExtResource("26_0y71k")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../Knife")
+libraries = {
+"": SubResource("AnimationLibrary_qnsa2")
+}
+
+[node name="MissPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 root_node = NodePath("../Knife")
 libraries = {

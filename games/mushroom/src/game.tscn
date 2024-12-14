@@ -190,6 +190,7 @@ unique_name_in_owner = true
 z_index = 4
 position = Vector2(52, 184)
 texture = ExtResource("3_fpoct")
+flip_h = true
 hframes = 2
 
 [node name="Item" type="Sprite2D" parent="."]
