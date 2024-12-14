@@ -24,6 +24,7 @@ const RESOLUTIONS = {
 
 func _ready() -> void:
 	%VolumeSlider.value_changed.connect(func(value):AudioServer.set_bus_volume_db(_bus,linear_to_db(value)))
+	%ExitButton.pressed.connect(func(): get_tree().change_scene_to_file('res://menu.tscn'))
 
 
 	%VsyncBox.toggled.connect(
@@ -70,4 +71,3 @@ func on_window_mode_selected(index: int):
 func resolution_toggled(index):
 	DisplayServer.window_set_size(RESOLUTIONS.values()[index])
 	pass
-

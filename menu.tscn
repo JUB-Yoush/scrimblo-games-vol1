@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkr4cpll2wxtl"]
+[gd_scene load_steps=6 format=3 uid="uid://bkr4cpll2wxtl"]
 
 [ext_resource type="Texture2D" uid="uid://b51tauxhjvcms" path="res://assets/logo-temp.png" id="1_3n84o"]
 [ext_resource type="Script" path="res://menu/menu.gd" id="1_i7gfa"]
+[ext_resource type="Shader" path="res://games/mushroom/src/game.gdshader" id="2_qcr54"]
+[ext_resource type="Texture2D" uid="uid://cm2yl45wtd0mi" path="res://assets/bg.png" id="3_vx0ln"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vp0yu"]
+shader = ExtResource("2_qcr54")
+shader_parameter/speed = 0.2
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -11,6 +17,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i7gfa")
+
+[node name="bg" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_vp0yu")
+offset_right = 439.0
+offset_bottom = 248.0
+texture = ExtResource("3_vx0ln")
+stretch_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

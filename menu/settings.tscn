@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhtwl4j7ffya2"]
+[gd_scene load_steps=5 format=3 uid="uid://dhtwl4j7ffya2"]
 
 [ext_resource type="Script" path="res://menu/settingsmenu.gd" id="1_whows"]
+[ext_resource type="Shader" path="res://games/mushroom/src/game.gdshader" id="2_1flse"]
+[ext_resource type="Texture2D" uid="uid://cm2yl45wtd0mi" path="res://assets/bg.png" id="3_glyj6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_opq1f"]
+shader = ExtResource("2_1flse")
+shader_parameter/speed = 0.2
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -10,6 +16,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_whows")
+
+[node name="bg" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_opq1f")
+offset_right = 439.0
+offset_bottom = 242.0
+texture = ExtResource("3_glyj6")
+stretch_mode = 1
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -68,7 +90,8 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Button" type="Button" parent="."]
+[node name="ExitButton" type="Button" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
