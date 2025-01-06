@@ -17,15 +17,17 @@ var acts = ["* Check","* Appeal","* Oppose","* HR Talk"]
 var appeals = ["* You show Kayla a gif. \n It's spinning Rei Chiquita.","* You simply ask Kayla \n  for more social credit.","You turn to the audience \n (there is no audience)"]
 var opposes = ["* You go on an impasioned rant about \n your disdain for audio-visualizers.","* You correct Kayla. \n  \"We aren't the Gaming Club,\" \n  \"We make games, Actually\"","* You try distracting Kayla from the \n knife orbiting you."]
 var hrtalks = ["* you use the Macaroni Corpo Jargon\n technique."]
-var start_turn_texts = ["* Smells of Scrimblo resedue.","* Your heart is filled with... pasta.","* Do Scrimblos dream of \n Sheep (2000) for the PSX?"]
+var start_turn_texts = ["* Smells of Scrimblo resedue.","* Your heart is filled with... pasta.","* Do Scrimblos dream of \n* Sheep (2000) for the PSX?","* This Boss battle was like, \n* 50% of development time."]
 
-var enemy_turn_text = ["Well Christina, I made it. dispite your directions.","quite fond of this scrimblo character"]
+var enemy_turn_text = ["Well Christina, I made it. despite your directions.","I am quite fond of this Scrimblo character","Is this how you hold all your meetings?"]
+#var enemy_turn_text = ["Is this how you hold all your meetings?"]
 var opposing_turn_text = ["You've been ordering \na lot of Gino's Pizza."]
 var start_turn_text = "* world is scrim blo blo blo"
 
 var awaiting_command = false
 var opposing = false
 var scrimbookied = false
+var scrimbookied_turn:int
 var sparable = false
 
 var scrimblo = false
@@ -56,10 +58,12 @@ var turn_count = 1:
 		if pigeon_waiting:
 			if turn_count == pigeon_turn + 2:
 				pigeon_returned = true
-		if turn_count == deadline:
-			out_of_time()
+		if scrimbookied and turn_count == scrimbookied_turn + 3:
+			scrimbookied = false
+		#if turn_count == deadline:
+			#out_of_time()
 			pass
-var deadline = 10
+var deadline = 100
 
 var max_hp := 20
 var hp := 20:
@@ -87,6 +91,7 @@ func _ready() -> void:
 	%MissPlayer.play("preset")
 	await %AnimationPlayer.animation_finished
 	%Cursor.position = Vector2(14,228)
+	AudioPlayer.play_music(preload("res://assets/sound/music/cover1.ogg"))
 	%AnimationPlayer.play("bob")
 	get_viewport().gui_focus_changed.connect(update_cursor)
 	danmaku.attack_over.connect(func(): update_game_state(GAME_STATE.MENUS))
@@ -169,6 +174,8 @@ func command_selected(command):
 		%Cmd1.visible = true
 		%Cmd1.text = "  * Kayla"
 
+		if sparable:
+			%Cmd1.modulate = "#fefe00"
 		%Cmd1.pressed.connect(spare)
 	elif command == COMMANDS.ITEM:
 		populate_items(0)
@@ -204,6 +211,8 @@ func fight():
 func spare():
 	menu_state = MENU_STATES.CHOSEN
 	if sparable:
+		print_to_menu("* You inform Kayla that GDYU is \n* Getting a club room in the \n* Second Student Centre.")
+		await txb_adv
 		#turn her grey or whatever and sto animation
 		%EnemySprite.modulate = "#717171"
 		%AnimationPlayer.stop()
@@ -221,6 +230,7 @@ func clear_menu():
 	%Dialog.text = ""
 	%MenuString.text = ""
 	for box in cmdboxes:
+		box.modulate = "#ffffff"
 		box.visible = false
 		box.text = ""
 		# reset signals
@@ -246,6 +256,7 @@ func use_item(item_str):
 		await txb_adv
 	elif item_str == "* Scrimbookie":
 		scrimbookied = true
+		scrimbookied_turn = turn_count
 		print_to_menu("* You feel especially persuasive.\n  Extra Social Credit for 3 turns.")
 		await txb_adv
 	elif item_str == "* Pigeon":

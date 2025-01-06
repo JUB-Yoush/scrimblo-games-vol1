@@ -20,6 +20,7 @@ script = ExtResource("1_i7gfa")
 
 [node name="bg" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_vp0yu")
+layout_mode = 0
 offset_right = 439.0
 offset_bottom = 248.0
 texture = ExtResource("3_vx0ln")

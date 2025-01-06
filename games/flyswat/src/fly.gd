@@ -31,6 +31,7 @@ func _process(delta) -> void:
 func on_clicked(viewport,event,shape_idx):
 	if event is InputEventMouseButton:
 		if alive:
+			AudioPlayer.play_sfx(preload("res://assets/sound/sfx/swat.wav"))
 			alive = false
 			died.emit()
 			$Sprite2D.texture = load("res://games/flyswat/assets/fly-ded.png")

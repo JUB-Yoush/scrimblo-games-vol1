@@ -19,6 +19,7 @@ script = ExtResource("1_whows")
 
 [node name="bg" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_opq1f")
+layout_mode = 0
 offset_right = 439.0
 offset_bottom = 242.0
 texture = ExtResource("3_glyj6")
@@ -57,6 +58,9 @@ theme_override_constants/margin_right = 250
 [node name="VolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+max_value = 12.0
+step = 0.5
+value = 5.0
 
 [node name="VsyncBox" type="CheckBox" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true

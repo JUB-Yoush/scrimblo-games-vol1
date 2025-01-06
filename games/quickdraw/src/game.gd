@@ -24,10 +24,12 @@ var rng = RandomNumberGenerator.new()
 @onready var scrimblo:Sprite2D = $Scrimblo
 @onready var wizard:Sprite2D = $Wizard
 func _ready() -> void:
+	AudioPlayer.play_music(preload("res://assets/sound/music/quickdraw_theme.ogg"))
 	play_round()
 	pass # Replace with function body.
 
 func lose():
+	AudioPlayer.play_sfx(preload("res://assets/sound/sfx/shot.wav"))
 	$Hitflash.visible = true
 	await get_tree().create_timer(.1).timeout
 	$Hitflash.visible = false
@@ -49,6 +51,7 @@ func lose():
 	pass
 
 func shoot():
+	AudioPlayer.play_sfx(preload("res://assets/sound/sfx/shot.wav"))
 	player_shot = true
 	$Hitflash.visible = true
 	await get_tree().create_timer(.1).timeout

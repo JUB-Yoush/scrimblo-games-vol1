@@ -23,7 +23,7 @@ const RESOLUTIONS = {
 }
 
 func _ready() -> void:
-	%VolumeSlider.value_changed.connect(func(value):AudioServer.set_bus_volume_db(_bus,linear_to_db(value)))
+	%VolumeSlider.value_changed.connect(func(value):AudioPlayer.set_volume(value))
 	%ExitButton.pressed.connect(func(): get_tree().change_scene_to_file('res://menu.tscn'))
 
 

@@ -5,7 +5,9 @@ extends Node2D
 #"res://games/flyswat/src/game.tscn",
 #"res://games/yudumsort/src/game.tscn",
 #"res://games/mushroom/src/game.tscn",]
-var microgames:Array[String] = ["res://games/flyswat/src/game.tscn"]
+var microgames:Array[String] = [
+"res://games/flyswat/src/game.tscn",
+]
 var playedGames:Array[String] = []
 var result:bool
 var currentGame
@@ -16,6 +18,7 @@ var lives:int = 3:
 		%Lifebar.visible = true
 		var lifeSprite = get_node("Lifebar/Lives%d" % lives)
 		await get_tree().create_timer(.5).timeout
+		AudioPlayer.play_sfx(preload("res://assets/sound/sfx/explosion.wav"))
 		lifeSprite.texture = load("res://assets/explosion/gamemaker_explosion.png")
 		lifeSprite.hframes = 17
 		lifeSprite.frame = 0
@@ -35,6 +38,7 @@ var score:int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	microgames.shuffle()
 	score = 0
 	move_scrimblo()
 	between_games(true,null,null)
@@ -65,18 +69,14 @@ func boss_state():
 	play_game(gameInstance,"res://games/vsKayla/game.tscn")
 
 func select_game():
+	var gameString:String
 
-
-	var gameString:String = microgames.pick_random()
-
-	if playedGames.size() == microgames.size():
+	if microgames.size() == 0:
 		gameString = "res://games/vsKayla/game.tscn"
 		return gameString
-	print(playedGames)
-	while playedGames.has(gameString):
-		gameString = microgames.pick_random()
-
-	return gameString
+	else:
+		gameString = microgames.pop_front()
+		return gameString
 
 
 func play_game(gameInstance,gameString):
@@ -108,6 +108,7 @@ func between_games(result,prevGame,prevGameString):
 	if result == true:
 		if prevGame != null:
 			animPlayer.play("win")
+			AudioPlayer.play_sfx(preload("res://assets/sound/sfx/golf-clap.wav"))
 			await animPlayer.animation_finished
 
 		if prevGameString == "res://games/vsKayla/game.tscn":
@@ -120,6 +121,7 @@ func between_games(result,prevGame,prevGameString):
 
 	animPlayer.play("close")
 	await animPlayer.animation_finished
+	AudioPlayer.stop()
 	if result == false:
 		lives -= 1
 		await get_tree().create_timer(.5).timeout

@@ -25,6 +25,7 @@ var fly_spawn_variance := 0.2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	AudioPlayer.play_music(preload("res://assets/sound/music/flyswat.ogg"))
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	add_child(timer)
 	add_child(gameTimer)

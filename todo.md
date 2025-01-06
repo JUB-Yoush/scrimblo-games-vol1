@@ -1,3 +1,10 @@
+# TODAY
+
+- losing -> winning -> boss crashes, fix the game selection system please
+- no win screen transition?
+- telling kayla you got a room in 2sc
+- kayla dialog dialog
+
 # vs kayla
 
 ## menu
@@ -110,54 +117,31 @@ change the current one to be bursts instead of targeted
   - [x] resolution scale x1 x2 x3
   - [x] vsync
 
-# okay, WHAT'S LEFT
-
-- [ ] final win screen
-- [ ] style settings menu
-- [x] lose screen
-- [ ] use the scrolling bg shader I stole
-
 ## boss stage
 
 - [x] opening animation
 - [x] kayla go grey when sparing (tell her we got a room in the 2sc)
 - [x] put the miss on the knife anim
 - [ ] dialog (just all of steamed hams idk burh)
-- [ ] winning goes nowhere
+- [ ] winning goes nowhere?
 
 # Sound
 
 ## music
 
-- [ ] Main Menu theme
 - [ ] In between game jingle
-- [ ] win jingle
-- [ ] lose jingle
 - [ ] win entire game jingle
-- [ ] game over jingle
-
-- [ ] quickdraw jingle
-- [ ] yudum sort theme
-- [ ] flyswat theme
-- [ ] yiik ambiance
-- [ ] vs kayla theme
+- [ ] mushroom theme
 
 ## sfx
 
-### general
-
-- [ ] game win
-- [ ] explosion
-- [ ] game over
-
 ### quickdraw
 
-- [ ] gunshot
+- [x] gunshot
 
 ### flyswat
 
-- [ ] fly buzzing
-- [ ] swatting sound effect
+- [x] swatting sound effect
 
 ### mushroom
 
@@ -174,3 +158,14 @@ change the current one to be bursts instead of targeted
 - [ ] typing noise
 - [ ] heartbeat
 - [ ] alex yiik voice lines
+
+# okay, WHAT'S LEFT
+
+- [ ] Make Some sounds
+- [ ] Mix all sounds
+- [ ] save settings when the game is closed
+- [ ] Kayla Dialog
+- [ ] final win screen
+- [ ] nicer start and settings buttons
+- [ ] nicer lose button
+- [ ] that's it?

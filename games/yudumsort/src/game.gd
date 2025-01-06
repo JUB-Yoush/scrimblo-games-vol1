@@ -32,6 +32,7 @@ var choice_made = false
 var over = false
 signal game_over(result)
 func _ready() -> void:
+	AudioPlayer.play_music(preload("res://assets/sound/music/gant_steps_ambient.ogg"))
 	pick_games()
 	%Button1.pressed.connect(func(): picked(1))
 	%Button2.pressed.connect(func(): picked(2))
@@ -62,6 +63,8 @@ func picked(choice:int) -> void:
 		if right == 5:
 			over = true
 			game_over.emit(1)
+		else:
+			pick_games()
 		pass
 	else:
 		print('wrong choice')

@@ -32,7 +32,7 @@ var prompt_index = 0
 @onready var richTextLabel:RichTextLabel = $Panel/RichTextLabel
 signal game_over(result)
 func _ready() -> void:
-
+	AudioPlayer.play_music(preload("res://assets/sound/music/output.ogg"))
 	%MarginContainer.rotation = 0
 	var clock = Timer.new()
 	clock.timeout.connect(

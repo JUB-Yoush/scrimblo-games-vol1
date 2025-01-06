@@ -3,6 +3,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	AudioPlayer.play_music(preload("res://assets/sound/music/title_theem.ogg"))
 	%StartButton.pressed.connect(func(): get_tree().change_scene_to_file('res://main.tscn'))
 	%SettingsButton.pressed.connect(func(): get_tree().change_scene_to_file('res://menu/settings.tscn'))
 
