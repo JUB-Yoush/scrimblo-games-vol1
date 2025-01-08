@@ -21,6 +21,9 @@ func play_music(music:AudioStream):
 
 	stream = music
 	play()
+func pause_music():
+	stop()
+
 
 func play_sfx(sfx:AudioStream):
 	sfxPlayer.stream = sfx

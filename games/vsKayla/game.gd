@@ -159,6 +159,7 @@ func start_turn():
 		start_turn()
 
 func command_selected(command):
+	AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/snd_select.wav"))
 	menu_state = MENU_STATES.MENU
 	# going backwards in menus should happen
 	awaiting_command = true
@@ -188,6 +189,7 @@ func command_selected(command):
 	end_turn()
 
 func fight():
+	AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/snd_select.wav"))
 	clear_menu()
 	menu_state = MENU_STATES.CHOSEN
 	%Textbox.texture = load("res://games/vsKayla/assets/attackscale.png")
@@ -210,6 +212,7 @@ func fight():
 
 func spare():
 	menu_state = MENU_STATES.CHOSEN
+	AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/killsoundpreview.mp3"))
 	if sparable:
 		print_to_menu("* You inform Kayla that GDYU is \n* Getting a club room in the \n* Second Student Centre.")
 		await txb_adv
@@ -247,19 +250,23 @@ func use_item(item_str):
 	menu_state = MENU_STATES.CHOSEN
 	clear_menu()
 	if item_str == "* M.Soup":
+		AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/snd_power.wav"))
 		hp += 15
 		print_to_menu("* Made by Maddie. \n* Healed 15 HP.")
 		await txb_adv
 	elif item_str == "* Bingus":
 		hp += 20
+		AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/snd_power.wav"))
 		print_to_menu("* It's mostly Ice. \n* Healed 20 HP.")
 		await txb_adv
 	elif item_str == "* Scrimbookie":
 		scrimbookied = true
+		AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/snd_power.wav"))
 		scrimbookied_turn = turn_count
 		print_to_menu("* You feel especially persuasive.\n  Extra Social Credit for 3 turns.")
 		await txb_adv
 	elif item_str == "* Pigeon":
+		AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/snd_select.wav"))
 		print_to_menu("* You tossed the Pigeon.\n It's flying to California. \n  It'll return in 2 business turns.")
 		pigeon_returned = false
 		pigeon_waiting = true
@@ -269,6 +276,7 @@ func use_item(item_str):
 	command_completed.emit()
 
 func use_act(act_str):
+	AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/snd_select.wav"))
 	menu_state = MENU_STATES.CHOSEN
 	if act_str == "* Check":
 		print_to_menu("* Kayla: 50HP, 12ATK, 5DEF \n She runs lassonde clubs.")
@@ -351,12 +359,15 @@ func print_to_menu(text):
 			%MenuString.text = ''
 			output = text
 			break
+		AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/snd_txt1.mp3"))
 		output += c
 		%MenuString.text = output
 		await get_tree().create_timer(.01).timeout
 
 
 func take_damage(damage:int):
+	if hp > 0:
+		AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/damage.wav"))
 	hp -= damage
 	pass
 

@@ -67,8 +67,11 @@ func enemy_says(text):
 
 
 func heart_explode():
+	AudioPlayer.pause_music()
 	if died:
 		return
+
+	AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/snd_break1.wav"))
 	died = true
 	%Heart.can_hit = false
 	%Heart.z_index = 32
@@ -77,6 +80,7 @@ func heart_explode():
 	await get_tree().create_timer(1).timeout
 	%Heart.hide()
 	for i in range(randi_range(4,7)):
+		AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/snd_break2.wav"))
 		var rigid := RigidBody2D.new()
 		rigid.gravity_scale = .5
 		rigid.global_position = %Heart.position
