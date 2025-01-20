@@ -1,13 +1,13 @@
 extends Node2D
 
-#var microgames:Array[String] = ["res://games/quickdraw/src/game.tscn",
-#"res://games/yiik/src/game.tscn",
-#"res://games/flyswat/src/game.tscn",
-#"res://games/yudumsort/src/game.tscn",
-#"res://games/mushroom/src/game.tscn",]
-var microgames:Array[String] = [
+var microgames:Array[String] = ["res://games/quickdraw/src/game.tscn",
+"res://games/yiik/src/game.tscn",
 "res://games/flyswat/src/game.tscn",
-]
+"res://games/yudumsort/src/game.tscn",
+"res://games/mushroom/src/game.tscn",]
+# var microgames:Array[String] = [
+# "res://games/flyswat/src/game.tscn",
+# ]
 var playedGames:Array[String] = []
 var result:bool
 var currentGame
@@ -48,6 +48,8 @@ func _ready() -> void:
 
 func game_over():
 	get_tree().paused = true
+	AudioPlayer.play_music(preload("res://assets/sound/music/brawl.ogg"))
+	AudioPlayer.game_over = true
 	%LoseAnimPlayer.play("wipe")
 	await get_tree().create_timer(1).timeout
 	%LosePanel.visible = true
@@ -61,6 +63,7 @@ func restart():
 	%LosePanel.visible = false
 	#await get_tree().create_timer(1).timeout
 	#get_tree().change_scene_to_file('res://main.tscn')
+	AudioPlayer.game_over = false
 	get_tree().reload_current_scene()
 
 func boss_state():

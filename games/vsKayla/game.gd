@@ -1,7 +1,7 @@
 extends Node
 
 var PROMPT = "BOSS"
-var CONTROLS = "keeb"
+var CONTROLS = "wasd"
 
 # set up game states
 enum GAME_STATE {SETUP,MENUS,DANMAKU,ENDED}
@@ -14,16 +14,16 @@ var items = ["* Bingus","* M.Soup","* Scrimbookie","* Pigeon"]
 var curr_items = []
 var acts = ["* Check","* Appeal","* Oppose","* HR Talk"]
 
-var appeals = ["* You show Kayla a gif. \n It's spinning Rei Chiquita.","* You simply ask Kayla \n  for more social credit.","You turn to the audience \n (there is no audience)"]
+var appeals = ["* You show Kayla a gif. \n It's spinning Rei Chiquita.","* You simply ask Kayla \n  for more social credit.","* You ask Kayla who her favorite \n Chikawa is. \n ...it's Tux?","* You show Kayla she's \n the boss of this video game. \n She dosen't understand."]
 var opposes = ["* You go on an impasioned rant about \n your disdain for audio-visualizers.","* You correct Kayla. \n  \"We aren't the Gaming Club,\" \n  \"We make games, Actually\"","* You try distracting Kayla from the \n knife orbiting you."]
-var hrtalks = ["* you use the Macaroni Corpo Jargon\n technique."]
-var start_turn_texts = ["* Smells of Scrimblo resedue.","* Your heart is filled with... pasta.","* Do Scrimblos dream of \n* Sheep (2000) for the PSX?","* This Boss battle was like, \n* 50% of development time."]
 
-var enemy_turn_text = ["Well Christina, I made it. despite your directions.","I am quite fond of this Scrimblo character","Is this how you hold all your meetings?"]
-#var enemy_turn_text = ["Is this how you hold all your meetings?"]
-var opposing_turn_text = ["You've been ordering \na lot of Gino's Pizza."]
-var start_turn_text = "* world is scrim blo blo blo"
+#var hrtalks = ["* you use the Schulich Corpo Jargon\n technique.","* You use a disarming \n emote from your emote wheel.","* You start speaking Italian \n (What is she cooking ???)","* You simply ask kayla\n to stop being offended.","* Jasmine Appears!\n She throws a chikawa wrapped in copper wire. \n ...and she's gone."]
+var hrtalks = ["* Jasmine Appears!\n She throws a chikawa wrapped in \n copper wire, then leaves."]
+var start_turn_texts = ["* Smells of Scrimblo resedue.","* Your heart is filled with... pasta.","* This Boss battle was like, \n* 50% of development time.","* We have Undertale at home.","* Hopefully this bit was \n worth the wait."]
 
+var enemy_turn_text = ["Well Christina, I made it. despite your directions.","I am quite fond of this Scrimblo character","Is this how you hold all your meetings?","Don't you guys just play video games?","This fight would've been funnier 6 months ago.",]
+var opposing_turn_text = ["You've been ordering \na lot of Gino's Pizza.","Don't you guys just play video games?","I think WiSE is the better club, actually.",""]
+var start_turn_text = "this is used somewhere"
 var awaiting_command = false
 var opposing = false
 var scrimbookied = false
@@ -41,17 +41,18 @@ var fightbar_moving = false
 @onready var action_buttons =[%FightButton, %ActButton, %ItemButton, %MercyButton]
 @onready var danmaku = $Danmaku
 
-var social_credit = 100:
+var social_credit = 0:
 	set(value):
 		if scrimbookied:
 			value += 7
 		social_credit = min(value,goal_credit)
 		%SCreditBar.value = social_credit
 		if social_credit == goal_credit:
+			%SocialCreditLabel.modulate = "#fefe00"
 			sparable = true
 			credit_reached()
 
-var goal_credit = 100
+var goal_credit = 50
 var turn_count = 1:
 	set(value):
 		turn_count = value
@@ -82,6 +83,10 @@ signal game_over(state)
 signal command_completed
 signal txb_adv
 signal txb_back
+
+func play_start_sound():
+	AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/start.wav"))
+
 
 func _ready() -> void:
 
@@ -198,6 +203,7 @@ func fight():
 	fightbar_moving = true
 	# do the timing minigame
 	await txb_adv
+	AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/slash.wav"))
 	%MissPlayer.play("knife")
 	await  %MissPlayer.animation_finished
 	%MissPlayer.play("miss")
@@ -214,12 +220,15 @@ func spare():
 	menu_state = MENU_STATES.CHOSEN
 	AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/killsoundpreview.mp3"))
 	if sparable:
-		print_to_menu("* You inform Kayla that GDYU is \n* Getting a club room in the \n* Second Student Centre.")
-		await txb_adv
+		#print_to_menu("* You inform Kayla that GDYU is \n* Getting a club room in the \n* Second Student Centre.")
+		#await txb_adv
 		#turn her grey or whatever and sto animation
 		%EnemySprite.modulate = "#717171"
 		%AnimationPlayer.stop()
-		print_to_menu("* YOU WON!.\n You earned 0 XP and 0 gold.")
+		AudioPlayer.stop()
+		AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/killsoundpreview.wav"))
+		clear_menu()
+		%MenuString.text = "* YOU WON!.\n You earned 0 XP and 0 gold."
 		await txb_adv
 		game_over.emit(true)
 	else:
@@ -252,18 +261,18 @@ func use_item(item_str):
 	if item_str == "* M.Soup":
 		AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/snd_power.wav"))
 		hp += 15
-		print_to_menu("* Made by Maddie. \n* Healed 15 HP.")
+		%MenuString.text = "* Made by Maddie. \n* Healed 15 HP."
 		await txb_adv
 	elif item_str == "* Bingus":
 		hp += 20
 		AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/snd_power.wav"))
-		print_to_menu("* It's mostly Ice. \n* Healed 20 HP.")
+		%MenuString.text = "* It's mostly Ice. \n* Healed 20 HP."
 		await txb_adv
 	elif item_str == "* Scrimbookie":
 		scrimbookied = true
 		AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/snd_power.wav"))
 		scrimbookied_turn = turn_count
-		print_to_menu("* You feel especially persuasive.\n  Extra Social Credit for 3 turns.")
+		%MenuString.text ="* You feel especially persuasive.\n  Extra Social Credit for 3 turns."
 		await txb_adv
 	elif item_str == "* Pigeon":
 		AudioPlayer.play_sfx(preload("res://assets/sound/sfx/undertale/snd_select.wav"))

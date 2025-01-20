@@ -167,7 +167,7 @@ var pattern3 = func():
 			var b = spinBulletScene.instantiate()
 			add_child(b)
 			b.speed = b_speed * mod
-			b.damage = 1
+			b.damage = 2
 			b.global_position = spiralSource.global_position
 			b.rotation = spiralSource.rotation
 		await get_tree().create_timer(.3).timeout

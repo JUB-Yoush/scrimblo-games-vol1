@@ -1,9 +1,8 @@
 # TODAY
 
-- losing -> winning -> boss crashes, fix the game selection system please
-- no win screen transition?
-- telling kayla you got a room in 2sc
-- kayla dialog dialog
+- kayla dialog
+- new logo
+- das it.
 
 # vs kayla
 

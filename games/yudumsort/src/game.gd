@@ -22,6 +22,7 @@ const GAMES = [
 	"Disco Elysium",
 	"Super Mario 64",
 	"Silent Hill 2",
+	"Sifu",
 ]
 var pool = range(GAMES.size())
 var round = 0

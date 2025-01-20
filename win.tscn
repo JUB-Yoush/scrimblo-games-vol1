@@ -1,16 +1,32 @@
-[gd_scene format=3 uid="uid://d3kmg3dvrdexm"]
+[gd_scene load_steps=2 format=3 uid="uid://d3kmg3dvrdexm"]
 
-[node name="Control" type="Control"]
+[ext_resource type="Script" path="res://win.gd" id="1_pn6ai"]
+
+[node name="win" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_pn6ai")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Time prevented a nicer looking win screen i'm sorry th
-ansks for playing regardless yipee"
+offset_left = 13.0
+offset_top = 3.0
+offset_right = 431.0
+offset_bottom = 239.0
+text = "Please pretend this is a super nice and cool looking win screen that I spent a lot of effort making, and not one that I made after going \"wait... there's no win screen\"
+
+Hope you had fun playing the game and thought it was at least a little funny. If you laughed that'd be great, but I'll take a lil nose exhale as a consession."
+autowrap_mode = 2
+
+[node name="Restart" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 173.0
+offset_top = 209.0
+offset_right = 246.0
+offset_bottom = 240.0
+text = "Restart!!"

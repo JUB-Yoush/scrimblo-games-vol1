@@ -2,11 +2,13 @@ extends AudioStreamPlayer
 
 
 var audio_bus_name := "Master"
+var game_over = false
 @onready var _bus := AudioServer.get_bus_index(audio_bus_name)
 @onready var sfxPlayer = $SFXPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	process_mode = PROCESS_MODE_ALWAYS
 	set_volume(5)
 	pass # Replace with function body.
 
@@ -16,8 +18,10 @@ func _process(delta: float) -> void:
 	pass
 
 func play_music(music:AudioStream):
-	if stream == music:
+	if game_over:
 		return
+	# if stream == music:
+	# 	return
 
 	stream = music
 	play()

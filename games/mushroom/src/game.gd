@@ -33,6 +33,7 @@ var dir:Vector2
 var shroomTimer:Timer = Timer.new()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	AudioPlayer.play_music(preload("res://assets/sound/music/mario64.ogg"))
 	%Macaroni.flip_h = true
 	playerSprite.flip_h = true
 	add_child(shroomTimer)
@@ -71,6 +72,7 @@ func on_area_entered(area):
 	if current_game_state == GAME_STATE.PLAYING:
 		area.queue_free()
 		eating = true
+		AudioPlayer.play_sfx(preload("res://assets/sound/sfx/eat.wav"))
 		%AnimationPlayer.play("eat")
 		await %AnimationPlayer.animation_finished
 		collected_count += 1

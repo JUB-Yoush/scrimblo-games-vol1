@@ -52,6 +52,8 @@ func _ready() -> void:
 
 	$AnimationPlayer.play('slide_in')
 	await $AnimationPlayer.animation_finished
+	var monolog_path = "res://assets/sound/sfx/monolog/%s.ogg" % str(prompt_index)
+	AudioPlayer.play_sfx(load(monolog_path))
 	richTextLabel.visible = true
 	richTextLabel.text = PROMPTS[0]
 	sentence = richTextLabel.text
@@ -96,6 +98,8 @@ func get_bbcode_end_color_tag() -> String:
 
 func change_prompt():
 	prompt_index += 1
+	var monolog_path = "res://assets/sound/sfx/monolog/%s.ogg" % str(prompt_index)
+	AudioPlayer.play_sfx(load(monolog_path))
 	if prompt_index == PROMPTS.size():
 		game_over.emit(1)
 		return

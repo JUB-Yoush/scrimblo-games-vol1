@@ -34,13 +34,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 32
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer3"]
 layout_mode = 2
 texture = ExtResource("1_3n84o")
 stretch_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
 
 [node name="StartButton" type="Button" parent="VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
@@ -49,6 +57,8 @@ text = "START"
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer/MarginContainer2"]
 unique_name_in_owner = true
